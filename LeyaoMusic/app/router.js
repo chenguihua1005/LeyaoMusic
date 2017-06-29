@@ -22,6 +22,7 @@ import NoteDurationPage from './page/note-duration-page';
 import UpdateNamePage from './page/update-name-page';
 import UpdateGenderPage from './page/update-gender-page';
 import UpdateEmailPage from './page/update-email-page';
+import UpdateVideoPage from './page/update-video-page';
 import AboutLeyaoPage from './page/about-leyao-page';
 import MusicianPage from './page/musician-page';
 
@@ -49,6 +50,7 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene
       key="welcome"
+      initial="true"
       hideNavBar={ true }
       component={ WelcomePage }/>
     <Scene
@@ -89,12 +91,12 @@ const scenes = Actions.create(
         hideNavBar={ true }
         component={ SightsingPage }
         icon={ TabIconWidget }
-        title="乐理"
+        title="音乐屋"
         selectedIcon={ require('./resource/sightsing-selected.png') }
         unSelectedIcon={ require('./resource/sightsing-unselected.png') }
         selectedColor='rgba(179, 214, 110, 1)'
         unSelectedColor='rgba(255, 255, 255, 1)'/>
-      <Scene
+      {/*<Scene
         key="ear_training"
         hideNavBar={ true }
         component={ EarTrainingPage }
@@ -103,7 +105,7 @@ const scenes = Actions.create(
         selectedIcon={ require('./resource/headphone-selected.png') }
         unSelectedIcon={ require('./resource/headphone-unselected.png') }
         selectedColor='rgba(179, 214, 110, 1)'
-        unSelectedColor='rgba(255, 255, 255, 1)'/>
+        unSelectedColor='rgba(255, 255, 255, 1)'/>*/}
       <Scene
         key="profile"
         hideNavBar={ true }
@@ -140,6 +142,10 @@ const scenes = Actions.create(
       key="update_email"
       hideNavBar={ true }
       component={ UpdateEmailPage }/>
+    <Scene
+      key="update_video"
+      hideNavBar={ true }
+      component={ UpdateVideoPage }/>
     <Scene
       key="about_leyao"
       hideNavBar={ true }

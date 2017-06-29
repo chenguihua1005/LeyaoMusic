@@ -19,14 +19,15 @@ export default class WelcomePage extends Component {
       copy = this
       AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
         if (error) {
-          console.log(error);
+          console.log("TOKEN = " + error);
           Actions.guide({ type: ActionConst.REPLACE })
         }
         if (!error) {
           if(result == null) {
+            console.log("TOKEN = null");
             Actions.guide({ type: ActionConst.REPLACE })
           } else {
-            console.log(result)
+            console.log("TOKEN = " + result);
             Actions.main({ type: ActionConst.REPLACE })
           }
         }
