@@ -12,7 +12,7 @@ import LoginPage from './page/login-page';
 import SetPasswordPage from './page/set-password-page';
 import RegisterOnePage from './page/register-one-page';
 import RegisterTwoPage from './page/register-two-page';
-import HomePage from './page/home-page';
+import MainScreen from './page/main-screen';
 import SightsingPage from './page/sightsing-page';
 import EarTrainingPage from './page/ear-training-page';
 import ProfilePage from './page/profile-page';
@@ -75,6 +75,11 @@ const scenes = Actions.create(
       component={ RegisterTwoPage }/>
     <Scene
       key="main"
+      hideNavBar={ true }
+      component={ MainScreen }/>
+    {/*<Scene
+      key="main"
+      header = { require('./page/home-header') }
       tabs={ true }>
       <Scene
         key="home"
@@ -96,7 +101,7 @@ const scenes = Actions.create(
         unSelectedIcon={ require('./resource/sightsing-unselected.png') }
         selectedColor='rgba(179, 214, 110, 1)'
         unSelectedColor='rgba(255, 255, 255, 1)'/>
-      {/*<Scene
+      <Scene
         key="ear_training"
         hideNavBar={ true }
         component={ EarTrainingPage }
@@ -105,7 +110,7 @@ const scenes = Actions.create(
         selectedIcon={ require('./resource/headphone-selected.png') }
         unSelectedIcon={ require('./resource/headphone-unselected.png') }
         selectedColor='rgba(179, 214, 110, 1)'
-        unSelectedColor='rgba(255, 255, 255, 1)'/>*/}
+        unSelectedColor='rgba(255, 255, 255, 1)'/>
       <Scene
         key="profile"
         hideNavBar={ true }
@@ -117,7 +122,7 @@ const scenes = Actions.create(
         selectedColor='#b3d66e'
         unSelectedColor='rgba(255, 255, 255, 1)'
         hideDivider={ true }/>
-    </Scene>
+    </Scene>*/}
     <Scene
       key="notification"
       hideNavBar={ true }
