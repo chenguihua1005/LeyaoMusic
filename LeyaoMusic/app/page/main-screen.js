@@ -29,13 +29,13 @@ const HOME_FOCUS = require('../resource/home_focus.png');
 const CATEGORY = 'category';
 //const CATEGORY_NORMAL = require('../resource/category_normal.png');
 //const CATEGORY_FOCUS = require('../resource/category_focus.png');
-const FAXIAN = 'faxian';
+const FAXIAN = '音乐屋';
 const FAXIAN_NORMAL = require('../resource/faxian_normal.png');
 const FAXIAN_FOCUS = require('../resource/faxian_focus.png');
 const CART = 'cart';
 //const CART_NORMAL = require('../resource/cart_normal.png');
 //const CART_FOCUS = require('../resource/cart_focus.png');
-const PERSONAL = 'personal';
+const PERSONAL = '个人';
 const PERSONAL_NORMAL = require('../resource/personal_normal.png');
 const PERSONAL_FOCUS = require('../resource/personal_focus.png');
 
@@ -64,12 +64,12 @@ export default class MainScreen extends Component {
     //模拟一条数据  
     var userData = [];  
     var user = {};  
-    user.name = "张三";  
-    user.age = "28";  
+    user.name = "陈贵华";  
+    user.age = "30";  
     user.sex = "男";  
-    user.phone = "18900001111";  
-    user.email = "2343242@qq.com";  
-    user.qq = "111222";  
+    user.phone = "13916174880";  
+    user.email = "343310096@qq.com";  
+    user.qq = "343310096";  
     userData.push(user);  
     //插入数据  
     sqLite.insertUserData(userData);  

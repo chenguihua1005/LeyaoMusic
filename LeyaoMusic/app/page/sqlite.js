@@ -10,14 +10,15 @@ var database_displayname = "MySQLite";
 var database_size = -1;//-1应该是表示无限制  
 var db;  
 export default class  SQLite extends Component{  
-    componentWillUnmount(){  
+  componentWillUnmount(){  
     if(db){  
         this._successCB('close');  
         db.close();  
     }else {  
         console.log("SQLiteStorage not open");  
     }  
-  }  
+  } 
+
   open(){  
     db = SQLiteStorage.openDatabase(  
       database_name,  
@@ -31,7 +32,8 @@ export default class  SQLite extends Component{
           this._errorCB('open',err);  
       });  
     return db;  
-  }  
+  } 
+
   createTable(){  
     if (!db) {  
         this.open();  
@@ -56,7 +58,8 @@ export default class  SQLite extends Component{
     }, ()=> {  
         this._successCB('transaction');  
     })  
-    }  
+  } 
+
   deleteData(){  
     if (!db) {  
         this.open();  
@@ -66,7 +69,8 @@ export default class  SQLite extends Component{
   
       });  
     });  
-  }  
+  }
+
   dropTable(){  
     db.transaction((tx)=>{  
       tx.executeSql('drop table user',[],()=>{  
@@ -77,8 +81,9 @@ export default class  SQLite extends Component{
     },()=>{  
       this._successCB('transaction');  
     });  
-  }  
-    insertUserData(userData){  
+  }
+
+  insertUserData(userData){  
     let len = userData.length;  
     if (!db) {  
         this.open();  
@@ -110,7 +115,8 @@ export default class  SQLite extends Component{
       this._successCB('transaction insert data');  
       //ToastAndroid.show("成功插入 "+len+" 条用户数据",ToastAndroid.SHORT);  
     });  
-  }  
+  }
+
   close(){  
       if(db){  
           this._successCB('close');  
@@ -119,15 +125,18 @@ export default class  SQLite extends Component{
           console.log("SQLiteStorage not open");  
       }  
       db = null;  
-  }  
+  }
+
   _successCB(name){  
     console.log("SQLiteStorage "+name+" success");  
-  }  
+  }
+
   _errorCB(name, err){  
     console.log("SQLiteStorage "+name);  
     console.log(err);  
-  }  
-    render(){  
+  }
+
+  render(){  
         return null;  
-    }  
+  }  
 };  

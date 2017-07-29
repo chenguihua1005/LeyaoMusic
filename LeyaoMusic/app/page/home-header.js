@@ -27,7 +27,7 @@ export default class Header extends Component {
             songLyr:[],     //当前歌词
             sliderValue: 0,    //Slide的value
             pause:false,       //歌曲播放/暂停
-            isplayBtn:require('../resource/播放.png')  //播放/暂停按钮背景图
+            isplayBtn:require('../resource/播放动图.gif')  //播放/暂停按钮背景图
         }
     }
 
@@ -64,11 +64,13 @@ export default class Header extends Component {
         //判断按钮显示什么
         if(this.state.pause == true){
             this.setState({
-                isplayBtn:require('../resource/播放.png')
+                // isplayBtn:require('../resource/播放.png')
+                isplayBtn:require('../resource/播放动图.gif')
             })
         }else {
             this.setState({
                 isplayBtn:require('../resource/暂停.png')
+                
             })
         }
 
