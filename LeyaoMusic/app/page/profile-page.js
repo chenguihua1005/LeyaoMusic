@@ -178,6 +178,7 @@ export default class ProfilePage extends Component {
   }
 
   updateGender() {
+    var copy = this;
     Actions.update_gender({
       gender: this.state.gender,
       parentComponent: copy
@@ -191,6 +192,25 @@ export default class ProfilePage extends Component {
       parentComponent: copy
     })
   }
+
+  //增加的4个菜单按钮事件
+  checkMessage() {
+    var copy = this;
+
+  }
+  checkFocus() {
+    var copy = this;
+
+  }
+  checkHistory() {
+    var copy = this;
+
+  }
+  checkSuggestion() {
+    var copy = this;
+
+  }
+
 
   logout() {
     // 存储登陆token
@@ -230,7 +250,7 @@ export default class ProfilePage extends Component {
           size="large"/>
         <View
           style={{
-            marginTop: 20,
+            marginTop: 5,
             height: 44,
             alignSelf: 'center',
             justifyContent: 'center'
@@ -409,6 +429,88 @@ export default class ProfilePage extends Component {
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
+          onPress={ this.checkMessage.bind(this) }>
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              height: 43,
+              marginTop: 5,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 13,
+                color: '#ffffff',
+                marginLeft: 11
+              }}>我的消息</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={ this.checkFocus.bind(this) }>
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              height: 43,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 13,
+                color: '#ffffff',
+                marginLeft: 11
+              }}>我的关注</Text>
+          </View>
+        </TouchableWithoutFeedback>     
+        <TouchableWithoutFeedback
+          onPress={ this.checkHistory.bind(this) }>
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              height: 43,
+              marginTop: 5,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 13,
+                color: '#ffffff',
+                marginLeft: 11
+              }}>我的历史</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={ this.checkSuggestion.bind(this) }>
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              height: 43,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 13,
+                color: '#ffffff',
+                marginLeft: 11
+              }}>意见反馈</Text>
+          </View>
+        </TouchableWithoutFeedback>            
+        <TouchableWithoutFeedback
           onPress={ this.logout.bind(this) }>
           <View
             style={{
@@ -418,7 +520,7 @@ export default class ProfilePage extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               alignSelf: 'center',
-              marginTop: 40,
+              marginTop: 20,
               borderRadius: 21
             }}>
             <Text

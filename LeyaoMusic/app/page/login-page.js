@@ -97,7 +97,7 @@ export default class LoginPage extends Component {
         .catch((error) => {
           console.log(error);
           //登陆有问题时，先直接跳转到主界面
-          Actions.main({ type: ActionConst.POP_AND_REPLACE })
+          //Actions.main({ type: ActionConst.POP_AND_REPLACE })
         })
     }
   }
