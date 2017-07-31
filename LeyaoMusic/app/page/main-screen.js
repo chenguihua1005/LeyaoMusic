@@ -16,6 +16,8 @@ import {
 
 import Header from './home-header'; 
 import HomePage from './home-page';
+import SightsingPage from './sightsing-page';
+import ProfilePage from './profile-page';
 import SQLite from './sqlite'; 
 var sqLite = new SQLite();
 var db;
@@ -100,14 +102,13 @@ export default class MainScreen extends Component {
       );
   }
 
-    static _createChildView(tag) {
-        return (
-            <View style={{flex:1,backgroundColor:'#00baff',alignItems:'center',justifyContent:'center'}}>
-                <Text style={{fontSize:22}}>{tag}</Text>
-            </View>
-        )
-    }
-
+    // static _createChildView(tag) {
+    //     return (
+    //         <View style={{flex:1,backgroundColor:'#00baff',alignItems:'center',justifyContent:'center'}}>
+    //             <Text style={{fontSize:22}}>{tag}</Text>
+    //         </View>
+    //     )
+    // }
 
     render() {
       return (
@@ -116,9 +117,9 @@ export default class MainScreen extends Component {
           <TabNavigator hidesTabTouch={true} tabBarStyle={styles.tab}>
             {this._renderTabItem(HOME_NORMAL, HOME_FOCUS, HOME, <HomePage nav={this.props.nav}/>)}
             {/*{this._renderTabItem(CATEGORY_NORMAL, CATEGORY_FOCUS, CATEGORY, MainScreen._createChildView(CATEGORY))}*/}
-            {this._renderTabItem(FAXIAN_NORMAL, FAXIAN_FOCUS, FAXIAN, MainScreen._createChildView(FAXIAN))}
+            {this._renderTabItem(FAXIAN_NORMAL, FAXIAN_FOCUS, FAXIAN, <SightsingPage nav={this.props.nav}/>)}
             {/*{this._renderTabItem(CART_NORMAL, CART_FOCUS, CART, MainScreen._createChildView(CART))}*/}
-            {this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, MainScreen._createChildView(PERSONAL))}
+            {this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, <ProfilePage nav={this.props.nav}/>)}
           </TabNavigator>
         </View >
  
