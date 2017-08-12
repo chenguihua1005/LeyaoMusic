@@ -20,6 +20,7 @@ import {
 
 import ViewPager from 'react-native-viewpager';
 import MenuButton from './menu-button';
+import MenuText from './menu-Text';
 
 const BANNER_IMGS = [
     require('../resource/banner1.jpg'),
@@ -80,7 +81,7 @@ export default class HomePage extends Component {
 
     _onMenuClick(title, tag) {
         //调用事件通知
-        DeviceEventEmitter.emit('changeMusic',{TITLE:title});
+        DeviceEventEmitter.emit('changeMusic',{TAG:tag});
         //Alert.alert('提示', '你点击了:' + title + " Tag:" + tag);
     }
 
@@ -160,35 +161,65 @@ alignItems: 'center'}}>
                         renderPage={this._renderPage}
                         isLoop={true}
                         autoPlay={true}/>
+
+                    <View style={{ flex: 1, flexDirection: 'row',margin: 10}}>
+                        <Image
+                            style={{ width: '30%', height:80 }}
+                            source={require('../resource/star1.png')}
+                        />
+                        <View style={{flexDirection: 'column',width: '70%'}}>
+                            <MenuText showText={'维也纳森林故事  词：Jack  曲：John'} tag={'MUS_1'}
+                                        onClick={this._onMenuClick}/>
+                            <MenuText showText={'星星索  词：Jesse  曲：Mike'} tag={'MUS_2'}
+                                        onClick={this._onMenuClick}/>
+                            <MenuText showText={'兰色多瑙河舞曲  词：Alex  曲：Andy'} tag={'MUS_3'}
+                                        onClick={this._onMenuClick}/>
+                        </View>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row',margin: 10}}>
+                        <Image
+                            style={{ width: '30%', height:80 }}
+                            source={require('../resource/star2.png')}
+                        />
+                        <View style={{flexDirection: 'column',width: '70%'}}>
+                            <MenuText showText={'匈牙利舞曲第五号  词：Jack  曲：John'} tag={'MUS_1'}
+                                        onClick={this._onMenuClick}/>
+                            <MenuText showText={'春江花月夜  词：Jesse  曲：Mike'} tag={'MUS_2'}
+                                        onClick={this._onMenuClick}/>
+                            <MenuText showText={'查拉图斯特拉如是说  词：Alex  曲：Andy'} tag={'MUS_3'}
+                                        onClick={this._onMenuClick}/>
+                        </View>
+                    </View>
+
                     <Text style={{color:'#7f7f7f',fontSize:12,padding:10}}>听我 ></Text>    
                     <View style={styles.menuView}>
                         <MenuButton renderIcon={require('../resource/wdgz.png')}
-                                    showText={'歌曲1'} tag={'wdgz'}
+                                    showText={'歌曲1'} tag={'MUSIC_1'}
                                     onClick={this._onMenuClick}/>
                         <MenuButton renderIcon={require('../resource/wlcx.png')}
-                                    showText={'歌曲2'} tag={'wlcx'}
+                                    showText={'歌曲2'} tag={'MUSIC_2'}
                                     onClick={this._onMenuClick}/>
                         <MenuButton renderIcon={require('../resource/cz.png')}
-                                    showText={'歌曲3'} tag={'cz'}
+                                    showText={'歌曲3'} tag={'MUSIC_3'}
                                     onClick={this._onMenuClick}/>
                         <MenuButton renderIcon={require('../resource/dyp.png')}
-                                    showText={'歌曲4'} tag={'dyp'}
+                                    showText={'歌曲4'} tag={'MUSIC_4'}
                                     onClick={this._onMenuClick}/>
                     </View>
                     <View style={{marginTop:15,borderWidth:0.5,borderColor:'#ccc'}}/>
                     <Text style={{color:'#7f7f7f',fontSize:12,padding:10}}>看我 ></Text>
                     <View style={styles.menuView}>
                         <MenuButton renderIcon={require('../resource/yxcz.png')}
-                                    showText={'视频1'} tag={'yxcz'}
+                                    showText={'视频1'} tag={'MUSIC_1'}
                                     onClick={this._onMenuClick2}/>
                         <MenuButton renderIcon={require('../resource/xjk.png')}
-                                    showText={'视频2'} tag={'xjk'}
+                                    showText={'视频2'} tag={'MUSIC_2'}
                                     onClick={this._onMenuClick2}/>
                         <MenuButton renderIcon={require('../resource/ljd.png')}
-                                    showText={'视频3'} tag={'ljd'}
+                                    showText={'视频3'} tag={'MUSIC_3'}
                                     onClick={this._onMenuClick2}/>
                         <MenuButton renderIcon={require('../resource/gd.png')}
-                                    showText={'视频4'} tag={'gd'}
+                                    showText={'视频4'} tag={'MUSIC_4'}
                                     onClick={this._onMenuClick2}/>
                     </View>
                 </View>)}}>
@@ -203,6 +234,7 @@ const styles = StyleSheet.create({
         height: 130,
         resizeMode: 'stretch'
     },
+
     menuView: {
         flexDirection: 'row',
         marginTop: 10

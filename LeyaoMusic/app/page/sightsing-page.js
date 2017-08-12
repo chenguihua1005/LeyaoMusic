@@ -13,18 +13,135 @@ import {
 import TopBarNav from 'top-bar-nav';
 
 const Scene1 = ({ index }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text style={{ fontSize: 20 }}>{index}_111</Text>
+  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
   </View>
 );
 const Scene2 = ({ index }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text style={{ fontSize: 20 }}>{index}_222</Text>
+  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+    <Image
+    style={{ width: '50%',height:100 }}
+    source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
   </View>
 );
 const Scene3 = ({ index }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text style={{ fontSize: 20 }}>{index}_333</Text>
+  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+    <Image
+    style={{ width: '50%',height:100 }}
+    source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner2.jpg')}
+    />
+    <Image
+        style={{ width: '50%',height:100 }}
+        source={require('../resource/banner4.jpg')}
+    />
   </View>
 );
 
