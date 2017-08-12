@@ -4,13 +4,11 @@ import React,{Component} from 'react';
 // } from 'react-native'; 
 import SQLiteStorage from 'react-native-sqlite-storage';  
 SQLiteStorage.DEBUG(true);  
-var database_name = "event.db";//数据库文件  
+var database_name = "test.db";//数据库文件  
 var database_version = "1.0";//版本号  
 var database_displayname = "MySQLite";  
 var database_size = -1;//-1应该是表示无限制  
-var db; 
-const Product_TABLE_NAME = "t_event_page";//表名称
-
+var db;  
 export default class  SQLite extends Component{  
   componentWillUnmount(){  
     if(db){  
@@ -42,28 +40,14 @@ export default class  SQLite extends Component{
     }  
     //创建用户表  
     db.transaction((tx)=> {  
-      tx.executeSql('CREATE TABLE IF NOT EXISTS ' + Product_TABLE_NAME + '(' +  
-          //       'id INTEGER PRIMARY KEY  AUTOINCREMENT,' +  
-          // 'name varchar,'+  
-          // 'age VARCHAR,' +  
-          // 'sex VARCHAR,' +  
-          // 'phone VARCHAR,' +  
-          // 'email VARCHAR,' +  
-          // 'qq VARCHAR)' 
-
-          'h_event_id INTEGER PRIMARY KEY NOT NULL ,' +
-          's_event_category_cd INTEGER NOT NULL,' +
-          'r_event_category_desc VARCHAR NOT NULL,' +
-          's_event_type_cd INTEGER NOT NULL,' +
-          'r_event_type_desc VARCHAR NOT NULL,' +
-          's_event_title_url VARCHAR NOT NULL,' +
-          's_event_content_url VARCHAR NOT NULL,' +
-          's_event_sub_content_1_url VARCHAR NOT NULL,' +
-          's_event_search_content_txt VARCHAR NOT NULL,' +
-          's_event_active_ind INTEGER NOT NULL,' +
-          'create_ts VARCHAR,' +
-          'update_ts VARCHAR'
-          + ')'  
+      tx.executeSql('CREATE TABLE IF NOT EXISTS USER(' +  
+          'id INTEGER PRIMARY KEY  AUTOINCREMENT,' +  
+          'name varchar,'+  
+          'age VARCHAR,' +  
+          'sex VARCHAR,' +  
+          'phone VARCHAR,' +  
+          'email VARCHAR,' +  
+          'qq VARCHAR)'  
           , [], ()=> {  
               this._successCB('executeSql');  
           }, (err)=> {  
@@ -81,7 +65,7 @@ export default class  SQLite extends Component{
         this.open();  
     }  
     db.transaction((tx)=>{  
-      tx.executeSql('delete from ' + Product_TABLE_NAME,[],()=>{  
+      tx.executeSql('delete from user',[],()=>{  
   
       });  
     });  
@@ -89,7 +73,7 @@ export default class  SQLite extends Component{
 
   dropTable(){  
     db.transaction((tx)=>{  
-      tx.executeSql('drop table ' + Product_TABLE_NAME,[],()=>{  
+      tx.executeSql('drop table user',[],()=>{  
   
       });  
     },(err)=>{  
@@ -99,8 +83,8 @@ export default class  SQLite extends Component{
     });  
   }
 
-  insertUserData(eventData){  
-    let len = eventData.length;  
+  insertUserData(userData){  
+    let len = userData.length;  
     if (!db) {  
         this.open();  
     }  
@@ -108,26 +92,16 @@ export default class  SQLite extends Component{
     this.deleteData();  
     db.transaction((tx)=>{  
        for(let i=0; i<len; i++){  
-        var event = eventData[i];  
-        //
-        let hEventId= event.hEventId;  
-        let rEventCategoryDesc = event.rEventCategoryDesc;  
-        let rEventTypeDesc = event.rEventTypeDesc;  
-        let sEventActiveInd = event.sEventActiveInd;  
-        let sEventCategoryCd = event.sEventCategoryCd;  
-        let sEventContentUrl = event.sEventContentUrl;  
-        let sEventSearchContentTxt = event.sEventSearchContentTxt;  
-        let sEventSubContent1Url = event.sEventSubContent1Url; 
-        let sEventTitleUrl = event.sEventTitleUrl; 
-        let sEventTypeCd = event.sEventTypeCd; 
-        let createTs = event.createTs;  
-        let updateTs = event.updateTs; 
-        let sql = 'INSERT INTO ' + Product_TABLE_NAME + 
-            '(h_event_id,s_event_category_cd,r_event_category_desc,s_event_type_cd,r_event_type_desc,' +
-            's_event_title_url,s_event_content_url,s_event_sub_content_1_url,s_event_search_content_txt,s_event_active_ind,create_ts,update_ts)'+  
-            'values(?,?,?,?,?,?,?,?,?,?,?,?)';  
-        tx.executeSql(sql,[hEventId,rEventCategoryDesc,rEventTypeDesc,sEventActiveInd,sEventCategoryCd,sEventContentUrl,
-          sEventSearchContentTxt,sEventSubContent1Url,sEventTitleUrl,sEventTypeCd,createTs,updateTs],()=>{  
+        var user = userData[i];  
+        let name= user.name;  
+        let age = user.age;  
+        let sex = user.sex;  
+        let phone = user.phone;  
+        let email = user.email;  
+        let qq = user.qq;  
+        let sql = "INSERT INTO user(name,age,sex,phone,email,qq)"+  
+        "values(?,?,?,?,?,?)";  
+        tx.executeSql(sql,[name,age,sex,phone,email,qq],()=>{  
             
           },(err)=>{  
             console.log(err);  
