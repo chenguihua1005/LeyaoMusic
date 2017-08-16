@@ -182,11 +182,11 @@ alignItems: 'center'}}>
                             source={require('../resource/star2.png')}
                         />
                         <View style={{flexDirection: 'column',width: '70%'}}>
-                            <MenuText showText={'匈牙利舞曲第五号  词：Jack  曲：John'} tag={'MUS_1'}
+                            <MenuText showText={'匈牙利舞曲第五号  词：Jack  曲：John'} tag={'http://47.94.94.196/LeyaoTemp/audio/1.mp3'}
                                         onClick={this._onMenuClick}/>
-                            <MenuText showText={'春江花月夜  词：Jesse  曲：Mike'} tag={'MUS_2'}
+                            <MenuText showText={'春江花月夜  词：Jesse  曲：Mike'} tag={'http://47.94.94.196/LeyaoTemp/audio/2.mp3'}
                                         onClick={this._onMenuClick}/>
-                            <MenuText showText={'查拉图斯特拉如是说  词：Alex  曲：Andy'} tag={'MUS_3'}
+                            <MenuText showText={'查拉图斯特拉如是说  词：Alex  曲：Andy'} tag={'http://47.94.94.196/LeyaoTemp/audio/3.mp3'}
                                         onClick={this._onMenuClick}/>
                         </View>
                     </View>

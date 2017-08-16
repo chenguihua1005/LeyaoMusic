@@ -40,7 +40,7 @@ export default class Header extends Component {
         switch(events.TAG) {
             case "MUS_1":
                 this.setState({file_link : MUS_1});
-            break;
+                break;
             case "MUS_2":
                 this.setState({file_link : MUS_2});
                 break;
@@ -60,7 +60,7 @@ export default class Header extends Component {
                 this.setState({file_link : MUSIC_4});
                 break;
             default:
-                this.setState({file_link : MUSIC_1});
+                this.setState({file_link : {uri:events.TAG} });
         }
     });    
 } 
@@ -108,6 +108,7 @@ export default class Header extends Component {
                 {/*播放器*/}
                 <Video
                     source={this.state.file_link}
+                    /* source={{uri:'http://47.94.94.196/LeyaoTemp/audio/1.mp3'}} */
                     ref='video'
                     volume={1.0}
                     repeat={true}

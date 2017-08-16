@@ -26,7 +26,7 @@ import UpdateVideoPage from './page/update-video-page';
 import AboutLeyaoPage from './page/about-leyao-page';
 import MusicianPage from './page/musician-page';
 
-import TabIconWidget from './widget/tab-icon-widget'
+// import TabIconWidget from './widget/tab-icon-widget'
 
 export default class AppRouter extends Component {
   render() {

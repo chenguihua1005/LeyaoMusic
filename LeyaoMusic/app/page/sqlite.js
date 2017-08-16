@@ -11,7 +11,7 @@ var database_size = -1;//-1应该是表示无限制
 var db; 
 const Product_TABLE_NAME = "t_event_page";//表名称
 
-export default class  SQLite extends Component{  
+export default class SQLite extends Component{  
   componentWillUnmount(){  
     if(db){  
         this._successCB('close');  
@@ -43,26 +43,18 @@ export default class  SQLite extends Component{
     //创建用户表  
     db.transaction((tx)=> {  
       tx.executeSql('CREATE TABLE IF NOT EXISTS ' + Product_TABLE_NAME + '(' +  
-          //       'id INTEGER PRIMARY KEY  AUTOINCREMENT,' +  
-          // 'name varchar,'+  
-          // 'age VARCHAR,' +  
-          // 'sex VARCHAR,' +  
-          // 'phone VARCHAR,' +  
-          // 'email VARCHAR,' +  
-          // 'qq VARCHAR)' 
-
-          'h_event_id INTEGER PRIMARY KEY NOT NULL ,' +
+          'h_event_id UNSIGNED BIGINT PRIMARY KEY NOT NULL,' +
           's_event_category_cd INTEGER NOT NULL,' +
-          'r_event_category_desc VARCHAR NOT NULL,' +
+          'r_event_category_desc VARCHAR(500) NOT NULL,' +
           's_event_type_cd INTEGER NOT NULL,' +
-          'r_event_type_desc VARCHAR NOT NULL,' +
-          's_event_title_url VARCHAR NOT NULL,' +
-          's_event_content_url VARCHAR NOT NULL,' +
-          's_event_sub_content_1_url VARCHAR NOT NULL,' +
-          's_event_search_content_txt VARCHAR NOT NULL,' +
+          'r_event_type_desc VARCHAR(500) NOT NULL,' +
+          's_event_title_url VARCHAR(255) NOT NULL,' +
+          's_event_content_url VARCHAR(255) NOT NULL,' +
+          's_event_sub_content_1_url VARCHAR(255) NOT NULL,' +
+          's_event_search_content_txt TEXT NOT NULL,' +
           's_event_active_ind INTEGER NOT NULL,' +
-          'create_ts VARCHAR,' +
-          'update_ts VARCHAR'
+          'create_ts TIMESTAMP NOT NULL,' +
+          'update_ts TIMESTAMP NOT NULL'
           + ')'  
           , [], ()=> {  
               this._successCB('executeSql');  
