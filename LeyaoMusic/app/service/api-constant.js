@@ -9,6 +9,8 @@ export default class APIConstant {
   static STATUS_FAILED = "FAILED"
 
   //新的API地址
-  //http://47.94.94.196:8080/LeyaoTemp/v1/service/getEvents
-  static BASE_URL_LY = "http://47.94.94.196:8080/LeyaoTemp"
+  static BASE_URL_PREFIX = "http://47.94.94.196/LeyaoTemp/"
+  static BASE_URL_ALL = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents"
+  static BASE_URL_AUDIO = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=2"
+  static BASE_URL_VEDIO = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=1"
 }

@@ -3,6 +3,22 @@ import APIConstant from './api-constant';
 
 export default class APIInterface {
 
+  //-->new add interface
+  static getLeyaoAudio() {
+    return BaseRequest.get(APIConstant.BASE_URL_AUDIO, {
+
+    })
+  }  
+
+  static getLeyaoVedio() {
+    return BaseRequest.get(APIConstant.BASE_URL_VEDIO, {
+
+    })
+  }
+
+
+  //--<new add interface
+
   static getCodeList() {
     return BaseRequest.post(APIConstant.BASE_URL + '/code/getCodeList', {
       'Accept': 'application/json',

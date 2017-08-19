@@ -18,6 +18,10 @@ import {
   Actions
 } from 'react-native-router-flux';
 
+import APIClient from '../service/api-client';
+import APIInterface from '../service/api-interface';
+import APIConstant from '../service/api-constant';
+
 import ViewPager from 'react-native-viewpager';
 import MenuButton from './menu-button';
 import MenuText from './menu-Text';
@@ -31,6 +35,9 @@ const BANNER_IMGS = [
 ];
 
 const len = 160;
+
+let audio_title =  ['title','title','title']
+let audio_url = ['url','url','url']
 
 export default class HomePage extends Component {
 
@@ -48,27 +55,32 @@ export default class HomePage extends Component {
         // 实际的DataSources存放在state中
         this.state = {
             dataSource: dataSource.cloneWithPages(BANNER_IMGS),
-            listData: ds
+            listData: ds,
+            title:['','',''],
+            url:['','','']
         }
     }
 
     componentWillMount() {
-        fetch('http://m.jd.com/index/recommend.action?_format_=json&page=1')
-            .then((res)=> res.json())
-            .then((str)=> {
-                let arr = JSON.parse(str.recommend).wareInfoList;
-                var rows = [];
-                for (let i = 0; i < arr.length; i += 2) {
-                    var item = {id: i, left: null, right: null};
-                    item.left = (arr[i]);
-                    if (i < arr.length - 1) {
-                        item.right = (arr[i + 1]);
-                    }
-                    rows.push(item);
-                }
-                var ds = this.state.listData.cloneWithRows(rows);
-                this.setState({listData: ds});
-            });
+
+        APIClient.access(APIInterface.getLeyaoAudio())
+        .then((response) => {
+          return response.json()
+        })
+        .then((json) => {
+            console.log(json)
+            let arr = json.rows;
+            for (let i = 0; i < arr.length; i++) {
+                audio_title[i] = arr[i].sEventTitleUrl;
+                audio_url[i] = arr[i].sEventContentUrl;
+            }          
+            this.setState({title : audio_title})
+            this.setState({url : audio_url})
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+       
     }
 
     _renderPage(data, pageID) {
@@ -103,49 +115,28 @@ export default class HomePage extends Component {
     _renderRow(rowData) {
         return (
             <View style={{flexDirection:'row'}}>
-                {/*<TouchableWithoutFeedback style={{flex:1,alignItems:'center'}}
-                                          onPress={()=>{this._onRecommendClick(rowData.left.wareId)}}>
-                    <View style={{flex:1,alignItems:'center'}}>
-                        <Image resizeMode={'stretch'} source={{uri:rowData.left.imageurl}}
-                               style={{width:len,height:len}}/>
-                        <Text numberOfLines={2} style={styles.recommendTitle}>{rowData.left.wname}</Text>
-                        <View style={{width:len,borderWidth:0.5,borderColor:'#d7d7d7'}}/>
-                        <View
-                            style={{flexDirection:'row',width:len, marginTop: 6, marginBottom: 22,alignItems:'flex-start'}}>
-                            <Text style={styles.priceText}>￥{rowData.left.jdPrice}</Text>
-                            <TouchableWithoutFeedback>
-                                <View style={{width:50,height:18,borderWidth:1,borderColor:'#999999',borderRadius:3,justifyContent: 'center',
-alignItems: 'center'}}>
-                                    <Text
-                                        style={{color:'#999999',fontSize:12,textAlign:'center'}}>看相似</Text>
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback style={{flex:1,alignItems:'center'}}
-                                          onPress={()=>{this._onRecommendClick(rowData.right.wareId)}}>
-                    <View style={{flex:1,alignItems:'center'}}>
-                        <Image resizeMode={'stretch'} source={{uri:rowData.right.imageurl}}
-                               style={{width:len,height:len}}/>
-                        <Text numberOfLines={2} style={styles.recommendTitle}>{rowData.right.wname}</Text>
-                        <View style={{width:len,borderWidth:0.5,borderColor:'#d7d7d7'}}/>
-                        <View
-                            style={{flexDirection:'row',width:len, marginTop: 6, marginBottom: 22,alignItems:'flex-start'}}>
-                            <Text style={styles.priceText}>￥{rowData.right.jdPrice}</Text>
-                            <TouchableWithoutFeedback>
-                                <View style={{width:50,height:18,borderWidth:1,borderColor:'#999999',borderRadius:3,justifyContent: 'center',
-alignItems: 'center'}}>
-                                    <Text
-                                        style={{color:'#999999',fontSize:12,textAlign:'center'}}>看相似</Text>
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>*/}
             </View>
         );
     }
+
+    getAudioList() {
+        APIClient.access(APIInterface.getLeyaoAudio(1))
+        .then((response) => {
+          return response.json()
+        })
+        .then((json) => {
+          console.log(json)
+
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+
+    getVedioList() {
+        
+    }
+
 
     render() {
         return (
@@ -182,11 +173,11 @@ alignItems: 'center'}}>
                             source={require('../resource/star2.png')}
                         />
                         <View style={{flexDirection: 'column',width: '70%'}}>
-                            <MenuText showText={'匈牙利舞曲第五号  词：Jack  曲：John'} tag={'http://47.94.94.196/LeyaoTemp/audio/1.mp3'}
+                            <MenuText showText={this.state.title[0]} tag={APIConstant.BASE_URL_PREFIX+ this.state.url[0]}
                                         onClick={this._onMenuClick}/>
-                            <MenuText showText={'春江花月夜  词：Jesse  曲：Mike'} tag={'http://47.94.94.196/LeyaoTemp/audio/2.mp3'}
+                            <MenuText showText={this.state.title[1]} tag={APIConstant.BASE_URL_PREFIX+ this.state.url[1]}
                                         onClick={this._onMenuClick}/>
-                            <MenuText showText={'查拉图斯特拉如是说  词：Alex  曲：Andy'} tag={'http://47.94.94.196/LeyaoTemp/audio/3.mp3'}
+                            <MenuText showText={this.state.title[2]} tag={APIConstant.BASE_URL_PREFIX+ this.state.url[2]}
                                         onClick={this._onMenuClick}/>
                         </View>
                     </View>
