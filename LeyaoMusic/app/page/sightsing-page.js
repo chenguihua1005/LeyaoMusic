@@ -8,16 +8,23 @@ import {
   StyleSheet
 } from 'react-native';
 import {
-  Actions
+  Actions,
+  ActionConst
 } from 'react-native-router-flux';
 import TopBarNav from 'top-bar-nav';
 
 const Scene1 = ({ index }) => (
   <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
+           
+    <TouchableWithoutFeedback 
+        onPress={ ()=>Actions.update_webview({ type: ActionConst.PUSH }) } >
+        <Image 
+            style={{ width: '50%',height:100 }} 
+            source={require('../resource/banner2.jpg')}>
+        </Image>
+    </TouchableWithoutFeedback>
+        
+    
     <Image
         style={{ width: '50%',height:100 }}
         source={require('../resource/banner4.jpg')}

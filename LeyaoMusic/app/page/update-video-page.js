@@ -37,8 +37,7 @@ export default class UpdateVideoPage extends Component {
             flex: 1
           }}>
           <VideoPlayer
-            source={{uri:'http://47.94.94.196/LeyaoTemp/audio/1.mp3'}}
-            /* source={{uri:'https://vjs.zencdn.net/v/oceans.mp4'}} */
+            source={{uri:'http://47.94.94.196/LeyaoTemp/vedio/3.mp4'}}
             playInBackground={ true }
             playWhenInactive={ true }
             navigator={this.props.navigator} 

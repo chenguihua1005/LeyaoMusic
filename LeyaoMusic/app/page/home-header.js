@@ -69,7 +69,7 @@ export default class Header extends Component {
         this.listener.remove(); 
     };
 
-        //播放/暂停
+    //播放/暂停
     playAction =() => {
         this.setState({
             pause: !this.state.pause

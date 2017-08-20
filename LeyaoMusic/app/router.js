@@ -23,6 +23,7 @@ import UpdateNamePage from './page/update-name-page';
 import UpdateGenderPage from './page/update-gender-page';
 import UpdateEmailPage from './page/update-email-page';
 import UpdateVideoPage from './page/update-video-page';
+import UpdateWebviewPage from './page/update-webview-page';
 import AboutLeyaoPage from './page/about-leyao-page';
 import MusicianPage from './page/musician-page';
 
@@ -151,6 +152,10 @@ const scenes = Actions.create(
       key="update_video"
       hideNavBar={ true }
       component={ UpdateVideoPage }/>
+    <Scene
+      key="update_webview"
+      hideNavBar={ true }
+      component={ UpdateWebviewPage }/>  
     <Scene
       key="about_leyao"
       hideNavBar={ true }
