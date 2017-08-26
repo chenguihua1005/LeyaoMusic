@@ -5,174 +5,196 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import {
   Actions,
   ActionConst
 } from 'react-native-router-flux';
 import TopBarNav from 'top-bar-nav';
-
-const Scene1 = ({ index }) => (
-  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-           
-    <TouchableWithoutFeedback 
-        onPress={ ()=>Actions.update_webview({ type: ActionConst.PUSH }) } >
-        <Image 
-            style={{ width: '50%',height:100 }} 
-            source={require('../resource/banner2.jpg')}>
-        </Image>
-    </TouchableWithoutFeedback>
-        
-    
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-  </View>
-);
-const Scene2 = ({ index }) => (
-  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-    <Image
-    style={{ width: '50%',height:100 }}
-    source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-  </View>
-);
-const Scene3 = ({ index }) => (
-  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-    <Image
-    style={{ width: '50%',height:100 }}
-    source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner2.jpg')}
-    />
-    <Image
-        style={{ width: '50%',height:100 }}
-        source={require('../resource/banner4.jpg')}
-    />
-  </View>
-);
-
-const ROUTES = {
-  Scene1,
-  // ideally you would have a ROUTES object with multiple React component scenes
-  Scene2,
-  Scene3
-};
-
-const ROUTESTACK = [
-  { label: '乐谣活动', title: 'Scene1' }, // label is what you see in the top bar
-  { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
-  { label: '艺人分享', title: 'Scene3' }
-];
-
-// const ROUTESTACK = [
-//   { image: require('./home.png'), title: 'Scene' },
-//   { image: require('./search.png'), title: 'Scene' },
-//   { image: require('./bell.png'), title: 'Scene' }
-// ];
-
+import MenuImage from './menu-image';
+import APIConstant from '../service/api-constant';
 
 export default class SightsingPage extends Component {
+    constructor(props) {
+        super(props);
+        this._onMenuClick = this._onMenuClick.bind(this);
+        Scene1 = ({ index }) => (
+            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.leyaomusic.com'}
+                              onClick={this._onMenuClick}/>
+              </View> 
+            </View>
+          );
+          Scene2 = ({ index }) => (
+            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'https://www.baidu.com'}
+                              onClick={this._onMenuClick}/>
+              </View>               
+            </View>
+          );
+          Scene3 = ({ index }) => (
+            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>
+              <View style={{ width: '50%',height:100 }} >
+                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
+                              tag={'http://www.265.com'}
+                              onClick={this._onMenuClick}/>
+              </View>               
+            </View>
+          );
+          
+          this.ROUTES = {
+            Scene1,
+            // ideally you would have a ROUTES object with multiple React component scenes
+            Scene2,
+            Scene3
+          };
+          
+          this.ROUTESTACK = [
+            { label: '乐谣活动', title: 'Scene1' }, // label is what you see in the top bar
+            { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
+            { label: '艺人分享', title: 'Scene3' }
+          ];
+    }
 
   staveIntroduce() {
     Actions.stave_introduction()
@@ -182,15 +204,20 @@ export default class SightsingPage extends Component {
     Actions.note_duration()
   }
 
+  _onMenuClick(tag) {
+    APIConstant.URL_EVENT = tag;
+    Actions.update_webview({ type: ActionConst.PUSH });
+}
+
   render() {
     return (
       <View style={{ flex: 1}}>
         <TopBarNav
           // routeStack and renderScene are required props
-          routeStack={ROUTESTACK}
+          routeStack={this.ROUTESTACK}
           renderScene={(route, i) => {
             // This is a lot like the now deprecated Navigator component
-            let Component = ROUTES[route.title];
+            let Component = this.ROUTES[route.title];
             return <Component index={i} />;
           }}
           // Below are optional props
@@ -206,99 +233,6 @@ export default class SightsingPage extends Component {
     );
   }
 
-  // render() {
-  //   return (
-  //     <Image
-  //       source={ require('../resource/main-background.jpg') }
-  //       style={{
-  //         flex: 1,
-  //         width: null,
-  //         height: null,
-  //         backgroundColor: 'rgba(0, 0, 0, 0)',
-  //       }}>
-  //       <View
-  //         style={{
-  //           marginTop: 20,
-  //           height: 44,
-  //           alignSelf: 'center',
-  //           justifyContent: 'center'
-  //         }}>
-  //         <Text
-  //           style={{
-  //             fontFamily: 'ArialMT',
-  //             fontSize: 18,
-  //             color: '#ffffff'
-  //           }}>乐理</Text>
-  //       </View>
-  //       <TouchableWithoutFeedback
-  //         onPress={ this.staveIntroduce.bind(this) }>
-  //         <View
-  //           style={{
-  //             width: Dimensions.get('window').width,
-  //             flexDirection: 'row',
-  //             alignItems: 'center',
-  //             marginTop: 10
-  //           }}>
-  //           <Image
-  //             source={ require('../resource/stave.png') }
-  //             style={{
-  //               width: 20.5,
-  //               height: 14.5,
-  //               marginLeft: 10
-  //             }}/>
-  //           <Text
-  //             style={{
-  //               fontFamily: 'ArialMT',
-  //               fontSize: 13,
-  //               color: '#ffffff',
-  //               marginLeft: 15
-  //             }}>五线谱介绍，谱号，加线</Text>
-  //         </View>
-  //       </TouchableWithoutFeedback>
-  //       <Image
-  //         source={ require('../resource/sightsing-divider.png') }
-  //         style={{
-  //           width: Dimensions.get('window').width,
-  //           height: 1,
-  //           marginTop: 11,
-  //           marginLeft: 11
-  //         }}/>
-  //       <TouchableWithoutFeedback
-  //         onPress={ this.noteDuration.bind(this) }>
-  //         <View
-  //           style={{
-  //             width: Dimensions.get('window').width,
-  //             flexDirection: 'row',
-  //             alignItems: 'center',
-  //             marginTop: 14
-  //           }}>
-  //           <Image
-  //             source={ require('../resource/note-duration.png') }
-  //             style={{
-  //               width: 18.5,
-  //               height: 16,
-  //               marginLeft: 10
-  //             }}/>
-  //           <Text
-  //             style={{
-  //               fontFamily: 'ArialMT',
-  //               fontSize: 13,
-  //               color: '#ffffff',
-  //               marginLeft: 15
-  //             }}>音符时值（持续时间长短）</Text>
-  //         </View>
-  //       </TouchableWithoutFeedback>
-  //       <Image
-  //         source={ require('../resource/sightsing-divider.png') }
-  //         style={{
-  //           width: Dimensions.get('window').width,
-  //           height: 1,
-  //           marginTop: 11,
-  //           marginLeft: 11
-  //         }}/>
-  //     </Image>
-  //   );
-  // }
 }
 
 const styles = StyleSheet.create({

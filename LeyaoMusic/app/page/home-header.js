@@ -38,8 +38,8 @@ export default class Header extends Component {
     componentDidMount(){    
         this.listener = DeviceEventEmitter.addListener('changeMusic',(events)=>{  
         this.setState({file_link : {uri:events.TAG} });
-    });    
-} 
+        });    
+    } 
 
     componentWillUnmount(){
         this.listener.remove(); 

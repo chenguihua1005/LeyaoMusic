@@ -16,4 +16,5 @@ export default class APIConstant {
   static BASE_URL_IMAGE = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=3"
 
   static URL_VEDIO = ""
+  static URL_EVENT = ""
 }

@@ -4,11 +4,12 @@ import {
   Text,
   View,
   TextInput,
-  WebView
+  WebView,
 } from 'react-native';
 import {
   Actions
 } from 'react-native-router-flux';
+import APIConstant from '../service/api-constant';
 
 export default class UpdateWebviewPage extends Component {
 
@@ -20,6 +21,11 @@ export default class UpdateWebviewPage extends Component {
       canBack: false
     }
   }
+
+  componentWillMount(){    
+    this.setState({ url: APIConstant.URL_EVENT });
+  }
+
 
   onBack() {
     //如果网页还有上级页面（可返回）
@@ -53,7 +59,7 @@ export default class UpdateWebviewPage extends Component {
         <View style={styles.item}>
             <Text style={styles.text} onPress={()=>{this.onBack()}}>返回</Text>
             <TextInput style={styles.input}
-                      defaultValue={'http://www.leyaomusic.com'}
+                      defaultValue={this.state.url}
                       onChangeText={text=>this.text=text}></TextInput>
             <Text style={styles.text} onPress={()=>{this.onNext()}}>GO</Text>
         </View>
