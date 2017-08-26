@@ -11,13 +11,13 @@ import {
 import Video from 'react-native-video'
 
 const MUSIC_1 = require('../resource/brave.mp3');
-const MUSIC_2 = require('../resource/brave2.mp3');
-const MUSIC_3 = require('../resource/brave3.mp3');
-const MUSIC_4 = require('../resource/brave4.mp3');
+// const MUSIC_2 = require('../resource/brave2.mp3');
+// const MUSIC_3 = require('../resource/brave3.mp3');
+// const MUSIC_4 = require('../resource/brave4.mp3');
 
-const MUS_1 = require('../resource/beijing.mp3');
-const MUS_2 = require('../resource/revoke.mp3');
-const MUS_3 = require('../resource/life.mp3');
+// const MUS_1 = require('../resource/beijing.mp3');
+// const MUS_2 = require('../resource/revoke.mp3');
+// const MUS_3 = require('../resource/life.mp3');
 
 export default class Header extends Component {
 
@@ -36,32 +36,8 @@ export default class Header extends Component {
     }
 
     componentDidMount(){    
-        this.listener = DeviceEventEmitter.addListener('changeMusic',(events)=>{     
-        switch(events.TAG) {
-            case "MUS_1":
-                this.setState({file_link : MUS_1});
-                break;
-            case "MUS_2":
-                this.setState({file_link : MUS_2});
-                break;
-            case "MUS_3":
-                this.setState({file_link : MUS_3});
-                break;
-            case "MUSIC_1":
-                this.setState({file_link : MUSIC_1});
-                break;
-            case "MUSIC_2":
-                this.setState({file_link : MUSIC_2});
-                break;
-            case "MUSIC_3":
-                this.setState({file_link : MUSIC_3});
-                break;
-            case "MUSIC_4":
-                this.setState({file_link : MUSIC_4});
-                break;
-            default:
-                this.setState({file_link : {uri:events.TAG} });
-        }
+        this.listener = DeviceEventEmitter.addListener('changeMusic',(events)=>{  
+        this.setState({file_link : {uri:events.TAG} });
     });    
 } 
 

@@ -16,6 +16,17 @@ export default class APIInterface {
     })
   }
 
+  static getLeyaoImage() {
+    return BaseRequest.get(APIConstant.BASE_URL_IMAGE, {
+
+    })
+  }
+
+  static getLeyaoAll() {
+    return BaseRequest.get(APIConstant.BASE_URL_ALL, {
+
+    })
+  }
 
   //--<new add interface
 

@@ -9,23 +9,30 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
-  WebView
+  WebView,
+  // DeviceEventEmitter
 } from 'react-native';
 import {
   Actions
 } from 'react-native-router-flux';
 
 import VideoPlayer from 'react-native-video-controls';
+import APIConstant from '../service/api-constant';
 
-const url='http://www.sina.com/';
 export default class UpdateVideoPage extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      parentComponent: props.parentComponent
+      parentComponent: props.parentComponent,
+      file_link:{uri:'http://47.94.94.196/LeyaoTemp/vedio/1.mp4'},   //视频播放链接
     }
   }
+
+  componentDidMount(){    
+      this.setState({file_link : {uri:APIConstant.URL_VEDIO} });
+  } 
+
 
   back() {
     Actions.pop()
@@ -37,7 +44,7 @@ export default class UpdateVideoPage extends Component {
             flex: 1
           }}>
           <VideoPlayer
-            source={{uri:'http://47.94.94.196/LeyaoTemp/vedio/3.mp4'}}
+            source={this.state.file_link}
             playInBackground={ true }
             playWhenInactive={ true }
             navigator={this.props.navigator} 

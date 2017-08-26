@@ -40,6 +40,7 @@ export default class RegisterOnePage extends Component {
       code: '',
       confirmPassword: ''
     }
+    
     this.validateParam.bind(this)
     this.checkNext.bind(this)
     this.next.bind(this)
