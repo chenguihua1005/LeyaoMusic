@@ -38,19 +38,22 @@ export default class APIInterface {
   }
 
   static getVerifyCode(phone) {
-    return BaseRequest.get(APIConstant.BASE_URL + '/user/getVerifyCode?phone=' + phone, {
+    return BaseRequest.post(APIConstant.BASE_URL + '/user/getVerifyCode?hUserPhoneNr=' + phone, {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },{
 
     })
   }
 
   static register(username, password, code) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/register', {
+    return BaseRequest.post(APIConstant.BASE_URL + '/user/regist', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'username': username,
-      'password': password,
-      'code': code
+      'hUserPhoneNr': username,
+      'sUserPasswordStr': password,
+      'verifyCode': code
     })
   }
 
@@ -59,8 +62,8 @@ export default class APIInterface {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'username': username,
-      'password': password
+      'hUserPhoneNr': username,
+      'sUserPasswordStr': password
     })
   }
 
@@ -69,9 +72,9 @@ export default class APIInterface {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'username': username,
-      'password': password,
-      'code': code
+      'hUserPhoneNr': username,
+      'sUserPasswordStr': password,
+      'verifyCode': code
     })
   }
 

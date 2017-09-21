@@ -114,12 +114,21 @@ export default class RegisterOnePage extends Component {
       })
       .then((json) => {
         console.log(json)
-        if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-          // alert(json.errorCode)
+        //Error-Response:-1
+        if(json == -1) {
+          Alert.alert('', '验证码发送失败，请重新获取')
+        }else if(0<json<10000) {
           Alert.alert('', '验证码已发送')
-        } else {
-          Alert.alert('', json.errorCode)
+        }else {
+          Alert.alert('', '验证码请求出错！')
         }
+
+        // if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+        //   // alert(json.errorCode)
+        //   Alert.alert('', '验证码已发送')
+        // } else {
+        //   Alert.alert('', json.errorCode)
+        // }
       })
       .catch((error) => {
         this.setState({ indicating: false})
@@ -153,41 +162,44 @@ export default class RegisterOnePage extends Component {
         })
         .then((json) => {
           console.log(json)
-          if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+          if(json.responseResult == APIConstant.STATUS_SUCCEED) {            
+            //新逻辑：直接跳转到登录界面
+            Actions.Actions.login()
 
+            //下面为旧有逻辑
             // 进行登陆操作
-            this.setState({ indicating: true})
-            APIClient.access(APIInterface.login(this.state.phone, this.state.password))
-              .then((response) => {
-                this.setState({ indicating: false})
-                return response.json()
-              })
-              .then((json) => {
-                console.log(json)
-                if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                  // 存储登陆token
-                  copy = this
-                  copy.setState({ indicating: true})
-                  AsyncStorage.setItem(StorageConstant.TOKEN, json.token, function(error) {
-                    copy.setState({ indicating: false})
-                    if (error) {
-                      console.log(error)
-                    }
-                    if (!error) {
-                      Actions.register_two()
-                    }
-                  });
+            // this.setState({ indicating: true})
+            // APIClient.access(APIInterface.login(this.state.phone, this.state.password))
+            //   .then((response) => {
+            //     this.setState({ indicating: false})
+            //     return response.json()
+            //   })
+            //   .then((json) => {
+            //     console.log(json)
+            //     if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+            //       // 存储登陆token
+            //       copy = this
+            //       copy.setState({ indicating: true})
+            //       AsyncStorage.setItem(StorageConstant.TOKEN, json.token, function(error) {
+            //         copy.setState({ indicating: false})
+            //         if (error) {
+            //           console.log(error)
+            //         }
+            //         if (!error) {
+            //           Actions.register_two()
+            //         }
+            //       });
 
-                } else {
-                  Alert.alert('', json.errorCode)
-                }
-              })
-              .catch((error) => {
-                this.setState({ indicating: false})
-                console.log(error);
-              })
+            //     } else {
+            //       Alert.alert('', json.errorCode)
+            //     }
+            //   })
+            //   .catch((error) => {
+            //     this.setState({ indicating: false})
+            //     console.log(error);
+            //   })
           } else {
-            Alert.alert('', json.errorCode)
+            Alert.alert('', json.responseResultMsg)
           }
         })
         .catch((error) => {

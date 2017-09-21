@@ -110,7 +110,7 @@ export default class SetPasswordPage extends Component {
       })
       .then((json) => {
         console.log(json)
-        if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+        if(json.responseResult == APIConstant.STATUS_SUCCEED) {
           // alert(json.errorCode)
           Alert.alert('', '验证码已发送')
         } else {
@@ -149,11 +149,11 @@ export default class SetPasswordPage extends Component {
         })
         .then((json) => {
           console.log(json)
-          if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-            Alert.alert('', json.errorCode)
+          if(json.responseResult == APIConstant.STATUS_SUCCEED) {
+            Alert.alert('', json.responseResultMsg)
             this.back()
           } else {
-            Alert.alert('', json.errorCode)
+            Alert.alert('', json.responseResultMsg)
           }
         })
         .catch((error) => {

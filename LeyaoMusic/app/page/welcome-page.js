@@ -25,9 +25,9 @@ export default class WelcomePage extends Component {
         if (!error) {
           if(result == null) {
             console.log("TOKEN = null");
-            //Actions.guide({ type: ActionConst.REPLACE })
+            Actions.guide({ type: ActionConst.REPLACE })
             //为方便调试，TOKEN为空也直接跳转
-            Actions.main({ type: ActionConst.REPLACE })            
+            //Actions.main({ type: ActionConst.REPLACE })            
           } else {
             console.log("TOKEN = " + result);
             Actions.main({ type: ActionConst.REPLACE })

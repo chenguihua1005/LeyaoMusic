@@ -1,12 +1,11 @@
 export default class APIConstant {
-  //static BASE_URL = "http://123.56.220.72:8080/poker/api"
-  //static BASE_FILE_URI = "http://123.56.220.72:8080/poker/"
+  // static BASE_URL = "http://panruifeng.loan/poker/api"
+  static BASE_URL = "http://47.94.94.196:8088/v1/service"
 
-  static BASE_URL = "http://panruifeng.loan/poker/api"
   static BASE_FILE_URI = "http://panruifeng.loan/poker/"
 
-  static STATUS_SUCCEED = "SUCCEED"
-  static STATUS_FAILED = "FAILED"
+  static STATUS_SUCCEED = "SUCCESS"
+  static STATUS_FAILED = "ERROR"
 
   //新的API地址
   static BASE_URL_PREFIX = "http://47.94.94.196/LeyaoTemp/"

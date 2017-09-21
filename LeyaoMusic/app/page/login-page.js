@@ -79,9 +79,9 @@ export default class LoginPage extends Component {
         })
         .then((json) => {
           console.log(json)
-          if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+          if(json.responseResult == APIConstant.STATUS_SUCCEED) {
             // 存储登陆token
-            AsyncStorage.setItem(StorageConstant.TOKEN, json.token, function(error) {
+            AsyncStorage.setItem(StorageConstant.TOKEN, json.responseResultMsg, function(error) {
               if (error) {
                 console.log(error)
               }
@@ -91,7 +91,7 @@ export default class LoginPage extends Component {
             });
 
           } else {
-            Alert.alert('', json.errorCode)
+            Alert.alert('', json.responseResultMsg)
           }
         })
         .catch((error) => {
