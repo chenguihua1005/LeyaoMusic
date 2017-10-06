@@ -10,7 +10,7 @@ import {
 export default class MenuButton extends Component {
 
     static propTypes = {
-        renderIcon: PropTypes.number.isRequired,  // 图片,加入.isRequired即为比填项
+        renderIcon: PropTypes.number.isRequired,  // 图片,加入.isRequired即为必填项
         showText: PropTypes.string,  // 显示标题\文字
         tag: PropTypes.string,  // Tag
         onClick: PropTypes.func  // 回调函数

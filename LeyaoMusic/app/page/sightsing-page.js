@@ -16,185 +16,185 @@ import MenuImage from './menu-image';
 import APIConstant from '../service/api-constant';
 
 export default class SightsingPage extends Component {
-    constructor(props) {
-        super(props);
-        this._onMenuClick = this._onMenuClick.bind(this);
-        Scene1 = ({ index }) => (
-            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-                              onClick={this._onMenuClick}/>
-              </View> 
-            </View>
-          );
-          Scene2 = ({ index }) => (
-            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'https://www.baidu.com'}
-                              onClick={this._onMenuClick}/>
-              </View>               
-            </View>
-          );
-          Scene3 = ({ index }) => (
-            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner2.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>
-              <View style={styles.itemStyle} >
-                  <MenuImage  renderIcon={require('../resource/banner4.jpg')}
-                              tag={'http://www.265.com'}
-                              onClick={this._onMenuClick}/>
-              </View>               
-            </View>
-          );
-          
-          this.ROUTES = {
-            Scene1,
-            // ideally you would have a ROUTES object with multiple React component scenes
-            Scene2,
-            Scene3
-          };
-          
-          this.ROUTESTACK = [
-            { label: '乐谣活动', title: 'Scene1' }, // label is what you see in the top bar
-            { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
-            { label: '艺人分享', title: 'Scene3' }
-          ];
-    }
+  constructor(props) {
+    super(props);
+    this._onMenuClick = this._onMenuClick.bind(this);
+    Scene1 = ({ index }) => (
+      <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
+            onClick={this._onMenuClick} />
+        </View>
+      </View>
+    );
+    Scene2 = ({ index }) => (
+      <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'https://www.baidu.com'}
+            onClick={this._onMenuClick} />
+        </View>
+      </View>
+    );
+    Scene3 = ({ index }) => (
+      <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+        <View style={styles.itemStyle} >
+          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+            tag={'http://www.265.com'}
+            onClick={this._onMenuClick} />
+        </View>
+      </View>
+    );
+
+    this.ROUTES = {
+      Scene1,
+      // ideally you would have a ROUTES object with multiple React component scenes
+      Scene2,
+      Scene3
+    };
+
+    this.ROUTESTACK = [
+      { label: '乐谣活动', title: 'Scene1' }, // label is what you see in the top bar
+      { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
+      { label: '艺人分享', title: 'Scene3' }
+    ];
+  }
 
   staveIntroduce() {
     Actions.stave_introduction()
@@ -207,11 +207,11 @@ export default class SightsingPage extends Component {
   _onMenuClick(tag) {
     APIConstant.URL_EVENT = tag;
     Actions.update_webview({ type: ActionConst.PUSH });
-}
+  }
 
   render() {
     return (
-      <View style={{ flex: 1}}>
+      <View style={{ flex: 1 }}>
         <TopBarNav
           // routeStack and renderScene are required props
           routeStack={this.ROUTESTACK}
@@ -257,8 +257,8 @@ const styles = StyleSheet.create({
   },
   itemStyle: {
     width: '50%',
-    height:100, 
-    borderWidth:2, 
+    height: 100,
+    borderWidth: 2,
     borderColor: '#e6faff'
   }
 

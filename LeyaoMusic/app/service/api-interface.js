@@ -3,6 +3,12 @@ import APIConstant from './api-constant';
 
 export default class APIInterface {
 
+  static getLeyaoMusician() {
+    return BaseRequest.get(APIConstant.BASE_URL_MUSICIAN, {
+
+    })
+  }
+
   //-->new add interface
   static getLeyaoAudio() {
     return BaseRequest.get(APIConstant.BASE_URL_AUDIO, {
@@ -108,9 +114,10 @@ export default class APIInterface {
     })
   }
 
-  static details(token) {
-    return BaseRequest.get(APIConstant.BASE_URL + '/user/details', {
-      'token': token
+  static details(token, username) {
+    return BaseRequest.get(APIConstant.BASE_URL + '/user/getTUserSummary', {
+      'sessionCode': token,
+      'hUserPhoneNr': username
     })
   }
 }

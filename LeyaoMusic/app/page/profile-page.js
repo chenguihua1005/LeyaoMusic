@@ -70,23 +70,24 @@ export default class ProfilePage extends Component {
         } else {
           console.log(result)
 
-          APIClient.access(APIInterface.details(result))
+          APIClient.access(APIInterface.details(result,13916174880))
             .then((response) => {
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                copy.setState({
-                  avatar: {uri: (APIConstant.BASE_FILE_URI + json.data.pic)},
-                  realName: json.data.realname,
-                  userName: json.data.username,
-                  gender: json.data.sex,
-                  email: json.data.email
-                })
-              } else {
-                Alert.alert('', json.errorCode)
-              }
+              //新接口重新定义了
+              // if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+              //   copy.setState({
+              //     avatar: {uri: (APIConstant.BASE_FILE_URI + json.data.pic)},
+              //     realName: json.data.realname,
+              //     userName: json.data.username,
+              //     gender: json.data.sex,
+              //     email: json.data.email
+              //   })
+              // } else {
+              //   Alert.alert('', json.errorCode)
+              // }
             })
             .catch((error) => {
               console.log(error);

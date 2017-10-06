@@ -108,7 +108,6 @@ export default class MainScreen extends Component {
               for(let i=0; i<len; i++){  
                 var u = results.rows.item(i);  
                 //一般在数据查出来之后，  可能要 setState操作，重新渲染页面  
-                //alert("字段1: "+u.h_event_id+"，字段2："+u.s_event_title_url+"，字段3："+u.update_ts);
                 console.log("db_sqlite:" + "字段1: "+u.h_event_id+"，字段2："+u.s_event_title_url+"，字段3："+u.update_ts);
               }  
             });  

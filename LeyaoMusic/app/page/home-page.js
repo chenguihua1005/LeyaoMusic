@@ -15,7 +15,8 @@ import {
 } from 'react-native';
 
 import {
-    Actions
+    Actions,
+    ActionConst
 } from 'react-native-router-flux';
 
 import APIClient from '../service/api-client';
@@ -28,6 +29,11 @@ import MenuText from './menu-Text';
 
 const len = 160;
 
+//state中转变量 
+let musician_title1 = []
+let musician_url1 = []
+let musician_title2 = []
+let musician_url2 = []
 let audio_title = []
 let audio_url = []
 let vedio_title = []
@@ -35,12 +41,15 @@ let vedio_url = []
 let image_title = []
 let image_url = [];
 
+//读我听我看我，个数先统一为4个
+const length = 4;
+
 let sliderImgs = [
     'http://images3.c-ctrip.com/SBU/apph5/201505/16/app_home_ad16_640_128.png',
     'http://images3.c-ctrip.com/rk/apph5/C1/201505/app_home_ad49_640_128.png',
     'http://images3.c-ctrip.com/rk/apph5/D1/201506/app_home_ad05_640_128.jpg',
     'http://images3.c-ctrip.com/SBU/apph5/201505/16/app_home_ad16_640_128.png',
-    'http://images3.c-ctrip.com/rk/apph5/C1/201505/app_home_ad49_640_128.png'    
+    'http://images3.c-ctrip.com/rk/apph5/C1/201505/app_home_ad49_640_128.png'
 ];
 
 export default class HomePage extends Component {
@@ -53,6 +62,10 @@ export default class HomePage extends Component {
         // 实际的DataSources存放在state中
         this.state = {
             listData: ds,
+            musician_title1: [],
+            musician_url1: [],
+            musician_title2: [],
+            musician_url2: [],
             audio_title: [],
             audio_url: [],
             vedio_title: [],
@@ -63,12 +76,68 @@ export default class HomePage extends Component {
     }
 
     componentWillMount() {
+        //音乐家
+        this.getMusicianList();
+
+        //读我听我看我
         this.getImageList();
         this.getAudioList();
         this.getVedioList();
     }
 
-    //get all audios
+    //音乐家
+    getMusicianList() {
+        APIClient.access(APIInterface.getLeyaoMusician())
+            .then((response) => {
+                return response.json()
+            })
+            .then((json) => {
+                console.log(json)
+                let arr = json.rows;
+                //一共有2名音乐家，每名音乐家下面有3首歌曲
+                //"sEventSubContent1UrlList":["audio/1.mp3","audio/2.mp3","audio/3.mp3"],
+                //"sEventSubContent2StrList":["musician1","musician1","musician1"]
+                for (let i = 0; i < 3; i++) {
+                    musician_title1[i] = arr[0].sEventSubContent2StrList[i];
+                    musician_url1[i] = arr[0].sEventSubContent1UrlList[i];
+                }
+                for (let i = 0; i < 3; i++) {
+                    musician_title2[i] = arr[1].sEventSubContent2StrList[i];
+                    musician_url2[i] = arr[1].sEventSubContent1UrlList[i];
+                }
+
+                this.setState({ musician_title1: musician_title1 })
+                this.setState({ musician_url1: musician_url1 })
+                this.setState({ musician_title2: musician_title2 })
+                this.setState({ musician_url2: musician_url2 })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //get all pages，读我
+    getImageList() {
+        APIClient.access(APIInterface.getLeyaoImage())
+            .then((response) => {
+                return response.json()
+            })
+            .then((json) => {
+                console.log(json)
+                let arr = json.rows;
+                for (let i = 0; i < length; i++) {
+                    image_title[i] = arr[i].sEventTitleUrl;
+                    image_url[i] = arr[i].sEventContentUrl;
+                }
+                this.setState({ image_title: image_title })
+                this.setState({ image_url: image_url })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //get all audios，听我
     getAudioList() {
         APIClient.access(APIInterface.getLeyaoAudio())
             .then((response) => {
@@ -77,7 +146,7 @@ export default class HomePage extends Component {
             .then((json) => {
                 console.log(json)
                 let arr = json.rows;
-                for (let i = 0; i < arr.length; i++) {
+                for (let i = 0; i < length; i++) {
                     audio_title[i] = arr[i].sEventTitleUrl;
                     audio_url[i] = arr[i].sEventContentUrl;
                 }
@@ -89,7 +158,7 @@ export default class HomePage extends Component {
             });
     }
 
-    //get all vedios
+    //get all vedios，看我
     getVedioList() {
         APIClient.access(APIInterface.getLeyaoVedio())
             .then((response) => {
@@ -98,33 +167,12 @@ export default class HomePage extends Component {
             .then((json) => {
                 console.log(json)
                 let arr = json.rows;
-                for (let i = 0; i < arr.length; i++) {
+                for (let i = 0; i < length; i++) {
                     vedio_title[i] = arr[i].sEventTitleUrl;
                     vedio_url[i] = arr[i].sEventContentUrl;
                 }
                 this.setState({ vedio_title: vedio_title })
                 this.setState({ vedio_url: vedio_url })
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
-
-    //get all PAGES
-    getImageList() {
-        APIClient.access(APIInterface.getLeyaoImage())
-            .then((response) => {
-                return response.json()
-            })
-            .then((json) => {
-                console.log(json)
-                let arr = json.rows;
-                for (let i = 0; i < arr.length; i++) {
-                    image_title[i] = arr[i].sEventTitleUrl;
-                    image_url[i] = arr[i].sEventContentUrl;
-                }
-                this.setState({ image_title: image_title })
-                this.setState({ image_url: image_url })
             })
             .catch((error) => {
                 console.log(error);
@@ -142,14 +190,20 @@ export default class HomePage extends Component {
     _onMenuClick(title, tag) {
         //调用事件通知
         DeviceEventEmitter.emit('changeMusic', { TAG: tag });
-        //Alert.alert('提示', '你点击了:' + title + " Tag:" + tag);
+        Alert.alert('提示', '你点击了:' + title + " Tag:" + tag);
     }
 
     _onMenuClick2(title, tag) {
         APIConstant.URL_VEDIO = tag;
         Actions.update_video();
-        //Alert.alert('URL_VEDIO = ' + tag);
+        Alert.alert('URL_VEDIO = ' + tag);
     }
+
+    _onMenuClick3(title, tag) {
+        APIConstant.URL_EVENT = tag;
+        Actions.update_webview({ type: ActionConst.PUSH });
+    }
+
 
     _renderRow(rowData) {
         return (
@@ -179,28 +233,28 @@ export default class HomePage extends Component {
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
                                     style={{ width: '30%', height: 80 }}
-                                    source={require('../resource/star1.png')}
+                                    source={{ uri: 'http://47.94.94.196:8088/image/1.jpg' }}
                                 />
                                 <View style={{ flexDirection: 'column', width: '70%' }}>
-                                    <MenuText showText={this.state.audio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[0]}
+                                    <MenuText showText={this.state.musician_title1[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[0]}
                                         onClick={this._onMenuClick} />
-                                    <MenuText showText={this.state.audio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[1]}
+                                    <MenuText showText={this.state.musician_title1[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[1]}
                                         onClick={this._onMenuClick} />
-                                    <MenuText showText={this.state.audio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[2]}
+                                    <MenuText showText={this.state.musician_title1[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[2]}
                                         onClick={this._onMenuClick} />
                                 </View>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
                                     style={{ width: '30%', height: 80 }}
-                                    source={require('../resource/star2.png')}
+                                    source={{ uri: 'http://47.94.94.196:8088/image/2.jpg' }}
                                 />
                                 <View style={{ flexDirection: 'column', width: '70%' }}>
-                                    <MenuText showText={this.state.audio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[3]}
+                                    <MenuText showText={this.state.musician_title2[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[0]}
                                         onClick={this._onMenuClick} />
-                                    <MenuText showText={this.state.audio_title[4]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[4]}
+                                    <MenuText showText={this.state.musician_title2[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[1]}
                                         onClick={this._onMenuClick} />
-                                    <MenuText showText={this.state.audio_title[5]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[5]}
+                                    <MenuText showText={this.state.musician_title2[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[2]}
                                         onClick={this._onMenuClick} />
                                 </View>
                             </View>
@@ -208,32 +262,32 @@ export default class HomePage extends Component {
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>听我 ></Text>
                             <View style={styles.menuView}>
                                 <MenuButton renderIcon={require('../resource/wdgz.png')}
-                                    showText={this.state.audio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[0]}
+                                    showText={this.state.audio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[0]}
                                     onClick={this._onMenuClick} />
                                 <MenuButton renderIcon={require('../resource/wlcx.png')}
-                                    showText={this.state.audio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[1]}
+                                    showText={this.state.audio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[1]}
                                     onClick={this._onMenuClick} />
                                 <MenuButton renderIcon={require('../resource/cz.png')}
-                                    showText={this.state.audio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[2]}
+                                    showText={this.state.audio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[2]}
                                     onClick={this._onMenuClick} />
                                 <MenuButton renderIcon={require('../resource/dyp.png')}
-                                    showText={this.state.audio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[3]}
+                                    showText={this.state.audio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[3]}
                                     onClick={this._onMenuClick} />
                             </View>
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>看我 ></Text>
                             <View style={styles.menuView}>
                                 <MenuButton renderIcon={require('../resource/yxcz.png')}
-                                    showText={this.state.vedio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[0]}
+                                    showText={this.state.vedio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[0]}
                                     onClick={this._onMenuClick2} />
                                 <MenuButton renderIcon={require('../resource/xjk.png')}
-                                    showText={this.state.vedio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[1]}
+                                    showText={this.state.vedio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[1]}
                                     onClick={this._onMenuClick2} />
                                 <MenuButton renderIcon={require('../resource/ljd.png')}
-                                    showText={this.state.vedio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[2]}
+                                    showText={this.state.vedio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[2]}
                                     onClick={this._onMenuClick2} />
                                 <MenuButton renderIcon={require('../resource/gd.png')}
-                                    showText={this.state.vedio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[3]}
+                                    showText={this.state.vedio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[3]}
                                     onClick={this._onMenuClick2} />
                             </View>
 
@@ -241,17 +295,17 @@ export default class HomePage extends Component {
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>读我 ></Text>
                             <View style={styles.menuView}>
                                 <MenuButton renderIcon={require('../resource/yxcz.png')}
-                                    showText={'发现图文1'} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[0]}
-                                    onClick={this._onMenuClick2} />
+                                    showText={'发现图文1'} tag={this.state.image_url[0]}
+                                    onClick={this._onMenuClick3} />
                                 <MenuButton renderIcon={require('../resource/xjk.png')}
-                                    showText={'发现图文2'} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[1]}
-                                    onClick={this._onMenuClick2} />
+                                    showText={'发现图文2'} tag={this.state.image_url[1]}
+                                    onClick={this._onMenuClick3} />
                                 <MenuButton renderIcon={require('../resource/ljd.png')}
-                                    showText={'发现图文3'} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[2]}
-                                    onClick={this._onMenuClick2} />
+                                    showText={'发现图文3'} tag={this.state.image_url[2]}
+                                    onClick={this._onMenuClick3} />
                                 <MenuButton renderIcon={require('../resource/gd.png')}
-                                    showText={'发现图文4'} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[3]}
-                                    onClick={this._onMenuClick2} />
+                                    showText={'发现图文4'} tag={this.state.image_url[3]}
+                                    onClick={this._onMenuClick3} />
                             </View>
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
                         </View>)
@@ -293,9 +347,9 @@ const styles = StyleSheet.create({
         height: 130
     },
     slide: {
-    	height:80,
-    	resizeMode: Image.resizeMode.contain,
-  	},
+        height: 80,
+        resizeMode: Image.resizeMode.contain,
+    },
     slide1: {
         flex: 1,
         justifyContent: 'center',
