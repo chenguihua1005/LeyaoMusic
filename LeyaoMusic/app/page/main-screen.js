@@ -18,9 +18,9 @@ import Header from './home-header';
 import HomePage from './home-page';
 import SightsingPage from './sightsing-page';
 import ProfilePage from './profile-page';
-import SQLite from './sqlite'; 
-var sqLite = new SQLite();
-var db;
+// import SQLite from './sqlite'; 
+// var sqLite = new SQLite();
+// var db;
 import TabNavigator from 'react-native-tab-navigator';
 import VideoPlayer from 'react-native-video-controls';
 import ViewPager from 'react-native-viewpager';
@@ -57,68 +57,68 @@ export default class MainScreen extends Component {
     this.state = {selectedTab: HOME} 
   }
 
+  componentWillMount(){  
+    // //开启数据库  
+    // if(!db){  
+    //   db = sqLite.open();  
+    // }  
+    // //建表  
+    // sqLite.createTable();  
+    // //删除数据  
+    // sqLite.deleteData();
+    // //请求数据，插入数据库，查询数据库    
+    // this.getAllResource(); 
+  } 
+  
   compennetDidUnmount(){  
-    sqLite.close();  
+    // sqLite.close();  
   } 
 
-  componentWillMount(){  
-    //开启数据库  
-    if(!db){  
-      db = sqLite.open();  
-    }  
-    //建表  
-    sqLite.createTable();  
-    //删除数据  
-    sqLite.deleteData();
-    //请求数据，插入数据库，查询数据库    
-    this.getAllResource(); 
-  }  
-
-    //get all resource
-    getAllResource() {
-      APIClient.access(APIInterface.getLeyaoAll())
-      .then((response) => {
-        return response.json()
-      })
-      .then((json) => {
-          console.log(json);
-          let arr = json.rows;
-          for (let i = 0; i < arr.length; i++) {
-              var event = {}; 
-              event.hEventId = arr[i].hEventId;
-              event.rEventCategoryDesc = arr[i].rEventCategoryDesc;
-              event.rEventTypeDesc = arr[i].rEventTypeDesc;  
-              event.sEventActiveInd = arr[i].sEventActiveInd;
-              event.sEventCategoryCd = arr[i].sEventCategoryCd;
-              event.sEventContentUrl = arr[i].sEventContentUrl;
-              event.sEventSearchContentTxt = arr[i].sEventSearchContentTxt;
-              event.sEventSubContent1Url = arr[i].sEventSubContent1Url;
-              event.sEventTitleUrl = arr[i].sEventTitleUrl;
-              event.sEventTypeCd = arr[i].sEventTypeCd;
-              event.createTs = arr[i].createTs;
-              event.updateTs = arr[i].updateTs;
-              eventData.push(event);
-          }          
-          //插入数据  
-          sqLite.insertUserData(eventData);  
-          //查询  
-          db.transaction((tx)=>{  
-            tx.executeSql("select * from " + Product_TABLE_NAME, [],(tx,results)=>{  
-              var len = results.rows.length;  
-              for(let i=0; i<len; i++){  
-                var u = results.rows.item(i);  
-                //一般在数据查出来之后，  可能要 setState操作，重新渲染页面  
-                console.log("db_sqlite:" + "字段1: "+u.h_event_id+"，字段2："+u.s_event_title_url+"，字段3："+u.update_ts);
-              }  
-            });  
-          },(error)=>{//打印异常信息  
-            console.log(error);  
-          }); 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  //   //get all resource
+  //   getAllResource() {
+  //     APIClient.access(APIInterface.getLeyaoAll())
+  //     .then((response) => {
+  //       return response.json()
+  //     })
+  //     .then((json) => {
+  //         console.log(json);
+  //         let arr = json.rows;
+  //         for (let i = 0; i < arr.length; i++) {
+  //             var event = {}; 
+  //             event.hEventId = arr[i].hEventId;
+  //             event.rEventCategoryDesc = arr[i].rEventCategoryDesc;
+  //             event.rEventTypeDesc = arr[i].rEventTypeDesc;  
+  //             event.sEventActiveInd = arr[i].sEventActiveInd;
+  //             event.sEventCategoryCd = arr[i].sEventCategoryCd;
+  //             event.sEventContentUrl = arr[i].sEventContentUrl;
+  //             event.sEventSearchContentTxt = arr[i].sEventSearchContentTxt;
+  //             event.sEventSubContent1Url = arr[i].sEventSubContent1Url;
+  //             event.sEventTitleUrl = arr[i].sEventTitleUrl;
+  //             event.sEventTypeCd = arr[i].sEventTypeCd;
+  //             event.createTs = arr[i].createTs;
+  //             event.updateTs = arr[i].updateTs;
+  //             eventData.push(event);
+  //         }          
+  //         //插入数据  
+  //         sqLite.insertUserData(eventData);  
+  //         //查询  
+  //         db.transaction((tx)=>{  
+  //           tx.executeSql("select * from " + Product_TABLE_NAME, [],(tx,results)=>{  
+  //             var len = results.rows.length;  
+  //             for(let i=0; i<len; i++){  
+  //               var u = results.rows.item(i);  
+  //               //一般在数据查出来之后，  可能要 setState操作，重新渲染页面  
+  //               console.log("db_sqlite:" + "字段1: "+u.h_event_id+"，字段2："+u.s_event_title_url+"，字段3："+u.update_ts);
+  //             }  
+  //           });  
+  //         },(error)=>{//打印异常信息  
+  //           console.log(error);  
+  //         }); 
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
 
     _renderTabItem(img, selectedImg, tag, childView) {
       return (

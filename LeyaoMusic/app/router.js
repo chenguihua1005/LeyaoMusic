@@ -24,6 +24,10 @@ import UpdateGenderPage from './page/update-gender-page';
 import UpdateEmailPage from './page/update-email-page';
 import UpdateVideoPage from './page/update-video-page';
 import UpdateWebviewPage from './page/update-webview-page';
+import UpdateMessagePage from './page/update-message-page';
+import UpdateFocusPage from './page/update-focus-page';
+import UpdateHistoryPage from './page/update-history-page';
+import UpdateSuggestionPage from './page/update-suggestion-page';
 import AboutLeyaoPage from './page/about-leyao-page';
 import MusicianPage from './page/musician-page';
 
@@ -156,6 +160,22 @@ const scenes = Actions.create(
       key="update_webview"
       hideNavBar={ true }
       component={ UpdateWebviewPage }/>  
+      <Scene
+      key="update_message"
+      hideNavBar={ true }
+      component={ UpdateMessagePage }/>
+      <Scene
+      key="update_focus"
+      hideNavBar={ true }
+      component={ UpdateFocusPage }/>
+      <Scene
+      key="update_history"
+      hideNavBar={ true }
+      component={ UpdateHistoryPage }/>
+      <Scene
+      key="update_suggestion"
+      hideNavBar={ true }
+      component={ UpdateSuggestionPage }/>
     <Scene
       key="about_leyao"
       hideNavBar={ true }

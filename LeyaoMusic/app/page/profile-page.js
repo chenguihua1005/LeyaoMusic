@@ -49,6 +49,11 @@ export default class ProfilePage extends Component {
       gender: "未知",
       userName: "未知",
       email: "未知",
+
+      message: "无",
+      focus: "无",
+      history: "无",
+      suggestion: "无"
     }
     this.load.bind(this)
   }
@@ -195,21 +200,37 @@ export default class ProfilePage extends Component {
   }
 
   //增加的4个菜单按钮事件
+  //我的消息
   checkMessage() {
     var copy = this;
-
+    Actions.update_message({
+      message: this.state.message,
+      parentComponent: copy
+    })
   }
+  //我的关注
   checkFocus() {
     var copy = this;
-
+    Actions.update_focus({
+      focus: this.state.focus,
+      parentComponent: copy
+    })
   }
+  //我的历史
   checkHistory() {
     var copy = this;
-
+    Actions.update_history({
+      history: this.state.history,
+      parentComponent: copy
+    })
   }
+  //意见反馈
   checkSuggestion() {
     var copy = this;
-
+    Actions.update_suggestion({
+      suggestion: this.state.suggestion,
+      parentComponent: copy
+    })
   }
 
 

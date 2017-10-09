@@ -6,18 +6,13 @@ import {
     Platform,
     StyleSheet,
     TouchableOpacity,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    Alert
 } from 'react-native';
 import Video from 'react-native-video'
+import APIConstant from '../service/api-constant';
 
-const MUSIC_1 = require('../resource/brave.mp3');
-// const MUSIC_2 = require('../resource/brave2.mp3');
-// const MUSIC_3 = require('../resource/brave3.mp3');
-// const MUSIC_4 = require('../resource/brave4.mp3');
-
-// const MUS_1 = require('../resource/beijing.mp3');
-// const MUS_2 = require('../resource/revoke.mp3');
-// const MUS_3 = require('../resource/life.mp3');
+const MUSIC_1 = require('../resource/silent.mp3');
 
 export default class Header extends Component {
 
@@ -25,41 +20,44 @@ export default class Header extends Component {
         super(props);
         this.state = {
             songs: [],   //歌曲id数据源
-            playModel:1,  // 播放模式  1:列表循环    2:随机    3:单曲循环
-            btnModel:require('../resource/列表循环.png'), //播放模式按钮背景图
-            file_link:MUSIC_1,   //歌曲播放链接
-            songLyr:[],     //当前歌词
+            playModel: 1,  // 播放模式  1:列表循环    2:随机    3:单曲循环
+            btnModel: require('../resource/列表循环.png'), //播放模式按钮背景图
+            file_link: MUSIC_1,   //歌曲播放链接
+            songLyr: [],     //当前歌词
             sliderValue: 0,    //Slide的value
-            pause:false,       //歌曲播放/暂停
-            isplayBtn:require('../resource/播放动图.gif')  //播放/暂停按钮背景图
+            pause: false,       //歌曲播放/暂停
+            isplayBtn: require('../resource/播放动图.gif')  //播放/暂停按钮背景图
         }
     }
 
-    componentDidMount(){    
-        this.listener = DeviceEventEmitter.addListener('changeMusic',(events)=>{  
-        this.setState({file_link : {uri:events.TAG} });
-        });    
-    } 
+    componentDidMount() {
+        this.listener = DeviceEventEmitter.addListener('changeMusic', (events) => {
+            this.setState({ file_link: { uri: events.TAG } });
+            Alert.alert('提示', '收到监听事件');
+            //强制启动渲染
+            // this.forceUpdate();
+        });
+    }
 
-    componentWillUnmount(){
-        this.listener.remove(); 
+    componentWillUnmount() {
+        this.listener.remove();
     };
 
     //播放/暂停
-    playAction =() => {
+    playAction = () => {
         this.setState({
             pause: !this.state.pause
         })
         //判断按钮显示什么
-        if(this.state.pause == true){
+        if (this.state.pause == true) {
             this.setState({
                 // isplayBtn:require('../resource/播放.png')
-                isplayBtn:require('../resource/播放动图.gif')
+                isplayBtn: require('../resource/播放动图.gif')
             })
-        }else {
+        } else {
             this.setState({
-                isplayBtn:require('../resource/暂停.png')
-                
+                isplayBtn: require('../resource/暂停.png')
+
             })
         }
 
@@ -70,16 +68,16 @@ export default class Header extends Component {
             <View style={styles.container}>
                 {/*<Image source={require('../resource/header_logo.png')} style={styles.logo}/>*/}
                 <View style={styles.searchBox}>
-                    <Image source={require('../resource/icon_search.png')} style={styles.searchIcon}/>
+                    <Image source={require('../resource/icon_search.png')} style={styles.searchIcon} />
                     <TextInput
                         keyboardType='web-search'
                         placeholder='搜索音乐、歌词、电台'
-                        style={styles.inputText}/>
+                        style={styles.inputText} />
                     {/*<Image source={require('../resource/icon_voice.png')} style={styles.voiceIcon}/>*/}
                 </View>
                 {/*<Image source={require('../resource/icon_qr.png')} style={styles.scanIcon}/>*/}
-                <TouchableOpacity onPress={()=>this.playAction()}>
-                    <Image source={this.state.isplayBtn} style={styles.scanIcon}/>
+                <TouchableOpacity onPress={() => this.playAction()}>
+                    <Image source={this.state.isplayBtn} style={styles.scanIcon} />
                 </TouchableOpacity>
                 {/*播放器*/}
                 <Video

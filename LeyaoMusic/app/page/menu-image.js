@@ -10,7 +10,7 @@ import {
 export default class MenuImage extends Component {
 
     static propTypes = {
-        renderIcon: PropTypes.number.isRequired,  // 图片,加入.isRequired即为比填项
+        renderIcon: PropTypes.string,  // 图片,加入.isRequired即为比填项
         tag: PropTypes.string,  // Tag
         onClick: PropTypes.func  // 回调函数
     };
@@ -30,7 +30,7 @@ export default class MenuImage extends Component {
         return (
             <TouchableWithoutFeedback onPress={this._onClick}>
                 <View style={{alignItems:'center',flex:1}}>
-                    <Image style={styles.iconImg} source={this.props.renderIcon}/>
+                    <Image style={styles.iconImg} source={{uri:this.props.renderIcon}}/>
                 </View>
             </TouchableWithoutFeedback>
         );

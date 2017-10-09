@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
+  ListView
 } from 'react-native';
 import {
   Actions,
@@ -19,55 +20,34 @@ export default class SightsingPage extends Component {
   constructor(props) {
     super(props);
     this._onMenuClick = this._onMenuClick.bind(this);
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    this.state = {
+      dataSource: ds.cloneWithRows([
+        'John'
+        // 'John', 'Joel', 'James', 'Jimmy', 'Jackson', 'Jillian'
+      ])
+    };
+
+
     Scene1 = ({ index }) => (
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/1.jpg' }
             tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
             onClick={this._onMenuClick} />
         </View>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/2.jpg' }
             tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
             onClick={this._onMenuClick} />
         </View>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/1.jpg' }
             tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
             onClick={this._onMenuClick} />
         </View>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/2.jpg' }
             tag={'http://mp.weixin.qq.com/s/pczRcFhP97l-u8u_SpNgpw'}
             onClick={this._onMenuClick} />
         </View>
@@ -76,109 +56,47 @@ export default class SightsingPage extends Component {
     Scene2 = ({ index }) => (
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/3.jpg' }
             tag={'https://www.baidu.com'}
             onClick={this._onMenuClick} />
         </View>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/4.jpg' }
             tag={'https://www.baidu.com'}
             onClick={this._onMenuClick} />
         </View>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/3.jpg' }
             tag={'https://www.baidu.com'}
             onClick={this._onMenuClick} />
         </View>
         <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'https://www.baidu.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'https://www.baidu.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'https://www.baidu.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'https://www.baidu.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'https://www.baidu.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'https://www.baidu.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
+          <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/4.jpg' }
             tag={'https://www.baidu.com'}
             onClick={this._onMenuClick} />
         </View>
       </View>
     );
     Scene3 = ({ index }) => (
-      <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner2.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
-        <View style={styles.itemStyle} >
-          <MenuImage renderIcon={require('../resource/banner4.jpg')}
-            tag={'http://www.265.com'}
-            onClick={this._onMenuClick} />
-        </View>
+      <View style={{paddingTop: 0}}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={
+            (rowData) =>
+              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/5.jpg' }
+                    tag={'http://www.265.com'}
+                    onClick={this._onMenuClick} />
+                </View>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={ 'http://47.94.94.196:8088/image/6.jpg' }
+                    tag={'https://www.baidu.com'}
+                    onClick={this._onMenuClick} />
+                </View>
+              </View>
+          }
+        />
       </View>
     );
 

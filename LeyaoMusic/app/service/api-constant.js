@@ -27,4 +27,7 @@ export default class APIConstant {
 
   static URL_VEDIO = ""
   static URL_EVENT = ""
+
+  //音乐uri地址
+  static MUSIC_URI = ""
 }

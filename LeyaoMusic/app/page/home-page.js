@@ -233,6 +233,7 @@ export default class HomePage extends Component {
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
                                     style={{ width: '30%', height: 80 }}
+                                    resizeMode={'stretch'}
                                     source={{ uri: 'http://47.94.94.196:8088/image/1.jpg' }}
                                 />
                                 <View style={{ flexDirection: 'column', width: '70%' }}>
@@ -247,6 +248,7 @@ export default class HomePage extends Component {
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
                                     style={{ width: '30%', height: 80 }}
+                                    resizeMode={'stretch'}
                                     source={{ uri: 'http://47.94.94.196:8088/image/2.jpg' }}
                                 />
                                 <View style={{ flexDirection: 'column', width: '70%' }}>
