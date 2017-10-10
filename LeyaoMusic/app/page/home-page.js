@@ -25,7 +25,7 @@ import APIConstant from '../service/api-constant';
 
 import Swiper from 'react-native-swiper';
 import MenuButton from './menu-button';
-import MenuText from './menu-Text';
+import MenuText from './menu-text';
 
 const len = 160;
 
@@ -45,11 +45,11 @@ let image_url = [];
 const length = 4;
 
 let sliderImgs = [
-    'http://images3.c-ctrip.com/SBU/apph5/201505/16/app_home_ad16_640_128.png',
-    'http://images3.c-ctrip.com/rk/apph5/C1/201505/app_home_ad49_640_128.png',
-    'http://images3.c-ctrip.com/rk/apph5/D1/201506/app_home_ad05_640_128.jpg',
-    'http://images3.c-ctrip.com/SBU/apph5/201505/16/app_home_ad16_640_128.png',
-    'http://images3.c-ctrip.com/rk/apph5/C1/201505/app_home_ad49_640_128.png'
+    'http://47.94.94.196:8088/image/1.jpg',
+    'http://47.94.94.196:8088/image/2.jpg',
+    'http://47.94.94.196:8088/image/3.jpg',
+    'http://47.94.94.196:8088/image/4.jpg',
+    'http://47.94.94.196:8088/image/5.jpg'
 ];
 
 export default class HomePage extends Component {
@@ -187,6 +187,7 @@ export default class HomePage extends Component {
         );
     }
 
+    //音乐家和听我，点击后统一调用接口
     _onMenuClick(title, tag) {
         //调用事件通知
         DeviceEventEmitter.emit('changeMusic', { TAG: tag });
@@ -232,11 +233,11 @@ export default class HomePage extends Component {
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
-                                    style={{ width: '30%', height: 80 }}
+                                    style={{ width: '50%', height: 80 }}
                                     resizeMode={'stretch'}
                                     source={{ uri: 'http://47.94.94.196:8088/image/1.jpg' }}
                                 />
-                                <View style={{ flexDirection: 'column', width: '70%' }}>
+                                <View style={{ flexDirection: 'column', width: '50%' }}>
                                     <MenuText showText={this.state.musician_title1[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[0]}
                                         onClick={this._onMenuClick} />
                                     <MenuText showText={this.state.musician_title1[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[1]}
@@ -247,11 +248,11 @@ export default class HomePage extends Component {
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
-                                    style={{ width: '30%', height: 80 }}
+                                    style={{ width: '50%', height: 80 }}
                                     resizeMode={'stretch'}
                                     source={{ uri: 'http://47.94.94.196:8088/image/2.jpg' }}
                                 />
-                                <View style={{ flexDirection: 'column', width: '70%' }}>
+                                <View style={{ flexDirection: 'column', width: '50%' }}>
                                     <MenuText showText={this.state.musician_title2[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[0]}
                                         onClick={this._onMenuClick} />
                                     <MenuText showText={this.state.musician_title2[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[1]}
@@ -263,32 +264,32 @@ export default class HomePage extends Component {
 
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>听我 ></Text>
                             <View style={styles.menuView}>
-                                <MenuButton renderIcon={require('../resource/wdgz.png')}
+                                <MenuButton renderIcon={require('../resource/song1.png')}
                                     showText={this.state.audio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[0]}
                                     onClick={this._onMenuClick} />
-                                <MenuButton renderIcon={require('../resource/wlcx.png')}
+                                <MenuButton renderIcon={require('../resource/song2.png')}
                                     showText={this.state.audio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[1]}
                                     onClick={this._onMenuClick} />
-                                <MenuButton renderIcon={require('../resource/cz.png')}
+                                <MenuButton renderIcon={require('../resource/song3.png')}
                                     showText={this.state.audio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[2]}
                                     onClick={this._onMenuClick} />
-                                <MenuButton renderIcon={require('../resource/dyp.png')}
+                                <MenuButton renderIcon={require('../resource/song4.png')}
                                     showText={this.state.audio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[3]}
                                     onClick={this._onMenuClick} />
                             </View>
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>看我 ></Text>
                             <View style={styles.menuView}>
-                                <MenuButton renderIcon={require('../resource/yxcz.png')}
+                                <MenuButton renderIcon={require('../resource/song1.png')}
                                     showText={this.state.vedio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[0]}
                                     onClick={this._onMenuClick2} />
-                                <MenuButton renderIcon={require('../resource/xjk.png')}
+                                <MenuButton renderIcon={require('../resource/song2.png')}
                                     showText={this.state.vedio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[1]}
                                     onClick={this._onMenuClick2} />
-                                <MenuButton renderIcon={require('../resource/ljd.png')}
+                                <MenuButton renderIcon={require('../resource/song3.png')}
                                     showText={this.state.vedio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[2]}
                                     onClick={this._onMenuClick2} />
-                                <MenuButton renderIcon={require('../resource/gd.png')}
+                                <MenuButton renderIcon={require('../resource/song4.png')}
                                     showText={this.state.vedio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[3]}
                                     onClick={this._onMenuClick2} />
                             </View>
@@ -296,16 +297,16 @@ export default class HomePage extends Component {
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>读我 ></Text>
                             <View style={styles.menuView}>
-                                <MenuButton renderIcon={require('../resource/yxcz.png')}
+                                <MenuButton renderIcon={require('../resource/song1.png')}
                                     showText={'发现图文1'} tag={this.state.image_url[0]}
                                     onClick={this._onMenuClick3} />
-                                <MenuButton renderIcon={require('../resource/xjk.png')}
+                                <MenuButton renderIcon={require('../resource/song2.png')}
                                     showText={'发现图文2'} tag={this.state.image_url[1]}
                                     onClick={this._onMenuClick3} />
-                                <MenuButton renderIcon={require('../resource/ljd.png')}
+                                <MenuButton renderIcon={require('../resource/song3.png')}
                                     showText={'发现图文3'} tag={this.state.image_url[2]}
                                     onClick={this._onMenuClick3} />
-                                <MenuButton renderIcon={require('../resource/gd.png')}
+                                <MenuButton renderIcon={require('../resource/song4.png')}
                                     showText={'发现图文4'} tag={this.state.image_url[3]}
                                     onClick={this._onMenuClick3} />
                             </View>
@@ -349,8 +350,9 @@ const styles = StyleSheet.create({
         height: 130
     },
     slide: {
-        height: 80,
-        resizeMode: Image.resizeMode.contain,
+        marginTop: 0,
+        height: 110,
+        resizeMode: Image.resizeMode.stretch,
     },
     slide1: {
         flex: 1,

@@ -12,7 +12,11 @@ import {
 import Video from 'react-native-video'
 import APIConstant from '../service/api-constant';
 
-const MUSIC_1 = require('../resource/silent.mp3');
+// const music_1 = require('../resource/silent.mp3');
+const music_1 = require('../resource/zz.mp3');
+
+// 存储中间变量
+let uri_temp = ""
 
 export default class Header extends Component {
 
@@ -21,19 +25,32 @@ export default class Header extends Component {
         this.state = {
             songs: [],   //歌曲id数据源
             playModel: 1,  // 播放模式  1:列表循环    2:随机    3:单曲循环
-            btnModel: require('../resource/列表循环.png'), //播放模式按钮背景图
-            file_link: MUSIC_1,   //歌曲播放链接
+            file_link: music_1,   //歌曲播放链接
             songLyr: [],     //当前歌词
             sliderValue: 0,    //Slide的value
-            pause: false,       //歌曲播放/暂停
-            isplayBtn: require('../resource/播放动图.gif')  //播放/暂停按钮背景图
+            pause: true,       //歌曲播放/暂停
+            isplayBtn: require('../resource/btn_bofang.png')  //播放/暂停按钮背景图
         }
     }
 
     componentDidMount() {
         this.listener = DeviceEventEmitter.addListener('changeMusic', (events) => {
+            //第一次进来icon：“暂停”->“播放”
+            if(this.state.pause == true) {
+                this.setState({
+                    pause: false,
+                    isplayBtn: require('../resource/btn_bofangzhong.png')
+                })
+            }
+
             this.setState({ file_link: { uri: events.TAG } });
-            Alert.alert('提示', '收到监听事件');
+            //前后两次url地址不一样，通知改变音乐播放状态icon
+            if(uri_temp != events.TAG) {
+                uri_temp = events.TAG
+                DeviceEventEmitter.emit('changeMusicIcon', { TAG: uri_temp });
+            }
+
+            //Alert.alert('提示', '收到监听事件');
             //强制启动渲染
             // this.forceUpdate();
         });
@@ -51,38 +68,33 @@ export default class Header extends Component {
         //判断按钮显示什么
         if (this.state.pause == true) {
             this.setState({
-                // isplayBtn:require('../resource/播放.png')
-                isplayBtn: require('../resource/播放动图.gif')
+                isplayBtn: require('../resource/btn_bofangzhong.png')
             })
         } else {
             this.setState({
-                isplayBtn: require('../resource/暂停.png')
-
+                isplayBtn: require('../resource/btn_bofang.png')
             })
         }
-
+        //发通知
+        DeviceEventEmitter.emit('changeMusicIcon', { TAG: this.state.pause, TAG2: uri_temp });
     }
 
     render() {
         return (
             <View style={styles.container}>
-                {/*<Image source={require('../resource/header_logo.png')} style={styles.logo}/>*/}
                 <View style={styles.searchBox}>
                     <Image source={require('../resource/icon_search.png')} style={styles.searchIcon} />
                     <TextInput
                         keyboardType='web-search'
-                        placeholder='搜索音乐、歌词、电台'
+                        placeholder='点击搜索你感兴趣的内容'
                         style={styles.inputText} />
-                    {/*<Image source={require('../resource/icon_voice.png')} style={styles.voiceIcon}/>*/}
                 </View>
-                {/*<Image source={require('../resource/icon_qr.png')} style={styles.scanIcon}/>*/}
                 <TouchableOpacity onPress={() => this.playAction()}>
                     <Image source={this.state.isplayBtn} style={styles.scanIcon} />
                 </TouchableOpacity>
                 {/*播放器*/}
                 <Video
                     source={this.state.file_link}
-                    /* source={{uri:'http://47.94.94.196/LeyaoTemp/audio/1.mp3'}} */
                     ref='video'
                     volume={1.0}
                     repeat={true}

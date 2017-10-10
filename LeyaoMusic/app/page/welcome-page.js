@@ -40,7 +40,7 @@ export default class WelcomePage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/welcome-background.jpg') }
+        source={ require('../resource/welcome-background.png') }
         style={{
           flex: 1,
           alignItems: 'center',

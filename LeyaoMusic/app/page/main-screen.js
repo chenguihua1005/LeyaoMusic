@@ -21,6 +21,9 @@ import ProfilePage from './profile-page';
 // import SQLite from './sqlite'; 
 // var sqLite = new SQLite();
 // var db;
+// const Product_TABLE_NAME = "t_event_page";//表名称
+//var eventData = [];  
+
 import TabNavigator from 'react-native-tab-navigator';
 import VideoPlayer from 'react-native-video-controls';
 import ViewPager from 'react-native-viewpager';
@@ -29,25 +32,20 @@ import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 
-const HOME = 'home';
-const HOME_NORMAL = require('../resource/home_normal.png');
-const HOME_FOCUS = require('../resource/home_focus.png');
+const HOME = '首页';
+const HOME_NORMAL = require('../resource/icon_shouye.png');
+const HOME_FOCUS = require('../resource/icon_shouye_xuanzhong.png');
 const CATEGORY = 'category';
-//const CATEGORY_NORMAL = require('../resource/category_normal.png');
-//const CATEGORY_FOCUS = require('../resource/category_focus.png');
+
 const FAXIAN = '音乐屋';
-const FAXIAN_NORMAL = require('../resource/faxian_normal.png');
-const FAXIAN_FOCUS = require('../resource/faxian_focus.png');
+const FAXIAN_NORMAL = require('../resource/icon_yintyuewu.png');
+const FAXIAN_FOCUS = require('../resource/icon_yintyuewu_xuanzhong.png');
 const CART = 'cart';
-//const CART_NORMAL = require('../resource/cart_normal.png');
-//const CART_FOCUS = require('../resource/cart_focus.png');
+
 const PERSONAL = '个人';
-const PERSONAL_NORMAL = require('../resource/personal_normal.png');
-const PERSONAL_FOCUS = require('../resource/personal_focus.png');
+const PERSONAL_NORMAL = require('../resource/icon_wode.png');
+const PERSONAL_FOCUS = require('../resource/icon_wode_xuanzhong.png');
 
-const Product_TABLE_NAME = "t_event_page";//表名称
-
-var eventData = [];  
 
 export default class MainScreen extends Component {
 
@@ -132,28 +130,16 @@ export default class MainScreen extends Component {
       );
   }
 
-    // static _createChildView(tag) {
-    //     return (
-    //         <View style={{flex:1,backgroundColor:'#00baff',alignItems:'center',justifyContent:'center'}}>
-    //             <Text style={{fontSize:22}}>{tag}</Text>
-    //         </View>
-    //     )
-    // }
-
     render() {
       return (
         <View style={{flex: 1}}>  
           <Header />  
           <TabNavigator hidesTabTouch={true} tabBarStyle={styles.tab}>
             {this._renderTabItem(HOME_NORMAL, HOME_FOCUS, HOME, <HomePage nav={this.props.nav}/>)}
-            {/*{this._renderTabItem(CATEGORY_NORMAL, CATEGORY_FOCUS, CATEGORY, MainScreen._createChildView(CATEGORY))}*/}
             {this._renderTabItem(FAXIAN_NORMAL, FAXIAN_FOCUS, FAXIAN, <SightsingPage nav={this.props.nav}/>)}
-            {/*{this._renderTabItem(CART_NORMAL, CART_FOCUS, CART, MainScreen._createChildView(CART))}*/}
             {this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, <ProfilePage nav={this.props.nav}/>)}
           </TabNavigator>
-        </View >
- 
-       
+        </View >      
     );
   }
 
