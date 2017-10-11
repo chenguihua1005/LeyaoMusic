@@ -12,8 +12,7 @@ import {
 import Video from 'react-native-video'
 import APIConstant from '../service/api-constant';
 
-// const music_1 = require('../resource/silent.mp3');
-const music_1 = require('../resource/zz.mp3');
+const music_1 = require('../resource/silent.mp3');
 
 // 存储中间变量
 let uri_temp = ""

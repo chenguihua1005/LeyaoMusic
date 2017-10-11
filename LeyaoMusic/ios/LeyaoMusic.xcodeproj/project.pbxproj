@@ -39,8 +39,8 @@
 		8A11A73CE2AB40AEABB0BA93 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5082F6CDFA547A985DA5B25 /* libsqlite3.0.tbd */; };
 		B4A4BEAD1EADFC4900053828 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A4BE9A1EADFB6B00053828 /* libRCTPushNotification.a */; };
 		B91D3EC2536D47D4BC647E9B /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3099DFA2638B40C1950661B8 /* libSQLite.a */; };
-		CA1F74801F5C0F8000E208E7 /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = CA1F747F1F5C0F8000E208E7 /* index.ios.jsbundle */; };
-		CA1F74821F5C0FA800E208E7 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = CA1F74811F5C0FA800E208E7 /* assets */; };
+		CA11FFA11F8E5CB10086A9CA /* assets in Resources */ = {isa = PBXBuildFile; fileRef = CA11FFA01F8E5CB10086A9CA /* assets */; };
+		CA11FFA31F8E5D150086A9CA /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = CA11FFA21F8E5D150086A9CA /* index.ios.jsbundle */; };
 		CA602FED1F0B340400673878 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA602FEC1F0B333A00673878 /* libSQLite.a */; };
 		CA602FEF1F0B341600673878 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CA602FEE1F0B341600673878 /* libsqlite3.0.tbd */; };
 /* End PBXBuildFile section */
@@ -293,8 +293,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		B4A4BE8A1EADFB6B00053828 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		CA1F747F1F5C0F8000E208E7 /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
-		CA1F74811F5C0FA800E208E7 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		CA11FFA01F8E5CB10086A9CA /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../../../../../Downloads/bundle/assets; sourceTree = "<group>"; };
+		CA11FFA21F8E5D150086A9CA /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = ../../../../../../../Downloads/bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		CA602FEE1F0B341600673878 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.2.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
 		D993391C49D04789A1789970 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		E5082F6CDFA547A985DA5B25 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -433,8 +433,8 @@
 		13B07FAE1A68108700A75B9A /* LeyaoMusic */ = {
 			isa = PBXGroup;
 			children = (
-				CA1F74811F5C0FA800E208E7 /* assets */,
-				CA1F747F1F5C0F8000E208E7 /* index.ios.jsbundle */,
+				CA11FFA21F8E5D150086A9CA /* index.ios.jsbundle */,
+				CA11FFA01F8E5CB10086A9CA /* assets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -957,8 +957,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1F74801F5C0F8000E208E7 /* index.ios.jsbundle in Resources */,
-				CA1F74821F5C0FA800E208E7 /* assets in Resources */,
+				CA11FFA31F8E5D150086A9CA /* index.ios.jsbundle in Resources */,
+				CA11FFA11F8E5CB10086A9CA /* assets in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

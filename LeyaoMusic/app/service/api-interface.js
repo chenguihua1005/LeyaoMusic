@@ -3,6 +3,24 @@ import APIConstant from './api-constant';
 
 export default class APIInterface {
 
+  static getLeyaoMusicParty() {
+    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_PARTY, {
+
+    })
+  }
+
+  static getLeyaoMusicTeach() {
+    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_TEACH, {
+
+    })
+  }
+
+  static getLeyaoMusicShare() {
+    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_SHARE, {
+
+    })
+  }
+
   static getLeyaoMusician() {
     return BaseRequest.get(APIConstant.BASE_URL_MUSICIAN, {
 
@@ -74,7 +92,7 @@ export default class APIInterface {
   }
 
   static forgetPWD(username, password, code) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/forgetPWD', {
+    return BaseRequest.post(APIConstant.BASE_URL + '/user/reset', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
