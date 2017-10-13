@@ -45,11 +45,11 @@ let image_url = [];
 const length = 4;
 
 let sliderImgs = [
-    'http://47.94.94.196:8088/image/1.jpg',
-    'http://47.94.94.196:8088/image/2.jpg',
-    'http://47.94.94.196:8088/image/3.jpg',
-    'http://47.94.94.196:8088/image/4.jpg',
-    'http://47.94.94.196:8088/image/5.jpg'
+    'http://47.94.94.196:8088/static/image/1.jpg',
+    'http://47.94.94.196:8088/static/image/2.jpg',
+    'http://47.94.94.196:8088/static/image/3.jpg',
+    'http://47.94.94.196:8088/static/image/4.jpg',
+    'http://47.94.94.196:8088/static/image/5.jpg'
 ];
 
 export default class HomePage extends Component {
@@ -98,12 +98,17 @@ export default class HomePage extends Component {
                 //"sEventSubContent1UrlList":["audio/1.mp3","audio/2.mp3","audio/3.mp3"],
                 //"sEventSubContent2StrList":["musician1","musician1","musician1"]
                 for (let i = 0; i < 3; i++) {
-                    musician_title1[i] = arr[0].sEventSubContent2StrList[i];
-                    musician_url1[i] = arr[0].sEventSubContent1UrlList[i];
+                    //词：jack 曲：jesse 唱： mark
+                    musician_title1[i] = " 词：" + arr[0].sEventSubContent[i].lyricist + 
+                        " 曲：" + arr[0].sEventSubContent[i].composer + 
+                        " 唱：" + arr[0].sEventSubContent[i].singer; 
+                    musician_url1[i] = arr[0].sEventSubContent[i].url;
                 }
                 for (let i = 0; i < 3; i++) {
-                    musician_title2[i] = arr[1].sEventSubContent2StrList[i];
-                    musician_url2[i] = arr[1].sEventSubContent1UrlList[i];
+                    musician_title2[i] = " 词：" + arr[1].sEventSubContent[i].lyricist + 
+                    " 曲：" + arr[1].sEventSubContent[i].composer + 
+                    " 唱：" + arr[1].sEventSubContent[i].singer;
+                    musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 
                 this.setState({ musician_title1: musician_title1 })
@@ -232,11 +237,11 @@ export default class HomePage extends Component {
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
-                                    style={{ width: '50%', height: 80 }}
+                                    style={{ width: '40%', height: 80 }}
                                     resizeMode={'stretch'}
-                                    source={{ uri: 'http://47.94.94.196:8088/image/1.jpg' }}
+                                    source={{ uri: 'http://47.94.94.196:8088/static/image/1.jpg' }}
                                 />
-                                <View style={{ flexDirection: 'column', width: '50%' }}>
+                                <View style={{ flexDirection: 'column', width: '60%' }}>
                                     <MenuText showText={this.state.musician_title1[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[0]}
                                         onClick={this._onMenuClick} />
                                     <MenuText showText={this.state.musician_title1[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[1]}
@@ -247,11 +252,11 @@ export default class HomePage extends Component {
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
-                                    style={{ width: '50%', height: 80 }}
+                                    style={{ width: '40%', height: 80 }}
                                     resizeMode={'stretch'}
-                                    source={{ uri: 'http://47.94.94.196:8088/image/2.jpg' }}
+                                    source={{ uri: 'http://47.94.94.196:8088/static/image/2.jpg' }}
                                 />
-                                <View style={{ flexDirection: 'column', width: '50%' }}>
+                                <View style={{ flexDirection: 'column', width: '60%' }}>
                                     <MenuText showText={this.state.musician_title2[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[0]}
                                         onClick={this._onMenuClick} />
                                     <MenuText showText={this.state.musician_title2[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[1]}

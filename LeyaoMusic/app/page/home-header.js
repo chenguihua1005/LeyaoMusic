@@ -27,7 +27,7 @@ export default class Header extends Component {
             file_link: music_1,   //歌曲播放链接
             songLyr: [],     //当前歌词
             sliderValue: 0,    //Slide的value
-            pause: true,       //歌曲播放/暂停
+            pause: true,       //歌曲暂停/播放
             isplayBtn: require('../resource/btn_bofang.png')  //播放/暂停按钮背景图
         }
     }
@@ -94,7 +94,7 @@ export default class Header extends Component {
                 {/*播放器*/}
                 <Video
                     source={this.state.file_link}
-                    ref='video'
+                    ref='audio'
                     volume={1.0}
                     repeat={true}
                     paused={this.state.pause}

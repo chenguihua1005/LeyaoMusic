@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     },
     tabIcon: {
         width: 30,
-        height: 35,
+        height: 30,
         resizeMode: 'stretch',
         marginTop: 12.5
     }

@@ -220,7 +220,7 @@ export default class LoginPage extends Component {
                   }}>登录</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
+            {/* <TouchableWithoutFeedback
               onPress={ this.setPassword.bind(this) }>
               <View
                 style={{
@@ -234,9 +234,9 @@ export default class LoginPage extends Component {
                     color: '#ffffff'
                   }}>忘记密码</Text>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
           </View>
-          <TouchableWithoutFeedback
+          {/* <TouchableWithoutFeedback
             onPress={ this.register.bind(this) }>
             <View
               style={{
@@ -250,7 +250,7 @@ export default class LoginPage extends Component {
                   color: '#ffffff'
                 }}>注册</Text>
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback> */}
         </KeyboardAvoidingView>
       </Image>
     );

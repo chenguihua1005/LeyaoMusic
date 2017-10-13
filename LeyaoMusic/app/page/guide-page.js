@@ -44,7 +44,8 @@ export default class GuidePage extends Component {
                 fontFamily: 'ArialMT',
                 fontSize: 17,
                 color: '#ffffff'
-              }}>登录/注册</Text>
+              // }}>登录/注册</Text>
+              }}>登录</Text>
           </View>
         </TouchableWithoutFeedback>
       </Image>

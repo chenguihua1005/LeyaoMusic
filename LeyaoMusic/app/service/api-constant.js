@@ -15,14 +15,8 @@ export default class APIConstant {
   static BASE_URL_IMAGE = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=1&sessionCode=hello"
   static BASE_URL_AUDIO = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=hello"
   static BASE_URL_VEDIO = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=3&sessionCode=hello"
-  // static BASE_URL_IMAGE = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=1"
-  // static BASE_URL_AUDIO = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=2"
-  // static BASE_URL_VEDIO = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=3"
 
   static BASE_URL_PREFIX = "http://47.94.94.196:8088/"
-  // static BASE_URL_IMAGE = "  http://47.94.94.196:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1&sessionCode=hello"
-  // static BASE_URL_AUDIO = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=2"
-  // static BASE_URL_VEDIO = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents?sEventTypeCd=3"
 
   //1:音乐屋活动 2:音乐屋教学 3:音乐屋分享 4:首页音乐家
   static BASE_URL_MUSIC_PARTY = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=1&sessionCode=hello"
