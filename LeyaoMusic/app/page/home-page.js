@@ -41,8 +41,8 @@ let vedio_url = []
 let image_title = []
 let image_url = [];
 
-//读我听我看我，个数先统一为4个
-const length = 4;
+//读我听我看我，个数先统一为6个
+const length = 6;
 
 let sliderImgs = [
     'http://47.94.94.196:8088/static/image/1.jpg',
@@ -99,15 +99,15 @@ export default class HomePage extends Component {
                 //"sEventSubContent2StrList":["musician1","musician1","musician1"]
                 for (let i = 0; i < 3; i++) {
                     //词：jack 曲：jesse 唱： mark
-                    musician_title1[i] = " 词：" + arr[0].sEventSubContent[i].lyricist + 
-                        " 曲：" + arr[0].sEventSubContent[i].composer + 
-                        " 唱：" + arr[0].sEventSubContent[i].singer; 
+                    musician_title1[i] = " 词：" + arr[0].sEventSubContent[i].lyricist +
+                        " 曲：" + arr[0].sEventSubContent[i].composer +
+                        " 唱：" + arr[0].sEventSubContent[i].singer;
                     musician_url1[i] = arr[0].sEventSubContent[i].url;
                 }
                 for (let i = 0; i < 3; i++) {
-                    musician_title2[i] = " 词：" + arr[1].sEventSubContent[i].lyricist + 
-                    " 曲：" + arr[1].sEventSubContent[i].composer + 
-                    " 唱：" + arr[1].sEventSubContent[i].singer;
+                    musician_title2[i] = " 词：" + arr[1].sEventSubContent[i].lyricist +
+                        " 曲：" + arr[1].sEventSubContent[i].composer +
+                        " 唱：" + arr[1].sEventSubContent[i].singer;
                     musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 
@@ -218,6 +218,51 @@ export default class HomePage extends Component {
         );
     }
 
+    renderItem1() {
+        var itemAry = [];
+        for (var i = 0; i < 6; i++) {
+            itemAry.push(
+                <View key={i}>
+                    <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/4.jpg'}
+                        showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[i]}
+                        onClick={this._onMenuClick} />
+                </View>
+
+            );
+        }
+        return itemAry;
+    }
+
+    renderItem2() {
+        var itemAry = [];
+        for (var i = 0; i < 6; i++) {
+            itemAry.push(
+                <View key={i}>
+                    <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/5.jpg'}
+                        showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[i]}
+                        onClick={this._onMenuClick2} />
+                </View>
+
+            );
+        }
+        return itemAry;
+    }
+
+    renderItem3() {
+        var itemAry = [];
+        for (var i = 0; i < 6; i++) {
+            itemAry.push(
+                <View key={i}>
+                    <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/6.jpg'}
+                        showText={''} tag={this.state.image_url[i]}
+                        onClick={this._onMenuClick3} />
+                </View>
+
+            );
+        }
+        return itemAry;
+    }
+
     render() {
         return (
             <ListView
@@ -268,51 +313,37 @@ export default class HomePage extends Component {
 
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>听我 ></Text>
                             <View style={styles.menuView}>
-                                <MenuButton renderIcon={require('../resource/song1.png')}
-                                    showText={this.state.audio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[0]}
-                                    onClick={this._onMenuClick} />
-                                <MenuButton renderIcon={require('../resource/song2.png')}
-                                    showText={this.state.audio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[1]}
-                                    onClick={this._onMenuClick} />
-                                <MenuButton renderIcon={require('../resource/song3.png')}
-                                    showText={this.state.audio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[2]}
-                                    onClick={this._onMenuClick} />
-                                <MenuButton renderIcon={require('../resource/song4.png')}
-                                    showText={this.state.audio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[3]}
-                                    onClick={this._onMenuClick} />
+                                <ScrollView style={styles.mainStyle}
+                                    horizontal={true}   // 水平方向
+                                    showsHorizontalScrollIndicator={false}  // 隐藏水平指示器
+                                    showsVerticalScrollIndicator={false}    // 隐藏垂直指示器
+                                >
+                                    {this.renderItem1()}
+                                </ScrollView>
                             </View>
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
+
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>看我 ></Text>
                             <View style={styles.menuView}>
-                                <MenuButton renderIcon={require('../resource/song1.png')}
-                                    showText={this.state.vedio_title[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[0]}
-                                    onClick={this._onMenuClick2} />
-                                <MenuButton renderIcon={require('../resource/song2.png')}
-                                    showText={this.state.vedio_title[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[1]}
-                                    onClick={this._onMenuClick2} />
-                                <MenuButton renderIcon={require('../resource/song3.png')}
-                                    showText={this.state.vedio_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[2]}
-                                    onClick={this._onMenuClick2} />
-                                <MenuButton renderIcon={require('../resource/song4.png')}
-                                    showText={this.state.vedio_title[3]} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[3]}
-                                    onClick={this._onMenuClick2} />
+                                <ScrollView style={styles.mainStyle}
+                                    horizontal={true}   // 水平方向
+                                    showsHorizontalScrollIndicator={false}  // 隐藏水平指示器
+                                    showsVerticalScrollIndicator={false}    // 隐藏垂直指示器
+                                >
+                                    {this.renderItem2()}
+                                </ScrollView>
                             </View>
-
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
+
                             <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>读我 ></Text>
                             <View style={styles.menuView}>
-                                <MenuButton renderIcon={require('../resource/song1.png')}
-                                    showText={'发现图文1'} tag={this.state.image_url[0]}
-                                    onClick={this._onMenuClick3} />
-                                <MenuButton renderIcon={require('../resource/song2.png')}
-                                    showText={'发现图文2'} tag={this.state.image_url[1]}
-                                    onClick={this._onMenuClick3} />
-                                <MenuButton renderIcon={require('../resource/song3.png')}
-                                    showText={'发现图文3'} tag={this.state.image_url[2]}
-                                    onClick={this._onMenuClick3} />
-                                <MenuButton renderIcon={require('../resource/song4.png')}
-                                    showText={'发现图文4'} tag={this.state.image_url[3]}
-                                    onClick={this._onMenuClick3} />
+                                <ScrollView style={styles.mainStyle}
+                                    horizontal={true}   // 水平方向
+                                    showsHorizontalScrollIndicator={false}  // 隐藏水平指示器
+                                    showsVerticalScrollIndicator={false}    // 隐藏垂直指示器
+                                >
+                                    {this.renderItem3()}
+                                </ScrollView>
                             </View>
                             <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
                         </View>)
@@ -380,5 +411,15 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 30,
         fontWeight: 'bold',
-    }
+    },
+    scrollViewStyle: {
+        // 背景色
+        backgroundColor: 'red'
+    },
+
+    itemStyle: {
+        // 尺寸
+        width: 400,
+        height: 400
+    },
 });

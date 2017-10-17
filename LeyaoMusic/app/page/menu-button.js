@@ -10,7 +10,7 @@ import {
 export default class MenuButton extends Component {
 
     static propTypes = {
-        renderIcon: PropTypes.number.isRequired,  // 图片,加入.isRequired即为必填项
+        renderIcon: PropTypes.string,  // 图片,加入.isRequired即为必填项
         showText: PropTypes.string,  // 显示标题\文字
         tag: PropTypes.string,  // Tag
         onClick: PropTypes.func  // 回调函数
@@ -31,8 +31,8 @@ export default class MenuButton extends Component {
         return (
             <TouchableWithoutFeedback onPress={this._onClick}>
                 <View style={{alignItems:'center',flex:1}}>
-                    <Image style={styles.iconImg} source={this.props.renderIcon}/>
-                    <Text style={styles.showText}>{this.props.showText}</Text>
+                    <Image style={styles.iconImg} source={{uri:this.props.renderIcon}}/>
+                    {<Text style={styles.showText}>{this.props.showText}</Text>}
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -41,9 +41,9 @@ export default class MenuButton extends Component {
 
 const styles = StyleSheet.create({
     iconImg: {
-        width: 42,
-        height: 42,
-        marginBottom: 2
+        width: 80,
+        height: 80,
+        margin: 5
     },
     showText: {
         fontSize: 12
