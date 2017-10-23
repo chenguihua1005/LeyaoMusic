@@ -137,7 +137,7 @@ export default class UpdateGenderPage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 18,
-                color: '#ffffff'
+                color: '#000'
               }}>修改性别</Text>
           </View>
           <TouchableWithoutFeedback
@@ -173,7 +173,7 @@ export default class UpdateGenderPage extends Component {
                 fontFamily: 'ArialMT',
                 fontSize: 13,
                 marginLeft: 10,
-                color: '#ffffff'
+                color: '#000'
               }}>男</Text>
             {
               this.state.maleChecked ? (
@@ -208,7 +208,7 @@ export default class UpdateGenderPage extends Component {
                 fontFamily: 'ArialMT',
                 fontSize: 13,
                 marginLeft: 10,
-                color: '#ffffff'
+                color: '#000'
               }}>女</Text>
             {
               this.state.femaleChecked ? (

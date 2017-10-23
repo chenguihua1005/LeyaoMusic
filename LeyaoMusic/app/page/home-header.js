@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         paddingTop: Platform.OS === 'ios' ? 20 : 0,  // 处理iOS状态栏
         height: Platform.OS === 'ios' ? 68 : 48,   // 处理iOS状态栏
-        backgroundColor: 'grey',
+        backgroundColor: 'white',
         alignItems: 'center'  // 使元素垂直居中排布, 当flexDirection为column时, 为水平居中
     },
     logo: {

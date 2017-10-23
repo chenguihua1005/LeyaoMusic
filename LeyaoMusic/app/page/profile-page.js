@@ -65,34 +65,36 @@ export default class ProfilePage extends Component {
   load() {
     // 获取存储的登陆token
     copy = this
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
-          APIClient.access(APIInterface.details(result,13916174880))
+          APIClient.access(APIInterface.details(result, 13916174880))
             .then((response) => {
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              //新接口重新定义了
-              // if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-              //   copy.setState({
-              //     avatar: {uri: (APIConstant.BASE_FILE_URI + json.data.pic)},
-              //     realName: json.data.realname,
-              //     userName: json.data.username,
-              //     gender: json.data.sex,
-              //     email: json.data.email
-              //   })
-              // } else {
-              //   Alert.alert('', json.errorCode)
-              // }
+              let arr = json.rows[0];
+              if (arr != null) {
+                  copy.setState({
+                    avatar: {uri: (APIConstant.BASE_FILE_URI + arr.sUserProfileUrl)},
+                    realName: arr.sUserNameStr,
+                    //userName手机号
+                    userName: arr.hUserPhoneNr,
+                    gender: arr.sUserGenderCd,
+                    email: arr.sUserEmailStr
+                  })
+              }
+              else {
+                  Alert.alert('', '获取用户详情错误')
+              }
             })
             .catch((error) => {
               console.log(error);
@@ -107,72 +109,73 @@ export default class ProfilePage extends Component {
       options: choosePictureOption,
       cancelButtonIndex: CHOOSE_PICTURE_OPTION_CANCEL_INDEX
     },
-    (buttonIndex) => {
-      switch (buttonIndex) {
-        case 0:
-          ImagePicker.launchCamera(options, (response) => {
+      (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            ImagePicker.launchCamera(options, (response) => {
 
-          });
-          break;
-        case 1:
-          ImagePicker.launchImageLibrary(options, (response) => {
-            if(response.didCancel) {
-              return
-            }
-            // 获取存储的登陆token
-            copy = this
-            copy.setState({ indicating: true})
-            AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-              copy.setState({ indicating: false})
-
-              if (error) {
-                console.log(error);
-              }
-              if (!error) {
-                // 上传文件
-                copy.setState({ indicating: true})
-                APIClient.access(APIInterface.upload(result, response.fileName, response.data))
-                  .then((response) => {
-                    copy.setState({ indicating: false})
-                    return response.json()
-                  })
-                  .then((json) => {
-                    console.log(json)
-                    if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                      var body = {
-                        'pic': json.data
-                      }
-                      APIClient.access(APIInterface.updateUser(result, body))
-                        .then((response) => {
-                          copy.setState({ indicating: false})
-                          return response.json()
-                        })
-                        .then((json) => {
-                          console.log(json)
-                          if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                            copy.load()
-                          } else {
-                            Alert.alert('', json.errorCode)
-                          }
-                        })
-                        .catch((error) => {
-                          copy.setState({ indicating: false})
-                          console.log(error)
-                        })
-                    } else {
-                      Alert.alert('', json.errorCode)
-                    }
-                  })
-                  .catch((error) => {
-                    copy.setState({ indicating: false})
-                    console.log(error)
-                  })
-              }
             });
-          });
-          break;
-      }
-    })
+            break;
+          case 1:
+            ImagePicker.launchImageLibrary(options, (response) => {
+              if (response.didCancel) {
+                return
+              }
+              // 获取存储的登陆token
+              copy = this
+              copy.setState({ indicating: true })
+              AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+                copy.setState({ indicating: false })
+
+                if (error) {
+                  console.log(error);
+                }
+                if (!error) {
+                  // 上传文件
+                  copy.setState({ indicating: true })
+                  APIClient.access(APIInterface.upload(1234, response.fileName, 13916174880, response.data))
+                    .then((response) => {
+                      copy.setState({ indicating: false })
+                      return response.json()
+                    })
+                    .then((json) => {
+                      console.log(json)
+                      if (json.callStatus == APIConstant.STATUS_SUCCEED) {
+                        copy.load()
+                        // var body = {
+                        //   'pic': json.data
+                        // }
+                        // APIClient.access(APIInterface.updateUser(result, body))
+                        //   .then((response) => {
+                        //     copy.setState({ indicating: false})
+                        //     return response.json()
+                        //   })
+                        //   .then((json) => {
+                        //     console.log(json)
+                        //     if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+                        //       copy.load()
+                        //     } else {
+                        //       Alert.alert('', json.errorCode)
+                        //     }
+                        //   })
+                        //   .catch((error) => {
+                        //     copy.setState({ indicating: false})
+                        //     console.log(error)
+                        //   })
+                      } else {
+                        Alert.alert('', json.responseResultMsg)
+                      }
+                    })
+                    .catch((error) => {
+                      copy.setState({ indicating: false })
+                      console.log(error)
+                    })
+                }
+              });
+            });
+            break;
+        }
+      })
   }
 
   updateName() {
@@ -236,7 +239,7 @@ export default class ProfilePage extends Component {
 
   logout() {
     // 存储登陆token
-    AsyncStorage.removeItem(StorageConstant.TOKEN, function(error) {
+    AsyncStorage.removeItem(StorageConstant.TOKEN, function (error) {
       if (error) {
         console.log(error)
       }
@@ -248,14 +251,14 @@ export default class ProfilePage extends Component {
 
   render() {
     var sex = this.state.gender
-    if(this.state.gender == 'M') {
+    if (this.state.gender == 0) {
       sex = '男'
-    } else if(this.state.gender == 'F') {
+    } else if (this.state.gender == 1) {
       sex = '女'
     }
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -263,13 +266,13 @@ export default class ProfilePage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             marginTop: 5,
@@ -281,11 +284,11 @@ export default class ProfilePage extends Component {
             style={{
               fontFamily: 'ArialMT',
               fontSize: 18,
-              color: '#ffffff'
+              color: '#000'
             }}>个人资料</Text>
         </View>
         <TouchableWithoutFeedback
-          onPress={ this.choosePicture.bind(this) }>
+          onPress={this.choosePicture.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
@@ -300,21 +303,21 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>头像</Text>
             <Image
-              source={ this.state.avatar }
+              source={this.state.avatar}
               style={{
                 borderRadius: 21,
                 width: 42,
                 height: 42,
                 marginRight: 11
-              }}/>
+              }} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.updateName.bind(this) }>
+          onPress={this.updateName.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
@@ -329,16 +332,16 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
-              }}>姓名</Text>
+              }}>昵称</Text>
             <Text
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginRight: 11
-              }}>{ this.state.realName }</Text>
+              }}>{this.state.realName}</Text>
           </View>
         </TouchableWithoutFeedback>
         <View
@@ -354,10 +357,10 @@ export default class ProfilePage extends Component {
               height: 1,
               alignSelf: 'center',
               backgroundColor: 'rgba(255, 255, 255, 0.1)'
-            }}/>
+            }} />
         </View>
         <TouchableWithoutFeedback
-          onPress={ this.updateGender.bind(this) }>
+          onPress={this.updateGender.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
@@ -371,16 +374,16 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>性别</Text>
             <Text
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginRight: 11
-              }}>{ sex }</Text>
+              }}>{sex}</Text>
           </View>
         </TouchableWithoutFeedback>
         <View
@@ -397,16 +400,16 @@ export default class ProfilePage extends Component {
             style={{
               fontFamily: 'ArialMT',
               fontSize: 13,
-              color: '#ffffff',
+              color: '#000',
               marginLeft: 11
             }}>手机号</Text>
           <Text
             style={{
               fontFamily: 'ArialMT',
               fontSize: 13,
-              color: '#ffffff',
+              color: '#000',
               marginRight: 11
-            }}>{ this.state.userName }</Text>
+            }}>{this.state.userName}</Text>
         </View>
         <View
           style={{
@@ -421,10 +424,10 @@ export default class ProfilePage extends Component {
               height: 1,
               alignSelf: 'center',
               backgroundColor: 'rgba(255, 255, 255, 0.1)'
-            }}/>
+            }} />
         </View>
         <TouchableWithoutFeedback
-          onPress={ this.updateEmail.bind(this) }>
+          onPress={this.updateEmail.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
@@ -438,26 +441,26 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>个人邮箱</Text>
             <Text
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginRight: 11
-              }}>{ this.state.email }</Text>
+              }}>{this.state.email}</Text>
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.checkMessage.bind(this) }>
+          onPress={this.checkMessage.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
               height: 43,
               marginTop: 5,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'
@@ -466,18 +469,18 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>我的消息</Text>
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.checkFocus.bind(this) }>
+          onPress={this.checkFocus.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
               height: 43,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'
@@ -486,19 +489,19 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>我的关注</Text>
           </View>
-        </TouchableWithoutFeedback>     
+        </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.checkHistory.bind(this) }>
+          onPress={this.checkHistory.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
               height: 43,
               marginTop: 5,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'
@@ -507,18 +510,18 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>我的历史</Text>
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.checkSuggestion.bind(this) }>
+          onPress={this.checkSuggestion.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
               height: 43,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'
@@ -527,18 +530,18 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 13,
-                color: '#ffffff',
+                color: '#000',
                 marginLeft: 11
               }}>意见反馈</Text>
           </View>
-        </TouchableWithoutFeedback>            
+        </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.logout.bind(this) }>
+          onPress={this.logout.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width - 125,
               height: 43,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(240, 240, 240, 1)',
               alignItems: 'center',
               justifyContent: 'center',
               alignSelf: 'center',
@@ -549,7 +552,7 @@ export default class ProfilePage extends Component {
               style={{
                 fontFamily: 'ArialMT',
                 fontSize: 15,
-                color: '#ffffff'
+                color: '#000'
               }}>退出登录</Text>
           </View>
         </TouchableWithoutFeedback>

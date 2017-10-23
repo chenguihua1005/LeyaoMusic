@@ -23,6 +23,8 @@ export default class APIConstant {
   static BASE_URL_MUSIC_TEACH = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=2&sessionCode=hello"
   static BASE_URL_MUSIC_SHARE = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=3&sessionCode=hello"  
   static BASE_URL_MUSICIAN = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByCategory?sEventCategoryCd=4&sessionCode=hello"
+  static BASE_URL_DETAILS = "http://47.94.94.196:8088/v1/service/user/getTUserSummary?hUserPhoneNr=13333333333&sessionCode=hello"
+
 
   static URL_VEDIO = ""
   static URL_EVENT = ""

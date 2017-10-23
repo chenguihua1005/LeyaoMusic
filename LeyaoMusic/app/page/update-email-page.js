@@ -113,7 +113,7 @@ export default class UpdateEmailPage extends Component {
                 style={{
                   fontFamily: 'ArialMT',
                   fontSize: 16,
-                  color: '#ffffff'
+                  color: '#000'
                 }}>取消</Text>
             </View>
           </TouchableWithoutFeedback>
@@ -121,7 +121,7 @@ export default class UpdateEmailPage extends Component {
             style={{
               fontFamily: 'ArialMT',
               fontSize: 18,
-              color: '#ffffff'
+              color: '#000'
             }}>修改邮箱</Text>
           <TouchableWithoutFeedback
             onPress={ this.save.bind(this) }>
@@ -153,7 +153,7 @@ export default class UpdateEmailPage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 13,
               width: Dimensions.get('window').width - 20,
-              color: '#ffffff'
+              color: '#000'
             }}
             onChangeText={ (value) => this.setState({ email: value }) }
             value={ this.state.email }/>

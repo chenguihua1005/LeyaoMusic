@@ -102,13 +102,14 @@ export default class APIInterface {
     })
   }
 
-  static upload(token, fileName, base64) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/file/upload', {
+  static upload(sessionCode, fileName, hUserPhoneNr, base64) {
+    return BaseRequest.post(APIConstant.BASE_URL + '/user/uploadProfile', {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'token': token
+      'Content-Type': 'application/json'
     }, {
+      'sessionCode': sessionCode,
       'fileName': fileName,
+      'hUserPhoneNr': hUserPhoneNr,
       'base64': base64
     })
   }
@@ -133,9 +134,8 @@ export default class APIInterface {
   }
 
   static details(token, username) {
-    return BaseRequest.get(APIConstant.BASE_URL + '/user/getTUserSummary', {
-      'sessionCode': token,
-      'hUserPhoneNr': username
+    return BaseRequest.get(APIConstant.BASE_URL_DETAILS, {
+      
     })
   }
 }

@@ -419,7 +419,7 @@ const styles = StyleSheet.create({
 
     itemStyle: {
         // 尺寸
-        width: 400,
-        height: 400
+        width: 500,
+        height: 500
     },
 });

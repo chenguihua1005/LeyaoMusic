@@ -253,12 +253,12 @@ const styles = StyleSheet.create({
   headerStyle: {
     borderBottomWidth: 1,
     borderColor: '#e6faff',
-    backgroundColor: '#3385ff'
+    backgroundColor: 'white'
   },
   labelStyle: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: '500',
-    color: '#fff'
+    color: 'black'
   },
   imageStyle: {
     height: 20,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   },
   underlineStyle: {
     height: 3.6,
-    backgroundColor: '#e6faff'
+    backgroundColor: 'black'
   },
   itemStyle: {
     width: '50%',
