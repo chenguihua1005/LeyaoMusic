@@ -34,6 +34,7 @@ export default class UpdateSuggestionPage extends Component {
     Actions.pop()
   }
 
+  //提交后的业务逻辑
   save() {
     copy = this
     copy.setState({ indicating: true})
@@ -114,7 +115,7 @@ export default class UpdateSuggestionPage extends Component {
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#000'
-                }}>取消</Text>
+                }}>返回</Text>
             </View>
           </TouchableWithoutFeedback>
           <Text
@@ -134,7 +135,7 @@ export default class UpdateSuggestionPage extends Component {
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}>保存</Text>
+                }}>提交</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>

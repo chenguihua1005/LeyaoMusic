@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         margin: 5
     },
     showText: {
-        fontSize: 12
+        height: 0,
+        fontSize: 1
     }
 });

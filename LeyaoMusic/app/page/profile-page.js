@@ -14,28 +14,12 @@ import {
   Actions,
   ActionConst
 } from 'react-native-router-flux';
-import ImagePicker from 'react-native-image-picker';
 
 import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 import StorageConstant from '../service/storage-constant';
-
-const choosePictureOption = [
-  '拍照',
-  '从手机相册选择',
-  '取消'
-]
-const CHOOSE_PICTURE_OPTION_CANCEL_INDEX = 2
-
-const options = {
-  mediaType: 'photo', // 'photo' or 'video'
-  videoQuality: 'high', // 'low', 'medium', or 'high'
-  durationLimit: 10, // video recording max time in seconds
-  maxWidth: 100, // photos only默认为手机屏幕的宽，高与宽一样，为正方形照片
-  maxHeight: 100, // photos only
-  allowsEditing: true, // 当用户选择过照片之后是否允许再次编辑图片
-};
+import MenuText from './menu-text';
 
 export default class ProfilePage extends Component {
 
@@ -45,15 +29,18 @@ export default class ProfilePage extends Component {
       indicating: false,
 
       avatar: require('../resource/default-avatar.png'),
-      realName: "未知",
-      gender: "未知",
-      userName: "未知",
-      email: "未知",
+      realName: "Gavin Gao",
+      //0:男
+      gender: 0,
+      userName: "13333333333",
+      email: "James.Wang@Leyao.com",
 
       message: "无",
       focus: "无",
       history: "无",
-      suggestion: "无"
+      suggestion: "无",
+
+
     }
     this.load.bind(this)
   }
@@ -83,17 +70,17 @@ export default class ProfilePage extends Component {
               console.log(json)
               let arr = json.rows[0];
               if (arr != null) {
-                  copy.setState({
-                    avatar: {uri: (APIConstant.BASE_FILE_URI + arr.sUserProfileUrl)},
-                    realName: arr.sUserNameStr,
-                    //userName手机号
-                    userName: arr.hUserPhoneNr,
-                    gender: arr.sUserGenderCd,
-                    email: arr.sUserEmailStr
-                  })
+                copy.setState({
+                  avatar: { uri: (APIConstant.BASE_FILE_URI + arr.sUserProfileUrl) },
+                  realName: arr.sUserNameStr.size > 0 ? arr.sUserNameStr : realName,
+                  //userName手机号
+                  userName: arr.hUserPhoneNr.size > 0 ? arr.hUserPhoneNr : userName,
+                  gender: arr.sUserGenderCd.size > 0 ? arr.sUserGenderCd : gender,
+                  email: arr.sUserEmailStr.size > 0 ? arr.sUserEmailStr : email
+                })
               }
               else {
-                  Alert.alert('', '获取用户详情错误')
+                Alert.alert('', '获取用户详情错误')
               }
             })
             .catch((error) => {
@@ -104,102 +91,20 @@ export default class ProfilePage extends Component {
     })
   }
 
-  choosePicture() {
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: choosePictureOption,
-      cancelButtonIndex: CHOOSE_PICTURE_OPTION_CANCEL_INDEX
-    },
-      (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            ImagePicker.launchCamera(options, (response) => {
 
-            });
-            break;
-          case 1:
-            ImagePicker.launchImageLibrary(options, (response) => {
-              if (response.didCancel) {
-                return
-              }
-              // 获取存储的登陆token
-              copy = this
-              copy.setState({ indicating: true })
-              AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
-                copy.setState({ indicating: false })
-
-                if (error) {
-                  console.log(error);
-                }
-                if (!error) {
-                  // 上传文件
-                  copy.setState({ indicating: true })
-                  APIClient.access(APIInterface.upload(1234, response.fileName, 13916174880, response.data))
-                    .then((response) => {
-                      copy.setState({ indicating: false })
-                      return response.json()
-                    })
-                    .then((json) => {
-                      console.log(json)
-                      if (json.callStatus == APIConstant.STATUS_SUCCEED) {
-                        copy.load()
-                        // var body = {
-                        //   'pic': json.data
-                        // }
-                        // APIClient.access(APIInterface.updateUser(result, body))
-                        //   .then((response) => {
-                        //     copy.setState({ indicating: false})
-                        //     return response.json()
-                        //   })
-                        //   .then((json) => {
-                        //     console.log(json)
-                        //     if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                        //       copy.load()
-                        //     } else {
-                        //       Alert.alert('', json.errorCode)
-                        //     }
-                        //   })
-                        //   .catch((error) => {
-                        //     copy.setState({ indicating: false})
-                        //     console.log(error)
-                        //   })
-                      } else {
-                        Alert.alert('', json.responseResultMsg)
-                      }
-                    })
-                    .catch((error) => {
-                      copy.setState({ indicating: false })
-                      console.log(error)
-                    })
-                }
-              });
-            });
-            break;
-        }
-      })
-  }
-
-  updateName() {
+  //点击个人相关信息
+  choosePersonal() {
+    //跳转到新的界面，显示“头像、昵称”等信息
     var copy = this;
-    Actions.update_name({
+    Actions.update_personal({
+      avatar: this.state.avatar,
       realName: this.state.realName,
-      parentComponent: copy
-    })
-  }
-
-  updateGender() {
-    var copy = this;
-    Actions.update_gender({
+      userName: this.state.userName,
       gender: this.state.gender,
-      parentComponent: copy
-    })
-  }
-
-  updateEmail() {
-    var copy = this;
-    Actions.update_email({
       email: this.state.email,
       parentComponent: copy
     })
+
   }
 
   //增加的4个菜单按钮事件
@@ -251,10 +156,13 @@ export default class ProfilePage extends Component {
 
   render() {
     var sex = this.state.gender
+    var sexImage;
     if (this.state.gender == 0) {
       sex = '男'
+      sexImage = require('../resource/icon_nan.png')
     } else if (this.state.gender == 1) {
       sex = '女'
+      sexImage = require('../resource/icon_nv.png')
     }
     return (
       <Image
@@ -273,7 +181,7 @@ export default class ProfilePage extends Component {
             height: 80
           }}
           size="large" />
-        <View
+        {/* <View
           style={{
             marginTop: 5,
             height: 44,
@@ -286,8 +194,54 @@ export default class ProfilePage extends Component {
               fontSize: 18,
               color: '#000'
             }}>个人资料</Text>
-        </View>
+        </View> */}
+
         <TouchableWithoutFeedback
+          onPress={this.choosePersonal.bind(this)}>
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              height: 80,
+              marginTop: 30,
+              marginBottom: 10,
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Image
+              style={{ width: '25%', height: 80 }}
+              resizeMode={'stretch'}
+              source={this.state.avatar}
+            />
+            <View style={{ flexDirection: 'column', width: '70%', height: 80 }}>
+              <View style={{
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                alignItems: 'flex-start'
+              }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', height: 40 }}>{this.state.realName}</Text>
+                <Image
+                  style={{ width: 20, height: 20 }}
+                  source={sexImage}
+                />
+              </View>
+              <View
+                style={{
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}>
+                <Text style={{ height: 20 }}>{this.state.userName}</Text>
+                <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+              </View>
+              <Text style={{ height: 20 }}>{this.state.email}</Text>
+            </View>
+          </View>
+
+        </TouchableWithoutFeedback>
+        <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
+
+        {/* <TouchableWithoutFeedback
           onPress={this.choosePicture.bind(this)}>
           <View
             style={{
@@ -452,7 +406,7 @@ export default class ProfilePage extends Component {
                 marginRight: 11
               }}>{this.state.email}</Text>
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback> */}
         <TouchableWithoutFeedback
           onPress={this.checkMessage.bind(this)}>
           <View
@@ -472,6 +426,7 @@ export default class ProfilePage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>我的消息</Text>
+            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -492,6 +447,7 @@ export default class ProfilePage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>我的关注</Text>
+            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -513,6 +469,7 @@ export default class ProfilePage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>我的历史</Text>
+            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -533,6 +490,7 @@ export default class ProfilePage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>意见反馈</Text>
+            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback

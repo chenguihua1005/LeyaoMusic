@@ -20,6 +20,7 @@ import NotificationPage from './page/notification-page';
 import StaveIntroductionPage from './page/stave-introduction-page';
 import NoteDurationPage from './page/note-duration-page';
 import UpdateNamePage from './page/update-name-page';
+import UpdatePersonalPage from './page/update-personal-page'
 import UpdateGenderPage from './page/update-gender-page';
 import UpdateEmailPage from './page/update-email-page';
 import UpdateVideoPage from './page/update-video-page';
@@ -144,6 +145,10 @@ const scenes = Actions.create(
       key="update_name"
       hideNavBar={ true }
       component={ UpdateNamePage }/>
+    <Scene
+      key="update_personal"
+      hideNavBar={ true }
+      component={ UpdatePersonalPage }/>  
     <Scene
       key="update_gender"
       hideNavBar={ true }

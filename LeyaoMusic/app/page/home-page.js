@@ -311,7 +311,7 @@ export default class HomePage extends Component {
                                 </View>
                             </View>
 
-                            <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>听我 ></Text>
+                            <Text style={{ color: '#7f7f7f', fontSize: 14, fontWeight: 'bold', padding: 10 }}>听我 · LISTEN ME</Text>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
                                     horizontal={true}   // 水平方向
@@ -321,9 +321,9 @@ export default class HomePage extends Component {
                                     {this.renderItem1()}
                                 </ScrollView>
                             </View>
-                            <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
+                            {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
 
-                            <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>看我 ></Text>
+                            <Text style={{ color: '#7f7f7f', fontSize: 14, fontWeight: 'bold', padding: 10 }}>看我 · WATCH ME</Text>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
                                     horizontal={true}   // 水平方向
@@ -333,9 +333,9 @@ export default class HomePage extends Component {
                                     {this.renderItem2()}
                                 </ScrollView>
                             </View>
-                            <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
+                            {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
 
-                            <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 10 }}>读我 ></Text>
+                            <Text style={{ color: '#7f7f7f', fontSize: 14, fontWeight: 'bold', padding: 10 }}>读我 · READ ME</Text>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
                                     horizontal={true}   // 水平方向
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
 
     menuView: {
         flexDirection: 'row',
-        marginTop: 10
+        marginTop: 0
     },
     recommendTitle: {
         width: len,
