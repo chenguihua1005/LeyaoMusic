@@ -116,7 +116,7 @@ export default class APIInterface {
   }
 
   static updateUser() {
-    return BaseRequest.get(APIConstant.BASE_URL + '/message/getTMessageSummaryListByCondition?sessionCode=1234', {
+    return BaseRequest.get(APIConstant.BASE_URL + '/message/getTMessageSummaryListByCondition?sessionCode=' + APIConstant.SESSIONCODE, {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }, {})

@@ -14,11 +14,8 @@ import RegisterOnePage from './page/register-one-page';
 import RegisterTwoPage from './page/register-two-page';
 import MainScreen from './page/main-screen';
 import SightsingPage from './page/sightsing-page';
-import EarTrainingPage from './page/ear-training-page';
 import ProfilePage from './page/profile-page';
 import NotificationPage from './page/notification-page';
-import StaveIntroductionPage from './page/stave-introduction-page';
-import NoteDurationPage from './page/note-duration-page';
 import UpdateNamePage from './page/update-name-page';
 import UpdatePersonalPage from './page/update-personal-page'
 import UpdateGenderPage from './page/update-gender-page';
@@ -29,8 +26,6 @@ import UpdateMessagePage from './page/update-message-page';
 import UpdateFocusPage from './page/update-focus-page';
 import UpdateHistoryPage from './page/update-history-page';
 import UpdateSuggestionPage from './page/update-suggestion-page';
-import AboutLeyaoPage from './page/about-leyao-page';
-import MusicianPage from './page/musician-page';
 
 // import TabIconWidget from './widget/tab-icon-widget'
 
@@ -83,64 +78,10 @@ const scenes = Actions.create(
       key="main"
       hideNavBar={ true }
       component={ MainScreen }/>
-    {/*<Scene
-      key="main"
-      header = { require('./page/home-header') }
-      tabs={ true }>
-      <Scene
-        key="home"
-        hideNavBar={ true }
-        component={ HomePage }
-        icon={ TabIconWidget }
-        title="首页"
-        selectedIcon={ require('./resource/music-note-selected.png') }
-        unSelectedIcon={ require('./resource/music-note-unselected.png') }
-        selectedColor='rgba(179, 214, 110, 1)'
-        unSelectedColor='rgba(255, 255, 255, 1)'/>
-      <Scene
-        key="sightsing"
-        hideNavBar={ true }
-        component={ SightsingPage }
-        icon={ TabIconWidget }
-        title="音乐屋"
-        selectedIcon={ require('./resource/sightsing-selected.png') }
-        unSelectedIcon={ require('./resource/sightsing-unselected.png') }
-        selectedColor='rgba(179, 214, 110, 1)'
-        unSelectedColor='rgba(255, 255, 255, 1)'/>
-      <Scene
-        key="ear_training"
-        hideNavBar={ true }
-        component={ EarTrainingPage }
-        icon={ TabIconWidget }
-        title="相关"
-        selectedIcon={ require('./resource/headphone-selected.png') }
-        unSelectedIcon={ require('./resource/headphone-unselected.png') }
-        selectedColor='rgba(179, 214, 110, 1)'
-        unSelectedColor='rgba(255, 255, 255, 1)'/>
-      <Scene
-        key="profile"
-        hideNavBar={ true }
-        component={ ProfilePage }
-        icon={ TabIconWidget }
-        title="个人"
-        selectedIcon={ require('./resource/profile-selected.png') }
-        unSelectedIcon={ require('./resource/profile-unselected.png') }
-        selectedColor='#b3d66e'
-        unSelectedColor='rgba(255, 255, 255, 1)'
-        hideDivider={ true }/>
-    </Scene>*/}
     <Scene
       key="notification"
       hideNavBar={ true }
       component={ NotificationPage }/>
-    <Scene
-      key="stave_introduction"
-      hideNavBar={ true }
-      component={ StaveIntroductionPage }/>
-    <Scene
-      key="note_duration"
-      hideNavBar={ true }
-      component={ NoteDurationPage }/>
     <Scene
       key="update_name"
       hideNavBar={ true }
@@ -181,13 +122,5 @@ const scenes = Actions.create(
       key="update_suggestion"
       hideNavBar={ true }
       component={ UpdateSuggestionPage }/>
-    <Scene
-      key="about_leyao"
-      hideNavBar={ true }
-      component={ AboutLeyaoPage }/>
-    <Scene
-      key="musician"
-      hideNavBar={ true }
-      component={ MusicianPage }/>
   </Scene>
 );

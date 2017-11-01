@@ -88,7 +88,7 @@ export default class UpdatePersonalPage extends Component {
                 if (!error) {
                   // 上传文件
                   copy.setState({ indicating: true })
-                  APIClient.access(APIInterface.upload(1234, response.fileName, 13333333333, response.data))
+                  APIClient.access(APIInterface.upload(APIConstant.SESSIONCODE, response.fileName, APIConstant.USER_PHONE, response.data))
                     .then((response) => {
                       copy.setState({ indicating: false })
                       return response.json()
@@ -170,7 +170,7 @@ export default class UpdatePersonalPage extends Component {
 
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -179,13 +179,13 @@ export default class UpdatePersonalPage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             width: Dimensions.get('window').width,
@@ -196,7 +196,7 @@ export default class UpdatePersonalPage extends Component {
             flexDirection: 'row'
           }}>
           <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+            onPress={this.back.bind(this)}>
             <View
               style={{
                 marginLeft: 10
@@ -216,7 +216,7 @@ export default class UpdatePersonalPage extends Component {
               color: '#000'
             }}>我的个人界面</Text>
           <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
+            onPress={this.save.bind(this)}>
             <View
               style={{
                 marginRight: 10
@@ -250,14 +250,22 @@ export default class UpdatePersonalPage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>头像</Text>
-            <Image
-              source={this.state.avatar}
-              style={{
-                borderRadius: 21,
-                width: 42,
-                height: 42,
-                marginRight: 11
-              }} />
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}>
+              <Image
+                source={this.state.avatar}
+                style={{
+                  borderRadius: 21,
+                  width: 42,
+                  height: 42,
+                  marginRight: 11
+                }} />
+              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            </View>
+
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -279,13 +287,20 @@ export default class UpdatePersonalPage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>昵称</Text>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginRight: 11
-              }}>{this.state.realName}</Text>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}>
+              <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 13,
+                  color: '#000',
+                  marginRight: 11
+                }}>{this.state.realName}</Text>
+              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            </View>
           </View>
         </TouchableWithoutFeedback>
         <View
@@ -321,13 +336,20 @@ export default class UpdatePersonalPage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>性别</Text>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginRight: 11
-              }}>{sex}</Text>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}>
+              <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 13,
+                  color: '#000',
+                  marginRight: 11
+                }}>{sex}</Text>
+              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            </View>
           </View>
         </TouchableWithoutFeedback>
         <View
@@ -388,13 +410,20 @@ export default class UpdatePersonalPage extends Component {
                 color: '#000',
                 marginLeft: 11
               }}>邮箱</Text>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginRight: 11
-              }}>{this.state.email}</Text>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}>
+              <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 13,
+                  color: '#000',
+                  marginRight: 11
+                }}>{this.state.email}</Text>
+              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </Image>

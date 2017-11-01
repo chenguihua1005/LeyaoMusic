@@ -10,6 +10,7 @@ import {
   ActionConst
 } from 'react-native-router-flux';
 import StorageConstant from '../service/storage-constant';
+import APIConstant from '../service/api-constant';
 
 export default class WelcomePage extends Component {
 
@@ -30,6 +31,8 @@ export default class WelcomePage extends Component {
             //Actions.main({ type: ActionConst.REPLACE })            
           } else {
             console.log("TOKEN = " + result);
+            //如果上一次登录成功的话，把token赋值给USER_PHONE
+            APIConstant.USER_PHONE = result
             Actions.main({ type: ActionConst.REPLACE })
           }
         }

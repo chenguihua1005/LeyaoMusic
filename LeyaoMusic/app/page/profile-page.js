@@ -32,7 +32,7 @@ export default class ProfilePage extends Component {
       realName: "Gavin Gao",
       //0:男
       gender: 0,
-      userName: "13333333333",
+      userName: APIConstant.USER_PHONE,
       email: "James.Wang@Leyao.com",
 
       message: "无",
@@ -62,7 +62,7 @@ export default class ProfilePage extends Component {
         } else {
           console.log(result)
 
-          APIClient.access(APIInterface.details(result, 13916174880))
+          APIClient.access(APIInterface.details(result, APIConstant.USER_PHONE))
             .then((response) => {
               return response.json()
             })
@@ -181,20 +181,6 @@ export default class ProfilePage extends Component {
             height: 80
           }}
           size="large" />
-        {/* <View
-          style={{
-            marginTop: 5,
-            height: 44,
-            alignSelf: 'center',
-            justifyContent: 'center'
-          }}>
-          <Text
-            style={{
-              fontFamily: 'ArialMT',
-              fontSize: 18,
-              color: '#000'
-            }}>个人资料</Text>
-        </View> */}
 
         <TouchableWithoutFeedback
           onPress={this.choosePersonal.bind(this)}>
@@ -237,176 +223,9 @@ export default class ProfilePage extends Component {
               <Text style={{ height: 20 }}>{this.state.email}</Text>
             </View>
           </View>
-
         </TouchableWithoutFeedback>
         <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
 
-        {/* <TouchableWithoutFeedback
-          onPress={this.choosePicture.bind(this)}>
-          <View
-            style={{
-              width: Dimensions.get('window').width,
-              height: 59,
-              marginTop: 10,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginLeft: 11
-              }}>头像</Text>
-            <Image
-              source={this.state.avatar}
-              style={{
-                borderRadius: 21,
-                width: 42,
-                height: 42,
-                marginRight: 11
-              }} />
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback
-          onPress={this.updateName.bind(this)}>
-          <View
-            style={{
-              width: Dimensions.get('window').width,
-              height: 43,
-              marginTop: 5,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginLeft: 11
-              }}>昵称</Text>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginRight: 11
-              }}>{this.state.realName}</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <View
-          style={{
-            width: Dimensions.get('window').width,
-            height: 1,
-            justifyContent: 'space-between',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)'
-          }}>
-          <View
-            style={{
-              width: Dimensions.get('window').width - 22,
-              height: 1,
-              alignSelf: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)'
-            }} />
-        </View>
-        <TouchableWithoutFeedback
-          onPress={this.updateGender.bind(this)}>
-          <View
-            style={{
-              width: Dimensions.get('window').width,
-              height: 43,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginLeft: 11
-              }}>性别</Text>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginRight: 11
-              }}>{sex}</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <View
-          style={{
-            width: Dimensions.get('window').width,
-            height: 43,
-            marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}>
-          <Text
-            style={{
-              fontFamily: 'ArialMT',
-              fontSize: 13,
-              color: '#000',
-              marginLeft: 11
-            }}>手机号</Text>
-          <Text
-            style={{
-              fontFamily: 'ArialMT',
-              fontSize: 13,
-              color: '#000',
-              marginRight: 11
-            }}>{this.state.userName}</Text>
-        </View>
-        <View
-          style={{
-            width: Dimensions.get('window').width,
-            height: 1,
-            justifyContent: 'space-between',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)'
-          }}>
-          <View
-            style={{
-              width: Dimensions.get('window').width - 22,
-              height: 1,
-              alignSelf: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)'
-            }} />
-        </View>
-        <TouchableWithoutFeedback
-          onPress={this.updateEmail.bind(this)}>
-          <View
-            style={{
-              width: Dimensions.get('window').width,
-              height: 43,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginLeft: 11
-              }}>个人邮箱</Text>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
-                marginRight: 11
-              }}>{this.state.email}</Text>
-          </View>
-        </TouchableWithoutFeedback> */}
         <TouchableWithoutFeedback
           onPress={this.checkMessage.bind(this)}>
           <View

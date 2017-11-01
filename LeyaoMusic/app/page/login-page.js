@@ -72,7 +72,7 @@ export default class LoginPage extends Component {
       this.setState({
         loginEnable: !this.state.loginEnable
       })
-
+      copy = this
       APIClient.access(APIInterface.login(this.state.phone, CryptoJS.MD5(this.state.password, { asString: true }).toString()))
         .then((response) => {
           return response.json()
@@ -80,13 +80,15 @@ export default class LoginPage extends Component {
         .then((json) => {
           console.log(json)
           if(json.responseResult == APIConstant.STATUS_SUCCEED) {
-            // 存储登陆token
-            AsyncStorage.setItem(StorageConstant.TOKEN, json.responseResultMsg, function(error) {
+            // 存储登陆token，token为用户登录的手机号码
+            AsyncStorage.setItem(StorageConstant.TOKEN, this.state.phone, function(error) {
               if (error) {
                 console.log(error)
               }
               if (!error) {
                 Actions.main({ type: ActionConst.POP_AND_REPLACE })
+                //存储登录用户的手机号
+                APIConstant.USER_PHONE = copy.state.phone
               }
             });
 

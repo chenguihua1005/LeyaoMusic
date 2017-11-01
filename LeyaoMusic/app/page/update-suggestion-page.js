@@ -52,7 +52,7 @@ export default class UpdateSuggestionPage extends Component {
           var FeedbackStr = copy.state.name
 
           copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateSuggestion(FeedbackStr, "13333333333"))
+          APIClient.access(APIInterface.updateSuggestion(FeedbackStr, APIConstant.USER_PHONE))
             .then((response) => {
               copy.setState({ indicating: false})
               return response.json()
