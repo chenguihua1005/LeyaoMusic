@@ -25,7 +25,7 @@ export default class UpdateSuggestionPage extends Component {
     super(props)
     this.state = {
       indicating: false,
-      name: props.suggestion,
+      name: '',
       parentComponent: props.parentComponent
     }
   }
@@ -49,22 +49,20 @@ export default class UpdateSuggestionPage extends Component {
         } else {
           console.log(result)
 
-          var body = {
-            'realname': copy.state.name
-          }
+          var FeedbackStr = copy.state.name
+
           copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
+          APIClient.access(APIInterface.updateSuggestion(FeedbackStr, "13333333333"))
             .then((response) => {
               copy.setState({ indicating: false})
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                Actions.pop()
-                copy.state.parentComponent.load()
+              if(json.responseResult == APIConstant.STATUS_SUCCEED) {
+                Alert.alert('', '感谢您的反馈')
               } else {
-                Alert.alert('', json.errorCode)
+                Alert.alert('', "添加用户反馈失败！")
               }
             })
             .catch((error) => {
@@ -142,9 +140,9 @@ export default class UpdateSuggestionPage extends Component {
         <View
           style={{
             width: Dimensions.get('window').width,
-            height: 50,
+            height: 200,
             marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'center'
@@ -154,8 +152,10 @@ export default class UpdateSuggestionPage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 13,
               width: Dimensions.get('window').width - 20,
+              height: 200,
               color: '#000'
             }}
+            multiline={true}
             onChangeText={ (value) => this.setState({ name: value }) }
             value={ this.state.name }/>
         </View>

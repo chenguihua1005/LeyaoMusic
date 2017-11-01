@@ -11,11 +11,11 @@ export default class APIConstant {
   //新的API地址
   // static BASE_URL_PREFIX = "http://47.94.94.196/LeyaoTemp/"
   static BASE_URL_ALL = "http://47.94.94.196/LeyaoTemp/v1/service/getEvents"
-  //1:读我 2:听我 3:看我
-  static BASE_URL_IMAGE = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=1&sessionCode=hello"
-  static BASE_URL_AUDIO = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=hello"
-  static BASE_URL_VEDIO = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=3&sessionCode=hello"
-
+  //1:听我 2:看我 3:读我 
+  static BASE_URL_AUDIO = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=1&sessionCode=hello"
+  static BASE_URL_VEDIO = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=hello"
+  static BASE_URL_IMAGE = "http://47.94.94.196:8088/v1/service/event/getTEventSummaryByType?sEventTypeCd=3&sessionCode=hello"
+  
   static BASE_URL_PREFIX = "http://47.94.94.196:8088/"
 
   //1:音乐屋活动 2:音乐屋教学 3:音乐屋分享 4:首页音乐家

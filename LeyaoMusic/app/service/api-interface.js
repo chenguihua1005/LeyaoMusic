@@ -28,6 +28,7 @@ export default class APIInterface {
   }
 
   //-->new add interface
+  //听我1 看我2 读我3
   static getLeyaoAudio() {
     return BaseRequest.get(APIConstant.BASE_URL_AUDIO, {
 
@@ -114,12 +115,21 @@ export default class APIInterface {
     })
   }
 
-  static updateUser(token, body) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/updateUser', {
+  static updateUser() {
+    return BaseRequest.get(APIConstant.BASE_URL + '/message/getTMessageSummaryListByCondition?sessionCode=1234', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'token': token
-    }, body)
+    }, {})
+  }
+
+  static updateSuggestion(sUserFeedbackStr, hUserPhoneNr) {
+    return BaseRequest.post(APIConstant.BASE_URL + '/user/addSUserFeedbackSummary', {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, {
+      'sUserFeedbackStr': sUserFeedbackStr,
+      'hUserPhoneNr': hUserPhoneNr
+    })
   }
 
   static getNoticeList(token, numPerPage, pageNum) {

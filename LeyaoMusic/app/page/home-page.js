@@ -49,7 +49,8 @@ let sliderImgs = [
     'http://47.94.94.196:8088/static/image/2.jpg',
     'http://47.94.94.196:8088/static/image/3.jpg',
     'http://47.94.94.196:8088/static/image/4.jpg',
-    'http://47.94.94.196:8088/static/image/5.jpg'
+    'http://47.94.94.196:8088/static/image/5.jpg',
+    'http://47.94.94.196:8088/static/image/6.jpg'
 ];
 
 export default class HomePage extends Component {
@@ -121,27 +122,6 @@ export default class HomePage extends Component {
             })
     }
 
-    //get all pages，读我
-    getImageList() {
-        APIClient.access(APIInterface.getLeyaoImage())
-            .then((response) => {
-                return response.json()
-            })
-            .then((json) => {
-                console.log(json)
-                let arr = json.rows;
-                for (let i = 0; i < length; i++) {
-                    image_title[i] = arr[i].sEventTitleUrl;
-                    image_url[i] = arr[i].sEventContentUrl;
-                }
-                this.setState({ image_title: image_title })
-                this.setState({ image_url: image_url })
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
-
     //get all audios，听我
     getAudioList() {
         APIClient.access(APIInterface.getLeyaoAudio())
@@ -178,6 +158,27 @@ export default class HomePage extends Component {
                 }
                 this.setState({ vedio_title: vedio_title })
                 this.setState({ vedio_url: vedio_url })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //get all pages，读我
+    getImageList() {
+        APIClient.access(APIInterface.getLeyaoImage())
+            .then((response) => {
+                return response.json()
+            })
+            .then((json) => {
+                console.log(json)
+                let arr = json.rows;
+                for (let i = 0; i < length; i++) {
+                    image_title[i] = arr[i].sEventTitleUrl;
+                    image_url[i] = arr[i].sEventContentUrl;
+                }
+                this.setState({ image_title: image_title })
+                this.setState({ image_url: image_url })
             })
             .catch((error) => {
                 console.log(error);
@@ -224,7 +225,7 @@ export default class HomePage extends Component {
             itemAry.push(
                 <View key={i}>
                     <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/4.jpg'}
-                        showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_title[i]}
+                        showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[i]}
                         onClick={this._onMenuClick} />
                 </View>
 
@@ -239,7 +240,7 @@ export default class HomePage extends Component {
             itemAry.push(
                 <View key={i}>
                     <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/5.jpg'}
-                        showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[i]}
+                        showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[i]}
                         onClick={this._onMenuClick2} />
                 </View>
 
@@ -278,6 +279,7 @@ export default class HomePage extends Component {
                                 <Image style={[styles.slide,]} source={{ uri: sliderImgs[2] }}></Image>
                                 <Image style={[styles.slide,]} source={{ uri: sliderImgs[3] }}></Image>
                                 <Image style={[styles.slide,]} source={{ uri: sliderImgs[4] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[5] }}></Image>
                             </Swiper>
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
@@ -419,7 +421,7 @@ const styles = StyleSheet.create({
 
     itemStyle: {
         // 尺寸
-        width: 500,
-        height: 500
+        width: 600,
+        height: 600
     },
 });

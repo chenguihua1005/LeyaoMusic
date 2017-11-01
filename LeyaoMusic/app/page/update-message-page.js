@@ -25,9 +25,10 @@ export default class UpdateMessagePage extends Component {
     super(props)
     this.state = {
       indicating: false,
-      name: props.message,
+      name: '',
       parentComponent: props.parentComponent
     }
+    this.save();
   }
 
   back() {
@@ -48,22 +49,19 @@ export default class UpdateMessagePage extends Component {
         } else {
           console.log(result)
 
-          var body = {
-            'realname': copy.state.name
-          }
+          //sMessageContentStr
           copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
+          APIClient.access(APIInterface.updateUser())
             .then((response) => {
               copy.setState({ indicating: false})
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                Actions.pop()
-                copy.state.parentComponent.load()
+              if(json.total > 0) {
+                copy.setState({ name: json.rows[0].sMessageContentStr })
               } else {
-                Alert.alert('', json.errorCode)
+                //Alert.alert('', '获取我的消息失败！')
               }
             })
             .catch((error) => {
@@ -143,7 +141,7 @@ export default class UpdateMessagePage extends Component {
             width: Dimensions.get('window').width,
             height: 50,
             marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'center'
@@ -155,7 +153,7 @@ export default class UpdateMessagePage extends Component {
               width: Dimensions.get('window').width - 20,
               color: '#000'
             }}
-            onChangeText={ (value) => this.setState({ name: value }) }
+            //onChangeText={ (value) => this.setState({ name: value }) }
             value={ this.state.name }/>
         </View>
       </Image>

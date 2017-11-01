@@ -7,12 +7,16 @@ import {
     StyleSheet,
     TouchableOpacity,
     DeviceEventEmitter,
-    Alert
+    Alert,
+    Text,
 } from 'react-native';
 import Video from 'react-native-video'
 import APIConstant from '../service/api-constant';
 
 const music_1 = require('../resource/silent.mp3');
+
+const bofang = require('../resource/btn_bofang.png');
+const bofangzhong = require('../resource/btn_bofangzhong.png');
 
 // 存储中间变量
 let uri_temp = ""
@@ -35,16 +39,16 @@ export default class Header extends Component {
     componentDidMount() {
         this.listener = DeviceEventEmitter.addListener('changeMusic', (events) => {
             //第一次进来icon：“暂停”->“播放”
-            if(this.state.pause == true) {
+            if (this.state.pause == true) {
                 this.setState({
                     pause: false,
-                    isplayBtn: require('../resource/btn_bofangzhong.png')
+                    isplayBtn: bofangzhong
                 })
             }
 
             this.setState({ file_link: { uri: events.TAG } });
             //前后两次url地址不一样，通知改变音乐播放状态icon
-            if(uri_temp != events.TAG) {
+            if (uri_temp != events.TAG) {
                 uri_temp = events.TAG
                 DeviceEventEmitter.emit('changeMusicIcon', { TAG: uri_temp });
             }
@@ -67,11 +71,11 @@ export default class Header extends Component {
         //判断按钮显示什么
         if (this.state.pause == true) {
             this.setState({
-                isplayBtn: require('../resource/btn_bofangzhong.png')
+                isplayBtn: bofangzhong
             })
         } else {
             this.setState({
-                isplayBtn: require('../resource/btn_bofang.png')
+                isplayBtn: bofang
             })
         }
         //发通知
@@ -81,6 +85,34 @@ export default class Header extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <View
+                    style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        flexDirection: 'row'
+                    }}>
+                    <View 
+                    style={{
+                        flex: 0.6,
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        flexDirection: 'row'
+                    }}>
+                        <Text style={{ color: '#7f7f7f', fontSize: 16, fontWeight: 'bold' }}>乐谣音乐</Text>
+                    </View>
+                    <View style={{
+                        flex: 0.4,
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        flexDirection: 'row'
+                    }}>
+                        <TouchableOpacity onPress={() => this.playAction()}>
+                            <Image source={this.state.isplayBtn} style={styles.scanIcon} />
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
                 <View style={styles.searchBox}>
                     <Image source={require('../resource/icon_search.png')} style={styles.searchIcon} />
                     <TextInput
@@ -88,9 +120,7 @@ export default class Header extends Component {
                         placeholder='点击搜索你感兴趣的内容'
                         style={styles.inputText} />
                 </View>
-                <TouchableOpacity onPress={() => this.playAction()}>
-                    <Image source={this.state.isplayBtn} style={styles.scanIcon} />
-                </TouchableOpacity>
+
                 {/*播放器*/}
                 <Video
                     source={this.state.file_link}
@@ -107,18 +137,13 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',   // 水平排布
+        flexDirection: 'column',   // 竖直排布
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: Platform.OS === 'ios' ? 20 : 0,  // 处理iOS状态栏
         height: Platform.OS === 'ios' ? 68 : 48,   // 处理iOS状态栏
         backgroundColor: 'white',
         alignItems: 'center'  // 使元素垂直居中排布, 当flexDirection为column时, 为水平居中
-    },
-    logo: {
-        height: 24,
-        width: 64,
-        resizeMode: 'stretch'  // 设置拉伸模式
     },
     searchBox: {
         height: 30,
@@ -128,7 +153,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         marginLeft: 8,
-        marginRight: 12
+        marginRight: 12,
     },
     scanIcon: {
         height: 26.7,

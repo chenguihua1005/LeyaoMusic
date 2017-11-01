@@ -88,7 +88,7 @@ export default class UpdatePersonalPage extends Component {
                 if (!error) {
                   // 上传文件
                   copy.setState({ indicating: true })
-                  APIClient.access(APIInterface.upload(1234, response.fileName, 13916174880, response.data))
+                  APIClient.access(APIInterface.upload(1234, response.fileName, 13333333333, response.data))
                     .then((response) => {
                       copy.setState({ indicating: false })
                       return response.json()
@@ -387,7 +387,7 @@ export default class UpdatePersonalPage extends Component {
                 fontSize: 13,
                 color: '#000',
                 marginLeft: 11
-              }}>个人邮箱</Text>
+              }}>邮箱</Text>
             <Text
               style={{
                 fontFamily: 'ArialMT',

@@ -112,7 +112,7 @@ export default class ProfilePage extends Component {
   checkMessage() {
     var copy = this;
     Actions.update_message({
-      message: this.state.message,
+      //message: this.state.message,
       parentComponent: copy
     })
   }
@@ -136,7 +136,7 @@ export default class ProfilePage extends Component {
   checkSuggestion() {
     var copy = this;
     Actions.update_suggestion({
-      suggestion: this.state.suggestion,
+      // suggestion: this.state.suggestion,
       parentComponent: copy
     })
   }

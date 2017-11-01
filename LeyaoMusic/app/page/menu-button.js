@@ -41,8 +41,8 @@ export default class MenuButton extends Component {
 
 const styles = StyleSheet.create({
     iconImg: {
-        width: 80,
-        height: 80,
+        width: 90,
+        height: 90,
         margin: 5
     },
     showText: {
