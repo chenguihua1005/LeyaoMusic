@@ -63,6 +63,11 @@ export default class Header extends Component {
         this.listener.remove();
     };
 
+    //改变搜索的文本
+    onSubmitEditingTextKeyword(event) {
+        Alert.alert('监听到事件：' + event.nativeEvent.text)
+    }
+
     //播放/暂停
     playAction = () => {
         this.setState({
@@ -92,13 +97,13 @@ export default class Header extends Component {
                         justifyContent: 'space-between',
                         flexDirection: 'row'
                     }}>
-                    <View 
-                    style={{
-                        flex: 0.6,
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        flexDirection: 'row'
-                    }}>
+                    <View
+                        style={{
+                            flex: 0.6,
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            flexDirection: 'row'
+                        }}>
                         <Text style={{ color: '#7f7f7f', fontSize: 16, fontWeight: 'bold' }}>乐谣音乐</Text>
                     </View>
                     <View style={{
@@ -118,6 +123,7 @@ export default class Header extends Component {
                     <TextInput
                         keyboardType='web-search'
                         placeholder='点击搜索你感兴趣的内容'
+                        onSubmitEditing={this.onSubmitEditingTextKeyword.bind(this)}
                         style={styles.inputText} />
                 </View>
 

@@ -9,7 +9,8 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 import {
   Actions
@@ -54,9 +55,45 @@ export default class UpdatePersonalPage extends Component {
 
   back() {
     Actions.pop()
+    //返回到个人界面，则通知其刷新数据
+    DeviceEventEmitter.emit('updateProfile', { TAG: this.state.avatar });
   }
 
   save() {
+  }
+
+  load() {
+    APIClient.access(APIInterface.details(APIConstant.USER_PHONE))
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        console.log(json)
+        //如果rows为空，返回
+        if (!json.rows[0]) return
+        let arr = json.rows[0];
+        if (arr != null) {
+          if (arr.sUserProfileUrl && arr.sUserProfileUrl != '?') {
+            copy.setState({
+              avatar: { uri: (APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl) },
+            })
+          }
+          //强制刷新
+          this.forceUpdate()
+          // copy.setState({
+          //   realName: arr.sUserNameStr.size > 0 ? arr.sUserNameStr : realName,
+          //   //userName手机号，不能修改
+          //   gender: arr.sUserGenderCd.size > 0 ? arr.sUserGenderCd : gender,
+          //   email: arr.sUserEmailStr.size > 0 ? arr.sUserEmailStr : email
+          // })
+        }
+        else {
+          Alert.alert('', '获取用户详情错误')
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   choosePicture() {
@@ -95,28 +132,8 @@ export default class UpdatePersonalPage extends Component {
                     })
                     .then((json) => {
                       console.log(json)
-                      if (json.callStatus == APIConstant.STATUS_SUCCEED) {
+                      if (json.responseResult == APIConstant.STATUS_SUCCEED) {
                         copy.load()
-                        // var body = {
-                        //   'pic': json.data
-                        // }
-                        // APIClient.access(APIInterface.updateUser(result, body))
-                        //   .then((response) => {
-                        //     copy.setState({ indicating: false})
-                        //     return response.json()
-                        //   })
-                        //   .then((json) => {
-                        //     console.log(json)
-                        //     if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                        //       copy.load()
-                        //     } else {
-                        //       Alert.alert('', json.errorCode)
-                        //     }
-                        //   })
-                        //   .catch((error) => {
-                        //     copy.setState({ indicating: false})
-                        //     console.log(error)
-                        //   })
                       } else {
                         Alert.alert('', json.responseResultMsg)
                       }
@@ -134,27 +151,27 @@ export default class UpdatePersonalPage extends Component {
   }
 
   updateName() {
-    // var copy = this;
-    // Actions.update_name({
-    //   realName: this.state.realName,
-    //   parentComponent: copy
-    // })
+    var copy = this;
+    Actions.update_name({
+      realName: this.state.realName,
+      parentComponent: copy
+    })
   }
 
   updateGender() {
-    // var copy = this;
-    // Actions.update_gender({
-    //   gender: this.state.gender,
-    //   parentComponent: copy
-    // })
+    var copy = this;
+    Actions.update_gender({
+      gender: this.state.gender,
+      parentComponent: copy
+    })
   }
 
   updateEmail() {
-    // var copy = this;
-    // Actions.update_email({
-    //   email: this.state.email,
-    //   parentComponent: copy
-    // })
+    var copy = this;
+    Actions.update_email({
+      email: this.state.email,
+      parentComponent: copy
+    })
   }
 
   render() {

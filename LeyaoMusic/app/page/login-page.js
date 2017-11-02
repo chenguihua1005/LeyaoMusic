@@ -35,7 +35,7 @@ export default class LoginPage extends Component {
   }
 
   phoneOnChange(text) {
-    if(text.length == 0){
+    if (text.length == 0) {
       this.setState({ phoneValidate: false }, () => { this.checkNext() })
     } else {
       this.setState({ phoneValidate: true }, () => { this.checkNext() })
@@ -46,7 +46,7 @@ export default class LoginPage extends Component {
   }
 
   passwordOnChange(text) {
-    if(text.length == 0){
+    if (text.length == 0) {
       this.setState({ passwordValidate: false }, () => { this.checkNext() })
     } else {
       this.setState({ passwordValidate: true }, () => { this.checkNext() })
@@ -57,7 +57,7 @@ export default class LoginPage extends Component {
   }
 
   checkNext() {
-    if(this.state.phoneValidate &&
+    if (this.state.phoneValidate &&
       this.state.passwordValidate) {
       this.setState({ loginEnable: true })
     } else {
@@ -66,7 +66,7 @@ export default class LoginPage extends Component {
   }
 
   login() {
-    if(!this.state.loginEnable){
+    if (!this.state.loginEnable) {
       return
     } else {
       this.setState({
@@ -79,9 +79,9 @@ export default class LoginPage extends Component {
         })
         .then((json) => {
           console.log(json)
-          if(json.responseResult == APIConstant.STATUS_SUCCEED) {
+          if (json.responseResult == APIConstant.STATUS_SUCCEED) {
             // 存储登陆token，token为用户登录的手机号码
-            AsyncStorage.setItem(StorageConstant.TOKEN, this.state.phone, function(error) {
+            AsyncStorage.setItem(StorageConstant.TOKEN, this.state.phone, function (error) {
               if (error) {
                 console.log(error)
               }
@@ -115,7 +115,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/login-background.jpg') }
+        source={require('../resource/login-background.jpg')}
         style={{
           flex: 1,
           alignItems: 'center',
@@ -144,9 +144,9 @@ export default class LoginPage extends Component {
                   width: 21,
                   height: 21
                 }}
-                source={ require('../resource/icon-phone.jpg') }/>
+                source={require('../resource/icon-phone.jpg')} />
               <TextInput
-                onChangeText = { this.phoneOnChange.bind(this) }
+                onChangeText={this.phoneOnChange.bind(this)}
                 style={{
                   width: 186,
                   marginLeft: 45,
@@ -155,18 +155,18 @@ export default class LoginPage extends Component {
                   color: '#ffffff',
                   marginTop: 3
                 }}
-                caretHidden={ false }
-                keyboardType={ 'numeric' }
-                multiline={ false }
-                placeholder={ '请输入' }
-                placeholderTextColor={ '#ffffff' }/>
+                caretHidden={false}
+                keyboardType={'numeric'}
+                multiline={false}
+                placeholder={'请输入'}
+                placeholderTextColor={'#ffffff'} />
             </View>
             <View
               style={{
                 height: 1,
                 marginTop: 10,
                 backgroundColor: 'rgba(255, 255, 255, 0.8)'
-              }}/>
+              }} />
             <View
               style={{
                 marginTop: 32,
@@ -179,9 +179,9 @@ export default class LoginPage extends Component {
                   height: 19.5,
                   marginLeft: 2.5
                 }}
-                source={ require('../resource/icon-password.jpg') }/>
+                source={require('../resource/icon-password.jpg')} />
               <TextInput
-                onChangeText = { this.passwordOnChange.bind(this) }
+                onChangeText={this.passwordOnChange.bind(this)}
                 style={{
                   width: 186,
                   marginLeft: 48,
@@ -190,20 +190,20 @@ export default class LoginPage extends Component {
                   color: '#ffffff',
                   marginTop: 3
                 }}
-                secureTextEntry={ true }
-                caretHidden={ false }
-                multiline={ false }
-                placeholder={ '请输入' }
-                placeholderTextColor={ '#ffffff' }/>
+                secureTextEntry={true}
+                caretHidden={false}
+                multiline={false}
+                placeholder={'请输入'}
+                placeholderTextColor={'#ffffff'} />
             </View>
             <View
               style={{
                 height: 1,
                 marginTop: 10,
                 backgroundColor: 'rgba(255, 255, 255, 0.8)'
-              }}/>
+              }} />
             <TouchableWithoutFeedback
-              onPress={ this.login.bind(this) }>
+              onPress={this.login.bind(this)}>
               <View
                 style={{
                   width: 290,

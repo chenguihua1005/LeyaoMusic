@@ -8,7 +8,8 @@ import {
   Image,
   Text,
   TouchableWithoutFeedback,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 import {
   Actions,
@@ -27,27 +28,36 @@ export default class ProfilePage extends Component {
     super(props)
     this.state = {
       indicating: false,
-
       avatar: require('../resource/default-avatar.png'),
       realName: "Gavin Gao",
       //0:男
       gender: 0,
       userName: APIConstant.USER_PHONE,
-      email: "James.Wang@Leyao.com",
+      email: "james.wang@Leyao.com",
 
       message: "无",
       focus: "无",
       history: "无",
       suggestion: "无",
-
-
     }
     this.load.bind(this)
   }
 
   componentDidMount() {
     this.load()
+    copy = this
+    //增加监听器
+    this.listener = DeviceEventEmitter.addListener('updateProfile', (events) => {
+      //获取传回的值，写刷新的逻辑
+      // copy.load()
+      //接收到消息，就将存储的值取过来刷新界面
+      
+    });
   }
+
+  componentWillUnmount() {
+    this.listener.remove();
+  };
 
   load() {
     // 获取存储的登陆token
@@ -62,19 +72,24 @@ export default class ProfilePage extends Component {
         } else {
           console.log(result)
 
-          APIClient.access(APIInterface.details(result, APIConstant.USER_PHONE))
+          APIClient.access(APIInterface.details(APIConstant.USER_PHONE))
             .then((response) => {
               return response.json()
             })
             .then((json) => {
               console.log(json)
+              //如果rows为空，返回
+              if (!json.rows[0]) return
               let arr = json.rows[0];
               if (arr != null) {
+                if (arr.sUserProfileUrl && arr.sUserProfileUrl != '?') {
+                  copy.setState({
+                    avatar: { uri: (APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl) },
+                  })
+                }
                 copy.setState({
-                  avatar: { uri: (APIConstant.BASE_FILE_URI + arr.sUserProfileUrl) },
                   realName: arr.sUserNameStr.size > 0 ? arr.sUserNameStr : realName,
-                  //userName手机号
-                  userName: arr.hUserPhoneNr.size > 0 ? arr.hUserPhoneNr : userName,
+                  //userName手机号，不能修改
                   gender: arr.sUserGenderCd.size > 0 ? arr.sUserGenderCd : gender,
                   email: arr.sUserEmailStr.size > 0 ? arr.sUserEmailStr : email
                 })

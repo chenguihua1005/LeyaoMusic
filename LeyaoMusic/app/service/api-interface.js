@@ -33,7 +33,7 @@ export default class APIInterface {
     return BaseRequest.get(APIConstant.BASE_URL_AUDIO, {
 
     })
-  }  
+  }
 
   static getLeyaoVedio() {
     return BaseRequest.get(APIConstant.BASE_URL_VEDIO, {
@@ -56,96 +56,132 @@ export default class APIInterface {
   //--<new add interface
 
   static getCodeList() {
-    return BaseRequest.post(APIConstant.BASE_URL + '/code/getCodeList', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'code/getCodeList', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {})
   }
 
   static getVerifyCode(phone) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/getVerifyCode?hUserPhoneNr=' + phone, {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/getVerifyCode?hUserPhoneNr=' + phone, {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },{
+    }, {
 
-    })
+      })
   }
 
   static register(username, password, code) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/regist', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/regist', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'hUserPhoneNr': username,
-      'sUserPasswordStr': password,
-      'verifyCode': code
-    })
+        'hUserPhoneNr': username,
+        'sUserPasswordStr': password,
+        'verifyCode': code
+      })
   }
 
   static login(username, password) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/login', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/login', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'hUserPhoneNr': username,
-      'sUserPasswordStr': password
-    })
+        'hUserPhoneNr': username,
+        'sUserPasswordStr': password
+      })
   }
 
   static forgetPWD(username, password, code) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/reset', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/reset', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'hUserPhoneNr': username,
-      'sUserPasswordStr': password,
-      'verifyCode': code
-    })
+        'hUserPhoneNr': username,
+        'sUserPasswordStr': password,
+        'verifyCode': code
+      })
   }
 
   static upload(sessionCode, fileName, hUserPhoneNr, base64) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/uploadProfile', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/uploadProfile', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'sessionCode': sessionCode,
-      'fileName': fileName,
-      'hUserPhoneNr': hUserPhoneNr,
-      'base64': base64
+        'sessionCode': sessionCode,
+        'fileName': fileName,
+        'hUserPhoneNr': hUserPhoneNr,
+        'base64': base64
+      })
+  }
+
+  static updateMessage() {
+    return BaseRequest.get(APIConstant.BASE_URL + 'message/getTMessageSummaryListByCondition?sessionCode=' + APIConstant.SESSIONCODE, {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     })
   }
 
-  static updateUser() {
-    return BaseRequest.get(APIConstant.BASE_URL + '/message/getTMessageSummaryListByCondition?sessionCode=' + APIConstant.SESSIONCODE, {
+  //修改昵称
+  static updateUserName(sessionCode,hUserPhoneNr,sUserNameStr) {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-    }, {})
+    }, {
+        'verifyCode': sessionCode,
+        'hUserPhoneNr': hUserPhoneNr,
+        'sUserNameStr': sUserNameStr
+      })
+  }
+
+  //修改性别
+  static updateUserGender(sessionCode,hUserPhoneNr,sUserGenderCd) {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }, {
+        'verifyCode': sessionCode,
+        'hUserPhoneNr': hUserPhoneNr,
+        'sUserGenderCd': sUserGenderCd
+      })
+  }
+
+  //修改邮箱
+  static updateUserEmail(sessionCode,hUserPhoneNr,sUserEmailStr) {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }, {
+        'verifyCode': sessionCode,
+        'hUserPhoneNr': hUserPhoneNr,
+        'sUserEmailStr': sUserEmailStr
+      })
   }
 
   static updateSuggestion(sUserFeedbackStr, hUserPhoneNr) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/user/addSUserFeedbackSummary', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user/addSUserFeedbackSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, {
-      'sUserFeedbackStr': sUserFeedbackStr,
-      'hUserPhoneNr': hUserPhoneNr
-    })
+        'sUserFeedbackStr': sUserFeedbackStr,
+        'hUserPhoneNr': hUserPhoneNr
+      })
   }
 
   static getNoticeList(token, numPerPage, pageNum) {
-    return BaseRequest.post(APIConstant.BASE_URL + '/notice/getNoticeList', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'notice/getNoticeList', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'token': token
     }, {
-      'numPerPage': numPerPage,
-      'pageNum': pageNum
-    })
+        'numPerPage': numPerPage,
+        'pageNum': pageNum
+      })
   }
 
-  static details(token, username) {
-    return BaseRequest.get(APIConstant.BASE_URL_DETAILS, {
-      
+  static details(username) {
+    return BaseRequest.get(APIConstant.BASE_URL_DETAILS + username, {
+
     })
   }
 }

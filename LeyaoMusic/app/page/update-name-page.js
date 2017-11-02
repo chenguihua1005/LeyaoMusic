@@ -48,22 +48,24 @@ export default class UpdateNamePage extends Component {
         } else {
           console.log(result)
 
-          var body = {
-            'realname': copy.state.name
-          }
+          var realname = copy.state.name
           copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
+          APIClient.access(APIInterface.updateUserName(APIConstant.SESSIONCODE, APIConstant.USER_PHONE,realname))
             .then((response) => {
               copy.setState({ indicating: false})
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+              if(json.responseResult == APIConstant.STATUS_SUCCEED) {
+                //存储修改成功后的昵称
+                APIConstant.MY_NICKNAME = realname
+                Alert.alert('修改昵称成功！')
                 Actions.pop()
                 copy.state.parentComponent.load()
               } else {
-                Alert.alert('', json.errorCode)
+                //Alert.alert('', json.responseResultMsg)
+                Alert.alert('修改昵称失败！')
               }
             })
             .catch((error) => {

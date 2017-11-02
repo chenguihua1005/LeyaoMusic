@@ -41,7 +41,7 @@ export default class UpdateGenderPage extends Component {
     this.setState({
       maleChecked: true,
       femaleChecked: false,
-      sex: 'M'
+      sex: 0
     })
 
     this.save()
@@ -51,7 +51,7 @@ export default class UpdateGenderPage extends Component {
     this.setState({
       maleChecked: false,
       femaleChecked: true,
-      sex: 'F'
+      sex: 1
     })
 
     this.save()
@@ -59,38 +59,40 @@ export default class UpdateGenderPage extends Component {
 
   save() {
     copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
+    copy.setState({ indicating: true })
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+      copy.setState({ indicating: false })
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
-          var body = {
-            'sex': copy.state.sex
-          }
-          copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
+          var sex = copy.state.sex
+          copy.setState({ indicating: true })
+          APIClient.access(APIInterface.updateUserGender(result, sex))
             .then((response) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+              if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+                //存储修改成功后的性别
+                APIConstant.MY_GENDER = sex
+                Alert.alert('修改性别成功！')
                 Actions.pop()
                 copy.state.parentComponent.load()
               } else {
-                Alert.alert('', json.errorCode)
+                //Alert.alert('', json.errorCode)
+                Alert.alert('修改性别失败！')
               }
             })
             .catch((error) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               console.log(error)
             })
         }
@@ -101,7 +103,7 @@ export default class UpdateGenderPage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -110,13 +112,13 @@ export default class UpdateGenderPage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             marginTop: 20,
@@ -141,23 +143,23 @@ export default class UpdateGenderPage extends Component {
               }}>修改性别</Text>
           </View>
           <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+            onPress={this.back.bind(this)}>
             <View
               style={{
                 position: 'absolute'
               }}>
               <Image
-                source={ require('../resource/arrow.jpg') }
+                source={require('../resource/arrow.png')}
                 style={{
                   width: 10,
                   height: 19.5,
                   marginLeft: 10
-                }}/>
+                }} />
             </View>
           </TouchableWithoutFeedback>
         </View>
         <TouchableWithoutFeedback
-          onPress={ this.maleCheck.bind(this) }>
+          onPress={this.maleCheck.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
@@ -178,21 +180,21 @@ export default class UpdateGenderPage extends Component {
             {
               this.state.maleChecked ? (
                 <Image
-                  source={ require('../resource/gender-selected.png') }
+                  source={require('../resource/gender-selected.png')}
                   style={{
                     width: 15,
                     height: 10,
                     marginRight: 10,
                     backgroundColor: 'rgba(0, 0, 0, 0)'
-                  }}/>
+                  }} />
               ) : (
-                null
-              )
+                  null
+                )
             }
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
-          onPress={ this.femaleCheck.bind(this) }>
+          onPress={this.femaleCheck.bind(this)}>
           <View
             style={{
               width: Dimensions.get('window').width,
@@ -213,16 +215,16 @@ export default class UpdateGenderPage extends Component {
             {
               this.state.femaleChecked ? (
                 <Image
-                  source={ require('../resource/gender-selected.png') }
+                  source={require('../resource/gender-selected.png')}
                   style={{
                     width: 15,
                     height: 10,
                     marginRight: 10,
                     backgroundColor: 'rgba(0, 0, 0, 0)'
-                  }}/>
+                  }} />
               ) : (
-                null
-              )
+                  null
+                )
             }
           </View>
         </TouchableWithoutFeedback>

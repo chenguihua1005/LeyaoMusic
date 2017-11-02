@@ -8,7 +8,8 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
+  ListView
 } from 'react-native';
 import {
   Actions
@@ -26,8 +27,12 @@ export default class UpdateMessagePage extends Component {
     this.state = {
       indicating: false,
       name: '',
+      dataSource: null,
       parentComponent: props.parentComponent
     }
+  }
+
+  componentDidMount() {
     this.save();
   }
 
@@ -35,37 +40,50 @@ export default class UpdateMessagePage extends Component {
     Actions.pop()
   }
 
+  componentWillUnmount() {
+    //清掉消息
+    //dataList = null
+  };
+
+
   save() {
     copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
+    copy.setState({ indicating: true })
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+      copy.setState({ indicating: false })
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
           //sMessageContentStr
-          copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser())
+          copy.setState({ indicating: true })
+          APIClient.access(APIInterface.updateMessage())
             .then((response) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.total > 0) {
-                copy.setState({ name: json.rows[0].sMessageContentStr })
+              if (json.total > 0) {
+                let dataList = []
+                for (let i = 0; i < json.total; i++) {
+                  let data = json.rows[i]
+                  dataList.push(data)
+                }
+                //重新设置数据源
+                copy.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList) });
+
               } else {
-                //Alert.alert('', '获取我的消息失败！')
+                Alert.alert('获取我的消息失败！')
               }
             })
             .catch((error) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               console.log(error)
             })
         }
@@ -74,69 +92,73 @@ export default class UpdateMessagePage extends Component {
   }
 
   render() {
-    return (
-      <Image
-        source={ require('../resource/main-background.jpg') }
-        style={{
-          flex: 1,
-          width: null,
-          height: null,
-          alignItems: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0)',
-        }}>
-        <ActivityIndicator
-          animating={ this.state.indicating }
+    if (!this.state.dataSource) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
+      return (
+        <Text>loading...</Text>
+      );
+    } else {//当this.state.data有了数据，则渲染ListView
+      return (
+        <Image
+          source={require('../resource/main-background.jpg')}
           style={{
-            position: 'absolute',
-            top: (Dimensions.get('window').height - 80) / 2,
-            height: 80
-          }}
-          size="large"/>
-        <View
-          style={{
-            width: Dimensions.get('window').width,
-            marginTop: 20,
-            height: 44,
+            flex: 1,
+            width: null,
+            height: null,
             alignItems: 'center',
-            justifyContent: 'space-between',
-            flexDirection: 'row'
+            backgroundColor: 'rgba(0, 0, 0, 0)',
           }}>
-          <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
-            <View
-              style={{
-                marginLeft: 10
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#000'
-                }}>取消</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <Text
+          <ActivityIndicator
+            animating={this.state.indicating}
             style={{
-              fontFamily: 'ArialMT',
-              fontSize: 18,
-              color: '#000'
-            }}>我的消息</Text>
-          <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
-            <View
-              style={{
-                marginRight: 10
-              }}>
-              <Text
+              position: 'absolute',
+              top: (Dimensions.get('window').height - 80) / 2,
+              height: 80
+            }}
+            size="large" />
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              marginTop: 20,
+              height: 44,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row'
+            }}>
+            <TouchableWithoutFeedback
+              onPress={this.back.bind(this)}>
+              <View
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#b3d66e'
-                }}>保存</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-        <View
+                  marginLeft: 10
+                }}>
+                <Text
+                  style={{
+                    fontFamily: 'ArialMT',
+                    fontSize: 16,
+                    color: '#000'
+                  }}>取消</Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 18,
+                color: '#000'
+              }}>我的消息</Text>
+            <TouchableWithoutFeedback>
+              <View
+                style={{
+                  marginRight: 10
+                }}>
+                <Text
+                  style={{
+                    fontFamily: 'ArialMT',
+                    fontSize: 16,
+                    color: '#b3d66e'
+                  }}></Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+          {/* <View
           style={{
             width: Dimensions.get('window').width,
             height: 50,
@@ -155,8 +177,16 @@ export default class UpdateMessagePage extends Component {
             }}
             //onChangeText={ (value) => this.setState({ name: value }) }
             value={ this.state.name }/>
-        </View>
-      </Image>
-    );
+        </View> */}
+          <View style={{ paddingTop: 22 }}>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={(rowData) => <Text>{rowData.sMessageContentStr}</Text>}
+            />
+          </View>
+        </Image>
+      );
+    }
   }
+
 }

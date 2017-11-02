@@ -36,38 +36,40 @@ export default class UpdateEmailPage extends Component {
 
   save() {
     copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
+    copy.setState({ indicating: true })
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+      copy.setState({ indicating: false })
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
-          var body = {
-            'email': copy.state.email
-          }
-          copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
+          var email = copy.state.email
+          copy.setState({ indicating: true })
+          APIClient.access(APIInterface.updateUserEmail(result, email))
             .then((response) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+              if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+                //存储修改成功后的邮箱
+                APIConstant.MY_EMAIL = email
+                Alert.alert('修改邮箱成功！')
                 Actions.pop()
                 copy.state.parentComponent.load()
               } else {
-                Alert.alert('', json.errorCode)
+                //Alert.alert('', json.errorCode)
+                Alert.alert('修改邮箱失败！')
               }
             })
             .catch((error) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               console.log(error)
             })
         }
@@ -78,7 +80,7 @@ export default class UpdateEmailPage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -87,13 +89,13 @@ export default class UpdateEmailPage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             width: Dimensions.get('window').width,
@@ -104,7 +106,7 @@ export default class UpdateEmailPage extends Component {
             flexDirection: 'row'
           }}>
           <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+            onPress={this.back.bind(this)}>
             <View
               style={{
                 marginLeft: 10
@@ -124,7 +126,7 @@ export default class UpdateEmailPage extends Component {
               color: '#000'
             }}>修改邮箱</Text>
           <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
+            onPress={this.save.bind(this)}>
             <View
               style={{
                 marginRight: 10
@@ -155,8 +157,8 @@ export default class UpdateEmailPage extends Component {
               width: Dimensions.get('window').width - 20,
               color: '#000'
             }}
-            onChangeText={ (value) => this.setState({ email: value }) }
-            value={ this.state.email }/>
+            onChangeText={(value) => this.setState({ email: value })}
+            value={this.state.email} />
         </View>
       </Image>
     );
