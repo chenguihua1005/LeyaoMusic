@@ -209,7 +209,8 @@ const styles = StyleSheet.create({
     width: '50%',
     height: 100,
     borderWidth: 2,
-    borderColor: '#e6faff'
+    borderColor: '#e6faff',
+    padding: 2.5
   }
 
 });

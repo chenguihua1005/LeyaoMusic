@@ -51,6 +51,7 @@ export default class UpdatePersonalPage extends Component {
       email: props.email,
       parentComponent: props.parentComponent
     }
+    //Alert.alert('', 'avatar =' + JSON.stringify(this.state.avatar))
   }
 
   back() {

@@ -312,8 +312,10 @@ export default class HomePage extends Component {
                                         onClick={this._onMenuClick} />
                                 </View>
                             </View>
-
-                            <Text style={{ color: '#7f7f7f', fontSize: 14, fontWeight: 'bold', padding: 10 }}>听我 · LISTEN ME</Text>
+                            <View style={{ flexDirection: 'row', margin: 10 }}>
+                                <Text style={{ color: '#000000', fontSize: 14, fontWeight: 'bold', marginRight: 5 }}>听我</Text>
+                                <Text style={{ color: '#7f7f7f', fontSize: 14 }}> · LISTEN ME</Text>
+                            </View>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
                                     horizontal={true}   // 水平方向
@@ -325,7 +327,10 @@ export default class HomePage extends Component {
                             </View>
                             {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
 
-                            <Text style={{ color: '#7f7f7f', fontSize: 14, fontWeight: 'bold', padding: 10 }}>看我 · WATCH ME</Text>
+                            <View style={{ flexDirection: 'row', margin: 10 }}>
+                                <Text style={{ color: '#000000', fontSize: 14, fontWeight: 'bold', marginRight: 5 }}>看我</Text>
+                                <Text style={{ color: '#7f7f7f', fontSize: 14 }}> · WATCH ME</Text>
+                            </View>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
                                     horizontal={true}   // 水平方向
@@ -336,8 +341,10 @@ export default class HomePage extends Component {
                                 </ScrollView>
                             </View>
                             {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
-
-                            <Text style={{ color: '#7f7f7f', fontSize: 14, fontWeight: 'bold', padding: 10 }}>读我 · READ ME</Text>
+                            <View style={{ flexDirection: 'row', margin: 10 }}>
+                                <Text style={{ color: '#000000', fontSize: 14, fontWeight: 'bold', marginRight: 5 }}>读我</Text>
+                                <Text style={{ color: '#7f7f7f', fontSize: 14 }}> · READ ME</Text>
+                            </View>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
                                     horizontal={true}   // 水平方向

@@ -94,7 +94,56 @@ export default class UpdateMessagePage extends Component {
   render() {
     if (!this.state.dataSource) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
       return (
-        <Text>loading...</Text>
+        <View style={{ flex: 1 }}>
+        <View
+          style={{
+            marginTop: 20,
+            width: Dimensions.get('window').width,
+            height: 44,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 18,
+                color: '#000'
+              }}>我的消息</Text>
+          </View>
+          <TouchableWithoutFeedback
+            onPress={this.back.bind(this)}>
+            <View
+              style={{
+                position: 'absolute'
+              }}>
+              <Image
+                source={require('../resource/arrow.png')}
+                style={{
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 10
+                }} />
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Image
+            style={{ width: 80, height: 80 }}
+            /* resizeMode={'stretch'} */
+            source={require('../resource/img_kong.png')}
+          />
+          <Text>暂时还没有消息</Text>
+        </View>
+      </View>
       );
     } else {//当this.state.data有了数据，则渲染ListView
       return (
