@@ -1,164 +1,337 @@
 import React, { Component } from "react";
 import {
-  ActivityIndicator,
-  Alert,
-  AsyncStorage,
   Dimensions,
   Image,
   Text,
-  TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
+  StyleSheet,
+  ListView
 } from 'react-native';
 import {
-  Actions
+  Actions,
+  ActionConst
 } from 'react-native-router-flux';
-
+import TopBarNav from 'top-bar-nav';
+import MenuImage from './menu-image';
 import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
-import StorageConstant from '../service/storage-constant';
 
 export default class UpdateFocusPage extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
+    this._onMenuClick = this._onMenuClick.bind(this);
     this.state = {
-      indicating: false,
-      name: props.focus,
-      parentComponent: props.parentComponent
-    }
+      dataSource1: null,
+      dataSource2: null,
+      dataSource3: null
+    };
+
+    //请求网络，并解析封装数据
+    this.getMusicParty();
+    this.getMusicTeach();
+    this.getMusicShare();
+
+    //待渲染场景
+    Scene1 = ({ index }) => (
+      <View style={{ paddingTop: 0 }}>
+        <ListView
+          dataSource={this.state.dataSource1}
+          renderRow={
+            (rowData) =>
+              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p1}
+                    tag={rowData.u1}
+                    onClick={this._onMenuClick} />
+                </View>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p2}
+                    tag={rowData.u2}
+                    onClick={this._onMenuClick} />
+                </View>
+              </View>
+          }
+        />
+      </View>
+
+    );
+    Scene2 = ({ index }) => (
+      <View style={{ paddingTop: 0 }}>
+        <ListView
+          dataSource={this.state.dataSource2}
+          renderRow={
+            (rowData) =>
+              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p1}
+                    tag={rowData.u1}
+                    onClick={this._onMenuClick} />
+                </View>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p2}
+                    tag={rowData.u2}
+                    onClick={this._onMenuClick} />
+                </View>
+              </View>
+          }
+        />
+      </View>
+
+    );
+    Scene3 = ({ index }) => (
+      <View style={{ paddingTop: 0 }}>
+        <ListView
+          dataSource={this.state.dataSource3}
+          renderRow={
+            (rowData) =>
+              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p1}
+                    tag={rowData.u1}
+                    onClick={this._onMenuClick} />
+                </View>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p2}
+                    tag={rowData.u2}
+                    onClick={this._onMenuClick} />
+                </View>
+              </View>
+          }
+        />
+      </View>
+    );
+
+    this.ROUTES = {
+      Scene1,
+      // ideally you would have a ROUTES object with multiple React component scenes
+      Scene2,
+      Scene3
+    };
+
+    this.ROUTESTACK = [
+      { label: '乐谣活动', title: 'Scene1' }, // label is what you see in the top bar
+      { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
+      { label: '艺人分享', title: 'Scene3' }
+    ];
   }
 
   back() {
     Actions.pop()
   }
 
-  save() {
-    copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
-      if (error) {
-        console.log(error)
-        return
-      }
-      if (!error) {
-        if(result == null) {
-        } else {
-          console.log(result)
-
-          var body = {
-            'realname': copy.state.name
+  //音乐屋：乐谣活动
+  getMusicParty() {
+    APIClient.access(APIInterface.focus(1))
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        console.log(json)
+        let dataList1 = []
+        let arr = json.rows;
+        for (let i = 0; i < json.total; i += 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
           }
-          copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
-            .then((response) => {
-              copy.setState({ indicating: false})
-              return response.json()
-            })
-            .then((json) => {
-              console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-                Actions.pop()
-                copy.state.parentComponent.load()
-              } else {
-                Alert.alert('', json.errorCode)
-              }
-            })
-            .catch((error) => {
-              copy.setState({ indicating: false})
-              console.log(error)
-            })
+          dataList1.push(data)
         }
-      }
-    })
+        //奇数个
+        if (json.total % 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+          }
+          dataList1.push(data)
+        }
+        //重新设置数据源
+        this.setState({ dataSource1: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList1) });
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+  //音乐屋：音乐教学
+  getMusicTeach() {
+    APIClient.access(APIInterface.focus(2))
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        console.log(json)
+        let arr = json.rows;
+        let dataList2 = []
+        for (let i = 0; i < json.total; i+=2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+          }
+          dataList2.push(data)
+        }
+        //奇数个
+        if (json.total % 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+          }
+          dataList2.push(data)
+        }
+        //重新设置数据源
+        this.setState({ dataSource2: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList2) });
+
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+
+  //音乐屋：艺人分享
+  getMusicShare() {
+    APIClient.access(APIInterface.focus(3))
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        console.log(json)
+        let arr = json.rows;
+        let dataList3 = []
+        for (let i = 0; i < json.total; i+=2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+          }
+          dataList3.push(data)
+        }
+        //奇数个
+        if (json.total % 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+          }
+          dataList3.push(data)
+        }
+        //重新设置数据源
+        this.setState({ dataSource3: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList3) });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+
+
+  staveIntroduce() {
+    Actions.stave_introduction()
+  }
+
+  noteDuration() {
+    Actions.note_duration()
+  }
+
+  _onMenuClick(tag) {
+    APIConstant.URL_EVENT = tag;
+    Actions.update_webview({ type: ActionConst.PUSH });
   }
 
   render() {
-    return (
-      <Image
-        source={ require('../resource/main-background.jpg') }
-        style={{
-          flex: 1,
-          width: null,
-          height: null,
-          alignItems: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0)',
-        }}>
-        <ActivityIndicator
-          animating={ this.state.indicating }
-          style={{
-            position: 'absolute',
-            top: (Dimensions.get('window').height - 80) / 2,
-            height: 80
-          }}
-          size="large"/>
-        <View
-          style={{
-            width: Dimensions.get('window').width,
-            marginTop: 20,
-            height: 44,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexDirection: 'row'
-          }}>
-          <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+    if (!this.state.dataSource3 || !this.state.dataSource2 || !this.state.dataSource1) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
+      return (
+        <Text>loading...</Text>
+      );
+    } else {//当this.state.data有了数据，则渲染ListView
+      return (
+        <View style={{ flex: 1 }}>
+          <View
+            style={{
+              marginTop: 20,
+              width: Dimensions.get('window').width,
+              height: 44,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
             <View
               style={{
-                marginLeft: 10
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}>
               <Text
                 style={{
                   fontFamily: 'ArialMT',
-                  fontSize: 16,
+                  fontSize: 18,
                   color: '#000'
-                }}>取消</Text>
+                }}>我的关注</Text>
             </View>
-          </TouchableWithoutFeedback>
-          <Text
-            style={{
-              fontFamily: 'ArialMT',
-              fontSize: 18,
-              color: '#000'
-            }}>我的关注</Text>
-          <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
-            <View
-              style={{
-                marginRight: 10
-              }}>
-              <Text
+            <TouchableWithoutFeedback
+              onPress={this.back.bind(this)}>
+              <View
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#b3d66e'
-                }}>保存</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-        <View
-          style={{
-            width: Dimensions.get('window').width,
-            height: 50,
-            marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}>
-          <TextInput
-            style={{
-              fontFamily: 'ArialMT',
-              fontSize: 13,
-              width: Dimensions.get('window').width - 20,
-              color: '#000'
+                  position: 'absolute'
+                }}>
+                <Image
+                  source={require('../resource/arrow.png')}
+                  style={{
+                    width: 10,
+                    height: 19.5,
+                    marginLeft: 10
+                  }} />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+          <TopBarNav
+            // routeStack and renderScene are required props
+            routeStack={this.ROUTESTACK}
+            renderScene={(route, i) => {
+              // This is a lot like the now deprecated Navigator component
+              let Component = this.ROUTES[route.title];
+              return <Component index={i} />;
             }}
-            onChangeText={ (value) => this.setState({ name: value }) }
-            value={ this.state.name }/>
+            // Below are optional props
+            headerStyle={[styles.headerStyle, { paddingTop: 20 }]} // probably want to add paddingTop: 20 if using TopBarNav for the  entire height of screen on iOS
+            labelStyle={styles.labelStyle}
+            underlineStyle={styles.underlineStyle}
+            imageStyle={styles.imageStyle}
+            sidePadding={40} // Can't set sidePadding in headerStyle because it's needed to calculate the width of the tabs
+            inactiveOpacity={1}
+            fadeLabels={false}
+          />
         </View>
-      </Image>
-    );
+      );
+    }
+
   }
+
 }
+
+const styles = StyleSheet.create({
+  headerStyle: {
+    borderBottomWidth: 1,
+    borderColor: '#e6faff',
+    backgroundColor: 'white'
+  },
+  labelStyle: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black'
+  },
+  imageStyle: {
+    height: 20,
+    width: 20,
+    tintColor: '#e6faff'
+  },
+  underlineStyle: {
+    height: 3.6,
+    backgroundColor: 'black'
+  },
+  itemStyle: {
+    width: '50%',
+    height: 100,
+    borderWidth: 2,
+    borderColor: '#e6faff'
+  }
+
+});

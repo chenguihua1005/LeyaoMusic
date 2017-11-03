@@ -32,9 +32,9 @@ export default class SightsingPage extends Component {
     super(props);
     this._onMenuClick = this._onMenuClick.bind(this);
     this.state = {
-      dataSource1:null,
-      dataSource2:null,
-      dataSource3:null
+      dataSource1: null,
+      dataSource2: null,
+      dataSource3: null
     };
 
     //请求网络，并解析封装数据
@@ -45,48 +45,48 @@ export default class SightsingPage extends Component {
     //待渲染场景
     Scene1 = ({ index }) => (
       <View style={{ paddingTop: 0 }}>
-      <ListView
-        dataSource={this.state.dataSource1}
-        renderRow={
-          (rowData) =>
-            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-              <View style={styles.itemStyle} >
-                <MenuImage renderIcon={rowData.p1}
-                  tag={rowData.u1}
-                  onClick={this._onMenuClick} />
+        <ListView
+          dataSource={this.state.dataSource1}
+          renderRow={
+            (rowData) =>
+              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p1}
+                    tag={rowData.u1}
+                    onClick={this._onMenuClick} />
+                </View>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p2}
+                    tag={rowData.u2}
+                    onClick={this._onMenuClick} />
+                </View>
               </View>
-              <View style={styles.itemStyle} >
-                <MenuImage renderIcon={rowData.p2}
-                  tag={rowData.u2}
-                  onClick={this._onMenuClick} />
-              </View>
-            </View>
-        }
-      />
-    </View>
+          }
+        />
+      </View>
 
     );
     Scene2 = ({ index }) => (
       <View style={{ paddingTop: 0 }}>
-      <ListView
-        dataSource={this.state.dataSource2}
-        renderRow={
-          (rowData) =>
-            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-              <View style={styles.itemStyle} >
-                <MenuImage renderIcon={rowData.p1}
-                  tag={rowData.u1}
-                  onClick={this._onMenuClick} />
+        <ListView
+          dataSource={this.state.dataSource2}
+          renderRow={
+            (rowData) =>
+              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p1}
+                    tag={rowData.u1}
+                    onClick={this._onMenuClick} />
+                </View>
+                <View style={styles.itemStyle} >
+                  <MenuImage renderIcon={rowData.p2}
+                    tag={rowData.u2}
+                    onClick={this._onMenuClick} />
+                </View>
               </View>
-              <View style={styles.itemStyle} >
-                <MenuImage renderIcon={rowData.p2}
-                  tag={rowData.u2}
-                  onClick={this._onMenuClick} />
-              </View>
-            </View>
-        }
-      />
-    </View>
+          }
+        />
+      </View>
 
     );
     Scene3 = ({ index }) => (
@@ -135,10 +135,17 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        for (let i = 0; i < json.total / 2; i++) {
+        for (let i = 0; i < json.total; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i+1].sEventTitleUrl, "u2": arr[i+1].sEventContentUrl
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+          }
+          dataList1.push(data)
+        }
+        //奇数个
+        if (json.total % 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
           }
           dataList1.push(data)
         }
@@ -160,16 +167,23 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        for (let i = 0; i < json.total / 2; i++) {
+        for (let i = 0; i < json.total; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i+1].sEventTitleUrl, "u2": arr[i+1].sEventContentUrl
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+          }
+          dataList2.push(data)
+        }
+        //奇数个
+        if (json.total % 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
           }
           dataList2.push(data)
         }
         //重新设置数据源
         this.setState({ dataSource2: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList2) });
-        
+
       })
       .catch((error) => {
         console.log(error);
@@ -186,10 +200,17 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        for (let i = 0; i < json.total / 2; i++) {
+        for (let i = 0; i < json.total; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i+1].sEventTitleUrl, "u2": arr[i+1].sEventContentUrl
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+          }
+          dataList3.push(data)
+        }
+        //奇数个
+        if (json.total % 2) {
+          let data = {
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
           }
           dataList3.push(data)
         }
@@ -217,11 +238,11 @@ export default class SightsingPage extends Component {
   }
 
   render() {
-    if(!this.state.dataSource3 || !this.state.dataSource2 || !this.state.dataSource1) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
-      return(
+    if (!this.state.dataSource3 || !this.state.dataSource2 || !this.state.dataSource1) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
+      return (
         <Text>loading...</Text>
-    );
-    } else{//当this.state.data有了数据，则渲染ListView
+      );
+    } else {//当this.state.data有了数据，则渲染ListView
       return (
         <View style={{ flex: 1 }}>
           <TopBarNav

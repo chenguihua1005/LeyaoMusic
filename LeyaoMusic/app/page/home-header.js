@@ -12,6 +12,10 @@ import {
 } from 'react-native';
 import Video from 'react-native-video'
 import APIConstant from '../service/api-constant';
+import {
+    Actions,
+    ActionConst
+} from 'react-native-router-flux';
 
 const music_1 = require('../resource/silent.mp3');
 
@@ -63,9 +67,14 @@ export default class Header extends Component {
         this.listener.remove();
     };
 
-    //改变搜索的文本
+    //监听搜索的文本
     onSubmitEditingTextKeyword(event) {
-        Alert.alert('监听到事件：' + event.nativeEvent.text)
+        //Alert.alert('监听到事件：' + event.nativeEvent.text)
+        var copy = this;
+        Actions.sightsing_search({
+            sEventSearchContentTxt: event.nativeEvent.text,
+            parentComponent: copy
+        })
     }
 
     //播放/暂停

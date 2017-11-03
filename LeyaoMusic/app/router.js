@@ -14,6 +14,7 @@ import RegisterOnePage from './page/register-one-page';
 import RegisterTwoPage from './page/register-two-page';
 import MainScreen from './page/main-screen';
 import SightsingPage from './page/sightsing-page';
+import SightsingSearchPage from './page/sightsing-search-page';
 import ProfilePage from './page/profile-page';
 import NotificationPage from './page/notification-page';
 import UpdateNamePage from './page/update-name-page';
@@ -122,5 +123,9 @@ const scenes = Actions.create(
       key="update_suggestion"
       hideNavBar={ true }
       component={ UpdateSuggestionPage }/>
+      <Scene
+      key="sightsing_search"
+      hideNavBar={ true }
+      component={ SightsingSearchPage }/>
   </Scene>
 );

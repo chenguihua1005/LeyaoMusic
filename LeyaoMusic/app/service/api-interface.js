@@ -4,57 +4,42 @@ import APIConstant from './api-constant';
 export default class APIInterface {
 
   static getLeyaoMusicParty() {
-    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_PARTY, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_PARTY, {})
   }
 
   static getLeyaoMusicTeach() {
-    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_TEACH, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_TEACH, {})
   }
 
   static getLeyaoMusicShare() {
-    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_SHARE, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_MUSIC_SHARE, {})
   }
 
   static getLeyaoMusician() {
-    return BaseRequest.get(APIConstant.BASE_URL_MUSICIAN, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_MUSICIAN, {})
   }
+
+  //我的
 
   //-->new add interface
   //听我1 看我2 读我3
   static getLeyaoAudio() {
-    return BaseRequest.get(APIConstant.BASE_URL_AUDIO, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_AUDIO, {})
   }
 
   static getLeyaoVedio() {
-    return BaseRequest.get(APIConstant.BASE_URL_VEDIO, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_VEDIO, {})
   }
 
   static getLeyaoImage() {
-    return BaseRequest.get(APIConstant.BASE_URL_IMAGE, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_IMAGE, {})
   }
 
   static getLeyaoAll() {
-    return BaseRequest.get(APIConstant.BASE_URL_ALL, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_ALL, {})
   }
 
   //--<new add interface
-
   static getCodeList() {
     return BaseRequest.post(APIConstant.BASE_URL + 'code/getCodeList', {
       'Accept': 'application/json',
@@ -66,9 +51,7 @@ export default class APIInterface {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/getVerifyCode?hUserPhoneNr=' + phone, {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }, {
-
-      })
+    }, {})
   }
 
   static register(username, password, code) {
@@ -158,6 +141,7 @@ export default class APIInterface {
       })
   }
 
+  //意见反馈
   static updateSuggestion(sUserFeedbackStr, hUserPhoneNr) {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/addSUserFeedbackSummary', {
       'Accept': 'application/json',
@@ -179,9 +163,19 @@ export default class APIInterface {
       })
   }
 
+  //获取用户详情
   static details(username) {
-    return BaseRequest.get(APIConstant.BASE_URL_DETAILS + username, {
-
-    })
+    return BaseRequest.get(APIConstant.BASE_URL_DETAILS + username, {})
   }
+
+  //搜索全局事件
+  static search(sEventSearchContentTxt) {
+    return BaseRequest.get(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt, {})
+  }
+
+  //我的关注
+  static focus(sEventCategoryCd) {
+    return BaseRequest.get(APIConstant.BASE_URL_FOCUS + sEventCategoryCd, {})
+  }
+
 }
