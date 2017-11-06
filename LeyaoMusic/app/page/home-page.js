@@ -27,9 +27,8 @@ import Swiper from 'react-native-swiper';
 import MenuButton from './menu-button';
 import MenuText from './menu-text';
 
-const len = 160;
-
 //state中转变量 
+let slide_image = []
 let musician_title1 = []
 let musician_url1 = []
 let musician_title2 = []
@@ -39,19 +38,10 @@ let audio_url = []
 let vedio_title = []
 let vedio_url = []
 let image_title = []
-let image_url = [];
+let image_url = []
 
 //读我听我看我，个数先统一为6个
 const length = 6;
-
-let sliderImgs = [
-    'http://47.94.94.196:8088/static/image/1.jpg',
-    'http://47.94.94.196:8088/static/image/2.jpg',
-    'http://47.94.94.196:8088/static/image/3.jpg',
-    'http://47.94.94.196:8088/static/image/4.jpg',
-    'http://47.94.94.196:8088/static/image/5.jpg',
-    'http://47.94.94.196:8088/static/image/6.jpg'
-];
 
 export default class HomePage extends Component {
 
@@ -63,6 +53,7 @@ export default class HomePage extends Component {
         // 实际的DataSources存放在state中
         this.state = {
             listData: ds,
+            slide_image: [],
             musician_title1: [],
             musician_url1: [],
             musician_title2: [],
@@ -77,6 +68,9 @@ export default class HomePage extends Component {
     }
 
     componentWillMount() {
+        //Banner页
+        this.getBanner();
+
         //音乐家
         this.getMusicianList();
 
@@ -84,6 +78,25 @@ export default class HomePage extends Component {
         this.getImageList();
         this.getAudioList();
         this.getVedioList();
+    }
+
+    //Banner页
+    getBanner() {
+        APIClient.access(APIInterface.getBanner())
+        .then((response) => {
+            return response.json()
+        })
+        .then((json) => {
+            console.log(json)
+            let arr = json.rows;
+            for (let i = 0; i < json.total; i++) {
+                slide_image[i] = arr[i].sEventTitleUrl;
+            }
+            this.setState({ slide_image: slide_image })
+        })
+        .catch((error) => {
+            console.log(error);
+        });        
     }
 
     //音乐家
@@ -185,14 +198,6 @@ export default class HomePage extends Component {
             })
     }
 
-    _renderPage(data, pageID) {
-        return (
-            <Image
-                source={data}
-                style={styles.page} />
-        );
-    }
-
     //音乐家和听我，点击后统一调用接口
     _onMenuClick(title, tag) {
         //调用事件通知
@@ -219,12 +224,13 @@ export default class HomePage extends Component {
         );
     }
 
+    //听我
     renderItem1() {
         var itemAry = [];
         for (var i = 0; i < 6; i++) {
             itemAry.push(
                 <View key={i}>
-                    <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/4.jpg'}
+                    <MenuButton renderIcon={APIConstant.BASE_URL_PREFIX + this.state.audio_title[i]}
                         showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.audio_url[i]}
                         onClick={this._onMenuClick} />
                 </View>
@@ -234,12 +240,13 @@ export default class HomePage extends Component {
         return itemAry;
     }
 
+    //看我
     renderItem2() {
         var itemAry = [];
         for (var i = 0; i < 6; i++) {
             itemAry.push(
                 <View key={i}>
-                    <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/5.jpg'}
+                    <MenuButton renderIcon={APIConstant.BASE_URL_PREFIX + this.state.vedio_title[i]}
                         showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[i]}
                         onClick={this._onMenuClick2} />
                 </View>
@@ -249,12 +256,13 @@ export default class HomePage extends Component {
         return itemAry;
     }
 
+    //读我
     renderItem3() {
         var itemAry = [];
         for (var i = 0; i < 6; i++) {
             itemAry.push(
                 <View key={i}>
-                    <MenuButton renderIcon={'http://47.94.94.196:8088/static/image/6.jpg'}
+                    <MenuButton renderIcon={APIConstant.BASE_URL_PREFIX + this.state.image_title[i]}
                         showText={''} tag={this.state.image_url[i]}
                         onClick={this._onMenuClick3} />
                 </View>
@@ -274,12 +282,12 @@ export default class HomePage extends Component {
                     return (
                         <View>
                             <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} autoplayTimeout={3}>
-                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[0] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[1] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[2] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[3] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[4] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: sliderImgs[5] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[0] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[2] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[3] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[4] }}></Image>
+                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
                             </Swiper>
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
@@ -363,32 +371,9 @@ export default class HomePage extends Component {
 }
 
 const styles = StyleSheet.create({
-    page: {
-        flex: 1,
-        height: 130,
-        resizeMode: 'stretch'
-    },
-
     menuView: {
         flexDirection: 'row',
         marginTop: 0
-    },
-    recommendTitle: {
-        width: len,
-        flexWrap: 'wrap',
-        fontSize: 12,
-        color: 'black',
-        flex: 1,
-        marginTop: 8,
-        marginBottom: 8,
-        height: 30
-    },
-    priceText: {
-        flex: 1,
-        alignSelf: 'flex-start',
-        textAlign: 'left',
-        fontSize: 13,
-        color: '#f15353'
     },
     wrapper: {
         height: 130
@@ -397,24 +382,6 @@ const styles = StyleSheet.create({
         marginTop: 0,
         height: 110,
         resizeMode: Image.resizeMode.stretch,
-    },
-    slide1: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#9DD6EB',
-    },
-    slide2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#97CAE5',
-    },
-    slide3: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#92BBD9',
     },
     text: {
         color: '#fff',

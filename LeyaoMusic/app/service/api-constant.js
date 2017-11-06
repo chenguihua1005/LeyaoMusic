@@ -14,6 +14,8 @@ export default class APIConstant {
 
   //新的API地址
   static BASE_URL_ALL = APIConstant.BASE_URL + "getEvents"
+  //Banner
+  static BASE_URL_BANNER = APIConstant.BASE_URL + "event/getTEventSummaryForBanner?sessionCode=" + APIConstant.SESSIONCODE  
   //1:听我 2:看我 3:读我 
   static BASE_URL_AUDIO = APIConstant.BASE_URL + "event/getTEventSummaryByType?sEventTypeCd=1&sessionCode=" + APIConstant.SESSIONCODE
   static BASE_URL_VEDIO = APIConstant.BASE_URL + "event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=" + APIConstant.SESSIONCODE

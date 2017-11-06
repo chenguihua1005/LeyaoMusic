@@ -31,7 +31,7 @@ export default class MenuButton extends Component {
         return (
             <TouchableWithoutFeedback onPress={this._onClick}>
                 <View style={{alignItems:'center',flex:1}}>
-                    <Image style={styles.iconImg} source={{uri:this.props.renderIcon}}/>
+                    <Image style={styles.iconImg} resizeMode={'stretch'} source={{uri:this.props.renderIcon}}/>
                     {<Text style={styles.showText}>{this.props.showText}</Text>}
                 </View>
             </TouchableWithoutFeedback>

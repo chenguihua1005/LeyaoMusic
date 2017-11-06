@@ -3,6 +3,12 @@ import APIConstant from './api-constant';
 
 export default class APIInterface {
 
+  //获取Banner事件
+  static getBanner() {
+    return BaseRequest.get(APIConstant.BASE_URL_BANNER, {})
+  }
+
+  //音乐屋
   static getLeyaoMusicParty() {
     return BaseRequest.get(APIConstant.BASE_URL_MUSIC_PARTY, {})
   }
@@ -20,7 +26,6 @@ export default class APIInterface {
   }
 
   //我的
-
   //-->new add interface
   //听我1 看我2 读我3
   static getLeyaoAudio() {
