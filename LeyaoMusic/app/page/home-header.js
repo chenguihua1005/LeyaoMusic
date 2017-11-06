@@ -113,7 +113,7 @@ export default class Header extends Component {
                             justifyContent: 'flex-end',
                             flexDirection: 'row'
                         }}>
-                        <Text style={{ color: '#7f7f7f', fontSize: 16, fontWeight: 'bold' }}>乐谣音乐</Text>
+                        <Text style={{ color: '#000000', fontSize: 16, fontWeight: 'bold' }}>乐谣音乐</Text>
                     </View>
                     <View style={{
                         flex: 0.4,

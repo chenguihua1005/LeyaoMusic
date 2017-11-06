@@ -140,7 +140,7 @@ export default class UpdateGenderPage extends Component {
                 fontFamily: 'ArialMT',
                 fontSize: 18,
                 color: '#000'
-              }}>修改性别</Text>
+              }}>性别</Text>
           </View>
           <TouchableWithoutFeedback
             onPress={this.back.bind(this)}>
@@ -165,7 +165,7 @@ export default class UpdateGenderPage extends Component {
               width: Dimensions.get('window').width,
               height: 51,
               marginTop: 5,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'
@@ -200,7 +200,7 @@ export default class UpdateGenderPage extends Component {
               width: Dimensions.get('window').width,
               height: 51,
               marginTop: 1,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'

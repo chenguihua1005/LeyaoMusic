@@ -37,36 +37,36 @@ export default class UpdateSuggestionPage extends Component {
   //提交后的业务逻辑
   save() {
     copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
+    copy.setState({ indicating: true })
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+      copy.setState({ indicating: false })
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
           var FeedbackStr = copy.state.name
 
-          copy.setState({ indicating: true})
+          copy.setState({ indicating: true })
           APIClient.access(APIInterface.updateSuggestion(FeedbackStr, APIConstant.USER_PHONE))
             .then((response) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.responseResult == APIConstant.STATUS_SUCCEED) {
+              if (json.responseResult == APIConstant.STATUS_SUCCEED) {
                 Alert.alert('', '感谢您的反馈')
               } else {
                 Alert.alert('', "添加用户反馈失败！")
               }
             })
             .catch((error) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               console.log(error)
             })
         }
@@ -77,7 +77,7 @@ export default class UpdateSuggestionPage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -86,13 +86,13 @@ export default class UpdateSuggestionPage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             width: Dimensions.get('window').width,
@@ -102,18 +102,19 @@ export default class UpdateSuggestionPage extends Component {
             justifyContent: 'space-between',
             flexDirection: 'row'
           }}>
-          <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+            <TouchableWithoutFeedback
+            onPress={this.back.bind(this)}>
             <View
               style={{
-                marginLeft: 10
+                marginLeft: 5
               }}>
-              <Text
+              <Image
+                source={require('../resource/arrow.png')}
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#000'
-                }}>返回</Text>
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 5
+                }} />
             </View>
           </TouchableWithoutFeedback>
           <Text
@@ -123,7 +124,7 @@ export default class UpdateSuggestionPage extends Component {
               color: '#000'
             }}>意见反馈</Text>
           <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
+            onPress={this.save.bind(this)}>
             <View
               style={{
                 marginRight: 10
@@ -156,8 +157,8 @@ export default class UpdateSuggestionPage extends Component {
               color: '#000'
             }}
             multiline={true}
-            onChangeText={ (value) => this.setState({ name: value }) }
-            value={ this.state.name }/>
+            onChangeText={(value) => this.setState({ name: value })}
+            value={this.state.name} />
         </View>
       </Image>
     );

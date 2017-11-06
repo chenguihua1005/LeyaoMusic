@@ -36,28 +36,28 @@ export default class UpdateNamePage extends Component {
 
   save() {
     copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
+    copy.setState({ indicating: true })
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+      copy.setState({ indicating: false })
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
           var realname = copy.state.name
-          copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUserName(APIConstant.SESSIONCODE, APIConstant.USER_PHONE,realname))
+          copy.setState({ indicating: true })
+          APIClient.access(APIInterface.updateUserName(APIConstant.SESSIONCODE, APIConstant.USER_PHONE, realname))
             .then((response) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.responseResult == APIConstant.STATUS_SUCCEED) {
+              if (json.responseResult == APIConstant.STATUS_SUCCEED) {
                 //存储修改成功后的昵称
                 APIConstant.MY_NICKNAME = realname
                 Alert.alert('修改昵称成功！')
@@ -69,7 +69,7 @@ export default class UpdateNamePage extends Component {
               }
             })
             .catch((error) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               console.log(error)
             })
         }
@@ -80,7 +80,7 @@ export default class UpdateNamePage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -89,13 +89,13 @@ export default class UpdateNamePage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             width: Dimensions.get('window').width,
@@ -106,17 +106,18 @@ export default class UpdateNamePage extends Component {
             flexDirection: 'row'
           }}>
           <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+            onPress={this.back.bind(this)}>
             <View
-              style={{
+            style={{
                 marginLeft: 10
               }}>
-              <Text
+              <Image
+                source={require('../resource/arrow.png')}
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#000'
-                }}>取消</Text>
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 5
+                }} />
             </View>
           </TouchableWithoutFeedback>
           <Text
@@ -124,9 +125,9 @@ export default class UpdateNamePage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 18,
               color: '#000'
-            }}>修改姓名</Text>
+            }}>昵称</Text>
           <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
+            onPress={this.save.bind(this)}>
             <View
               style={{
                 marginRight: 10
@@ -136,7 +137,7 @@ export default class UpdateNamePage extends Component {
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}>保存</Text>
+                }}>完成</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -145,7 +146,7 @@ export default class UpdateNamePage extends Component {
             width: Dimensions.get('window').width,
             height: 50,
             marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'center'
@@ -157,8 +158,8 @@ export default class UpdateNamePage extends Component {
               width: Dimensions.get('window').width - 20,
               color: '#000'
             }}
-            onChangeText={ (value) => this.setState({ name: value }) }
-            value={ this.state.name }/>
+            onChangeText={(value) => this.setState({ name: value })}
+            value={this.state.name} />
         </View>
       </Image>
     );

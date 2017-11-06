@@ -219,12 +219,13 @@ export default class UpdatePersonalPage extends Component {
               style={{
                 marginLeft: 10
               }}>
-              <Text
+              <Image
+                source={require('../resource/arrow.png')}
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#000'
-                }}>返回</Text>
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 5
+                }} />
             </View>
           </TouchableWithoutFeedback>
           <Text
@@ -232,7 +233,7 @@ export default class UpdatePersonalPage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 18,
               color: '#000'
-            }}>我的个人界面</Text>
+            }}>个人信息</Text>
           <TouchableWithoutFeedback
             onPress={this.save.bind(this)}>
             <View

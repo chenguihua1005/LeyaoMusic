@@ -111,12 +111,13 @@ export default class UpdateEmailPage extends Component {
               style={{
                 marginLeft: 10
               }}>
-              <Text
+              <Image
+                source={require('../resource/arrow.png')}
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#000'
-                }}>取消</Text>
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 5
+                }} />
             </View>
           </TouchableWithoutFeedback>
           <Text
@@ -124,7 +125,7 @@ export default class UpdateEmailPage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 18,
               color: '#000'
-            }}>修改邮箱</Text>
+            }}>邮箱</Text>
           <TouchableWithoutFeedback
             onPress={this.save.bind(this)}>
             <View
@@ -136,7 +137,7 @@ export default class UpdateEmailPage extends Component {
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}>保存</Text>
+                }}>完成</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -145,7 +146,7 @@ export default class UpdateEmailPage extends Component {
             width: Dimensions.get('window').width,
             height: 50,
             marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'center'

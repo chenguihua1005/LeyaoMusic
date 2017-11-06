@@ -277,7 +277,7 @@ export default class UpdateFocusPage extends Component {
                   style={{
                     width: 10,
                     height: 19.5,
-                    marginLeft: 10
+                    marginLeft: 15
                   }} />
               </View>
             </TouchableWithoutFeedback>

@@ -40,12 +40,6 @@ export default class UpdateMessagePage extends Component {
     Actions.pop()
   }
 
-  componentWillUnmount() {
-    //清掉消息
-    //dataList = null
-  };
-
-
   save() {
     copy = this
     copy.setState({ indicating: true })
@@ -95,55 +89,55 @@ export default class UpdateMessagePage extends Component {
     if (!this.state.dataSource) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
       return (
         <View style={{ flex: 1 }}>
-        <View
-          style={{
-            marginTop: 20,
-            width: Dimensions.get('window').width,
-            height: 44,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
           <View
             style={{
-              flex: 1,
+              marginTop: 20,
+              width: Dimensions.get('window').width,
+              height: 44,
               flexDirection: 'row',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-            <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 18,
-                color: '#000'
-              }}>我的消息</Text>
-          </View>
-          <TouchableWithoutFeedback
-            onPress={this.back.bind(this)}>
             <View
               style={{
-                position: 'absolute'
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}>
-              <Image
-                source={require('../resource/arrow.png')}
+              <Text
                 style={{
-                  width: 10,
-                  height: 19.5,
-                  marginLeft: 10
-                }} />
+                  fontFamily: 'ArialMT',
+                  fontSize: 18,
+                  color: '#000'
+                }}>我的消息</Text>
             </View>
-          </TouchableWithoutFeedback>
-        </View>
+            <TouchableWithoutFeedback
+              onPress={this.back.bind(this)}>
+              <View
+                style={{
+                  position: 'absolute'
+                }}>
+                <Image
+                  source={require('../resource/arrow.png')}
+                  style={{
+                    width: 10,
+                    height: 19.5,
+                    marginLeft: 10
+                  }} />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
 
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image
-            style={{ width: 80, height: 80 }}
-            /* resizeMode={'stretch'} */
-            source={require('../resource/img_kong.png')}
-          />
-          <Text>暂时还没有消息</Text>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Image
+              style={{ width: 80, height: 80 }}
+              /* resizeMode={'stretch'} */
+              source={require('../resource/img_kong.png')}
+            />
+            <Text>暂时还没有消息</Text>
+          </View>
         </View>
-      </View>
       );
     } else {//当this.state.data有了数据，则渲染ListView
       return (
@@ -153,7 +147,7 @@ export default class UpdateMessagePage extends Component {
             flex: 1,
             width: null,
             height: null,
-            alignItems: 'center',
+            alignItems: 'flex-start',
             backgroundColor: 'rgba(0, 0, 0, 0)',
           }}>
           <ActivityIndicator
@@ -179,12 +173,13 @@ export default class UpdateMessagePage extends Component {
                 style={{
                   marginLeft: 10
                 }}>
-                <Text
+                <Image
+                  source={require('../resource/arrow.png')}
                   style={{
-                    fontFamily: 'ArialMT',
-                    fontSize: 16,
-                    color: '#000'
-                  }}>取消</Text>
+                    width: 10,
+                    height: 19.5,
+                    marginLeft: 5
+                  }} />
               </View>
             </TouchableWithoutFeedback>
             <Text
@@ -207,30 +202,14 @@ export default class UpdateMessagePage extends Component {
               </View>
             </TouchableWithoutFeedback>
           </View>
-          {/* <View
-          style={{
-            width: Dimensions.get('window').width,
-            height: 50,
-            marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}>
-          <TextInput
-            style={{
-              fontFamily: 'ArialMT',
-              fontSize: 13,
-              width: Dimensions.get('window').width - 20,
-              color: '#000'
-            }}
-            //onChangeText={ (value) => this.setState({ name: value }) }
-            value={ this.state.name }/>
-        </View> */}
-          <View style={{ paddingTop: 22 }}>
+          <View style={{ paddingTop: 22, paddingLeft: 10 }}>
             <ListView
               dataSource={this.state.dataSource}
-              renderRow={(rowData) => <Text>{rowData.sMessageContentStr}</Text>}
+              renderRow={(rowData) =>
+                <Text>
+                  {rowData.sMessageContentStr}
+                </Text>                               
+              }
             />
           </View>
         </Image>
