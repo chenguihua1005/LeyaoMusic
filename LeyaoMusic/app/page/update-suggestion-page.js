@@ -26,7 +26,6 @@ export default class UpdateSuggestionPage extends Component {
     this.state = {
       indicating: false,
       name: '',
-      parentComponent: props.parentComponent
     }
   }
 

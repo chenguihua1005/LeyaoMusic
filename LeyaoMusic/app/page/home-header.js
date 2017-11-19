@@ -70,10 +70,8 @@ export default class Header extends Component {
     //监听搜索的文本
     onSubmitEditingTextKeyword(event) {
         //Alert.alert('监听到事件：' + event.nativeEvent.text)
-        var copy = this;
         Actions.sightsing_search({
             sEventSearchContentTxt: event.nativeEvent.text,
-            parentComponent: copy
         })
     }
 

@@ -28,12 +28,13 @@ export default class ProfilePage extends Component {
     super(props)
     this.state = {
       indicating: false,
-      avatar: require('../resource/default-avatar.png'),
-      realName: "Gavin Gao",
+      //avatar: require('../resource/default-avatar.png'),
+      avatar: null,
+      realName: "昵称未设置",
       //0:男
       gender: 0,
       userName: APIConstant.USER_PHONE,
-      email: "james.wang@Leyao.com",
+      email: "邮箱未设置",
 
       message: "无",
       focus: "无",
@@ -51,6 +52,10 @@ export default class ProfilePage extends Component {
       //获取传回的值，写刷新的逻辑
       // copy.load()
       //接收到消息，就将存储的值取过来刷新界面
+      //实验性代码，接收到消息处理
+      // copy.setState({
+      //   realName: 'jesse' ,
+      // })
       
     });
   }
@@ -117,7 +122,7 @@ export default class ProfilePage extends Component {
       userName: this.state.userName,
       gender: this.state.gender,
       email: this.state.email,
-      parentComponent: copy
+      //parentComponent: copy
     })
 
   }
@@ -125,34 +130,26 @@ export default class ProfilePage extends Component {
   //增加的4个菜单按钮事件
   //我的消息
   checkMessage() {
-    var copy = this;
     Actions.update_message({
       //message: this.state.message,
-      parentComponent: copy
     })
   }
   //我的关注
   checkFocus() {
-    var copy = this;
     Actions.update_focus({
       focus: this.state.focus,
-      parentComponent: copy
     })
   }
   //我的历史
   checkHistory() {
-    var copy = this;
     Actions.update_history({
       history: this.state.history,
-      parentComponent: copy
     })
   }
   //意见反馈
   checkSuggestion() {
-    var copy = this;
     Actions.update_suggestion({
       // suggestion: this.state.suggestion,
-      parentComponent: copy
     })
   }
 

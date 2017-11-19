@@ -26,7 +26,7 @@ export default class UpdateNamePage extends Component {
     this.state = {
       indicating: false,
       name: props.realName,
-      parentComponent: props.parentComponent
+      //parentComponent: props.parentComponent
     }
   }
 
@@ -62,7 +62,9 @@ export default class UpdateNamePage extends Component {
                 APIConstant.MY_NICKNAME = realname
                 Alert.alert('修改昵称成功！')
                 Actions.pop()
-                copy.state.parentComponent.load()
+                //copy.state.parentComponent.load()
+                //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
+                
               } else {
                 //Alert.alert('', json.responseResultMsg)
                 Alert.alert('修改昵称失败！')

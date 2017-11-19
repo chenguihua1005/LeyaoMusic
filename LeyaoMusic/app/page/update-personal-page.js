@@ -49,7 +49,7 @@ export default class UpdatePersonalPage extends Component {
       userName: props.userName,
       gender: props.gender,
       email: props.email,
-      parentComponent: props.parentComponent
+      //parentComponent: props.parentComponent
     }
     //Alert.alert('', 'avatar =' + JSON.stringify(this.state.avatar))
   }
@@ -155,7 +155,7 @@ export default class UpdatePersonalPage extends Component {
     var copy = this;
     Actions.update_name({
       realName: this.state.realName,
-      parentComponent: copy
+      //parentComponent: copy
     })
   }
 
@@ -163,7 +163,7 @@ export default class UpdatePersonalPage extends Component {
     var copy = this;
     Actions.update_gender({
       gender: this.state.gender,
-      parentComponent: copy
+      //parentComponent: copy
     })
   }
 
@@ -171,19 +171,16 @@ export default class UpdatePersonalPage extends Component {
     var copy = this;
     Actions.update_email({
       email: this.state.email,
-      parentComponent: copy
+      //parentComponent: copy
     })
   }
 
   render() {
     var sex = this.state.gender
-    var sexImage;
     if (this.state.gender == 0) {
       sex = '男'
-      sexImage = require('../resource/icon_nan.png')
     } else if (this.state.gender == 1) {
       sex = '女'
-      sexImage = require('../resource/icon_nv.png')
     }
 
     return (

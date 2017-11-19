@@ -27,8 +27,7 @@ export default class UpdateMessagePage extends Component {
     this.state = {
       indicating: false,
       name: '',
-      dataSource: null,
-      parentComponent: props.parentComponent
+      dataSource: null
     }
   }
 

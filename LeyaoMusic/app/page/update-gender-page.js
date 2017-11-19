@@ -27,7 +27,7 @@ export default class UpdateGenderPage extends Component {
       maleChecked: (props.gender == 'M') ? true : false,
       femaleChecked: (props.gender == 'F') ? true : false,
       sex: '',
-      parentComponent: props.parentComponent
+      //parentComponent: props.parentComponent
     }
 
     this.save.bind(this)
@@ -85,7 +85,9 @@ export default class UpdateGenderPage extends Component {
                 APIConstant.MY_GENDER = sex
                 Alert.alert('修改性别成功！')
                 Actions.pop()
-                copy.state.parentComponent.load()
+                //copy.state.parentComponent.load()
+                //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
+                
               } else {
                 //Alert.alert('', json.errorCode)
                 Alert.alert('修改性别失败！')

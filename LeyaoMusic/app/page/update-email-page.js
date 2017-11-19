@@ -26,7 +26,7 @@ export default class UpdateEmailPage extends Component {
     this.state = {
       indicating: false,
       email: props.email,
-      parentComponent: props.parentComponent
+      //parentComponent: props.parentComponent
     }
   }
 
@@ -62,7 +62,9 @@ export default class UpdateEmailPage extends Component {
                 APIConstant.MY_EMAIL = email
                 Alert.alert('修改邮箱成功！')
                 Actions.pop()
-                copy.state.parentComponent.load()
+                //copy.state.parentComponent.load()
+                //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
+                
               } else {
                 //Alert.alert('', json.errorCode)
                 Alert.alert('修改邮箱失败！')
