@@ -84,7 +84,7 @@ export default class MenuText extends Component {
                     <Image style={{ marginLeft: 10, width: 14, height: 14 }}
                         source={this.state.isplayBtn}
                     />
-                    <Text style={{ color: '#7f7f7f', fontSize: 12, padding: 6 }}>{this.props.showText}</Text>
+                    <Text style={{ color: '#999999', fontSize: 13, padding: 6 }}>{this.props.showText}</Text>
                 </View>
             </TouchableWithoutFeedback>
         );

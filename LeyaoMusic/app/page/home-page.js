@@ -113,15 +113,18 @@ export default class HomePage extends Component {
                 //"sEventSubContent2StrList":["musician1","musician1","musician1"]
                 for (let i = 0; i < 3; i++) {
                     //词：jack 曲：jesse 唱： mark
-                    musician_title1[i] = " 词：" + arr[0].sEventSubContent[i].lyricist +
-                        " 曲：" + arr[0].sEventSubContent[i].composer +
-                        " 唱：" + arr[0].sEventSubContent[i].singer;
+                    // musician_title1[i] = " 词：" + arr[0].sEventSubContent[i].lyricist +
+                    //     " 曲：" + arr[0].sEventSubContent[i].composer +
+                    //     " 唱：" + arr[0].sEventSubContent[i].singer;
+                    //音乐家的歌曲描述用description那个字段
+                    musician_title1[i] = arr[0].sEventSubContent[i].description
                     musician_url1[i] = arr[0].sEventSubContent[i].url;
                 }
                 for (let i = 0; i < 3; i++) {
-                    musician_title2[i] = " 词：" + arr[1].sEventSubContent[i].lyricist +
-                        " 曲：" + arr[1].sEventSubContent[i].composer +
-                        " 唱：" + arr[1].sEventSubContent[i].singer;
+                    // musician_title2[i] = " 词：" + arr[1].sEventSubContent[i].lyricist +
+                    //     " 曲：" + arr[1].sEventSubContent[i].composer +
+                    //     " 唱：" + arr[1].sEventSubContent[i].singer;
+                    musician_title2[i] = arr[1].sEventSubContent[i].description;
                     musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 
@@ -321,8 +324,8 @@ export default class HomePage extends Component {
                                 </View>
                             </View>
                             <View style={{ flexDirection: 'row', margin: 10 }}>
-                                <Text style={{ color: '#000000', fontSize: 14, fontWeight: 'bold', marginRight: 5 }}>听我</Text>
-                                <Text style={{ color: '#7f7f7f', fontSize: 14 }}> · LISTEN ME</Text>
+                                <Text style={{ color: '#333333', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>听我</Text>
+                                <Text style={{ color: '#BDBDBD', fontSize: 11, marginTop: 3 }}> · LISTEN ME</Text>
                             </View>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
@@ -336,8 +339,8 @@ export default class HomePage extends Component {
                             {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
 
                             <View style={{ flexDirection: 'row', margin: 10 }}>
-                                <Text style={{ color: '#000000', fontSize: 14, fontWeight: 'bold', marginRight: 5 }}>看我</Text>
-                                <Text style={{ color: '#7f7f7f', fontSize: 14 }}> · WATCH ME</Text>
+                                <Text style={{ color: '#333333', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>看我</Text>
+                                <Text style={{ color: '#BDBDBD', fontSize: 11, marginTop: 3 }}> · WATCH ME</Text>
                             </View>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
@@ -350,8 +353,8 @@ export default class HomePage extends Component {
                             </View>
                             {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
                             <View style={{ flexDirection: 'row', margin: 10 }}>
-                                <Text style={{ color: '#000000', fontSize: 14, fontWeight: 'bold', marginRight: 5 }}>读我</Text>
-                                <Text style={{ color: '#7f7f7f', fontSize: 14 }}> · READ ME</Text>
+                                <Text style={{ color: '#333333', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>读我</Text>
+                                <Text style={{ color: '#BDBDBD', fontSize: 11, marginTop: 3 }}> · READ ME</Text>
                             </View>
                             <View style={styles.menuView}>
                                 <ScrollView style={styles.mainStyle}
@@ -392,7 +395,9 @@ const styles = StyleSheet.create({
         // 背景色
         backgroundColor: 'red'
     },
-
+    mainStyle: {
+        marginLeft:5,
+    },
     itemStyle: {
         // 尺寸
         width: 600,
