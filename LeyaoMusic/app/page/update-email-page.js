@@ -50,7 +50,7 @@ export default class UpdateEmailPage extends Component {
 
           var email = copy.state.email
           copy.setState({ indicating: true })
-          APIClient.access(APIInterface.updateUserEmail(result, email))
+          APIClient.access(APIInterface.updateUserEmail(APIConstant.SESSIONCODE, APIConstant.USER_PHONE, email))
             .then((response) => {
               copy.setState({ indicating: false })
               return response.json()

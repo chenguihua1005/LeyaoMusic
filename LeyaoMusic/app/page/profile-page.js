@@ -93,11 +93,12 @@ export default class ProfilePage extends Component {
                   })
                 }
                 copy.setState({
-                  realName: arr.sUserNameStr.size > 0 ? arr.sUserNameStr : realName,
+                  realName: arr.sUserNameStr != '' ? arr.sUserNameStr : copy.state.realName,
                   //userName手机号，不能修改
-                  gender: arr.sUserGenderCd.size > 0 ? arr.sUserGenderCd : gender,
-                  email: arr.sUserEmailStr.size > 0 ? arr.sUserEmailStr : email
+                  gender: arr.sUserGenderCd != '' ? arr.sUserGenderCd : copy.state.gender,
+                  email: arr.sUserEmailStr != '' ? arr.sUserEmailStr : copy.state.email
                 })
+                console.log("realName = "  + copy.state.realName);
               }
               else {
                 Alert.alert('', '获取用户详情错误')

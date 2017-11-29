@@ -26,7 +26,7 @@ export default class UpdateGenderPage extends Component {
       indicating: false,
       maleChecked: (props.gender == 'M') ? true : false,
       femaleChecked: (props.gender == 'F') ? true : false,
-      sex: '',
+      sex: 0,
       //parentComponent: props.parentComponent
     }
 
@@ -37,6 +37,7 @@ export default class UpdateGenderPage extends Component {
     Actions.pop()
   }
 
+  //检验是否为男性
   maleCheck() {
     this.setState({
       maleChecked: true,
@@ -46,7 +47,7 @@ export default class UpdateGenderPage extends Component {
 
     this.save()
   }
-
+  //检验是否为女性
   femaleCheck() {
     this.setState({
       maleChecked: false,
@@ -69,11 +70,11 @@ export default class UpdateGenderPage extends Component {
       if (!error) {
         if (result == null) {
         } else {
-          console.log(result)
+          console.log("result = " + result)
 
           var sex = copy.state.sex
           copy.setState({ indicating: true })
-          APIClient.access(APIInterface.updateUserGender(result, sex))
+          APIClient.access(APIInterface.updateUserGender(APIConstant.SESSIONCODE, APIConstant.USER_PHONE, sex))
             .then((response) => {
               copy.setState({ indicating: false })
               return response.json()
@@ -87,7 +88,7 @@ export default class UpdateGenderPage extends Component {
                 Actions.pop()
                 //copy.state.parentComponent.load()
                 //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
-                
+
               } else {
                 //Alert.alert('', json.errorCode)
                 Alert.alert('修改性别失败！')
