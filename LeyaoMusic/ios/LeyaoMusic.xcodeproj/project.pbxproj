@@ -1098,7 +1098,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.faney.LeyaoMusic;
 				PRODUCT_NAME = LeyaoMusic;
-				PROVISIONING_PROFILE = "e53f1c4f-f9d4-4734-8de8-06e1753da9e6";
+				PROVISIONING_PROFILE = "c81831b2-f401-4b7e-908b-2a5472b7f756";
 				PROVISIONING_PROFILE_SPECIFIER = Faney_Test;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1111,7 +1111,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BH93G7K8PU;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
@@ -1128,7 +1128,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.faney.LeyaoMusic;
 				PRODUCT_NAME = LeyaoMusic;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "c81831b2-f401-4b7e-908b-2a5472b7f756";
+				PROVISIONING_PROFILE_SPECIFIER = Faney_Test;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

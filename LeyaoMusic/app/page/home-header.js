@@ -10,6 +10,7 @@ import {
     Alert,
     Text,
 } from 'react-native';
+import TopBarNav from 'top-bar-nav';
 import Video from 'react-native-video'
 import APIConstant from '../service/api-constant';
 import {
@@ -69,6 +70,10 @@ export default class Header extends Component {
 
     //监听搜索的文本
     onSubmitEditingTextKeyword(event) {
+        //判断当前是否在“音乐屋”下面，在其哪个tab下
+        if(APIConstant.SEARCH_PAGE == 1) {
+            APIConstant.SEARCH_CATEGORY = TopBarNav.SEARCH_PAGE_INDEX;
+        }
         //Alert.alert('监听到事件：' + event.nativeEvent.text)
         Actions.sightsing_search({
             sEventSearchContentTxt: event.nativeEvent.text,

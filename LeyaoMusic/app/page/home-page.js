@@ -118,6 +118,9 @@ export default class HomePage extends Component {
                     //     " 唱：" + arr[0].sEventSubContent[i].singer;
                     //音乐家的歌曲描述用description那个字段
                     musician_title1[i] = arr[0].sEventSubContent[i].description
+                    //字符串超过12，则截取后面的以...表示
+                    if(musician_title1[i].length > 12) 
+                        musician_title1[i] = musician_title1[i].slice(0,12) + '...';
                     musician_url1[i] = arr[0].sEventSubContent[i].url;
                 }
                 for (let i = 0; i < 3; i++) {
@@ -125,6 +128,9 @@ export default class HomePage extends Component {
                     //     " 曲：" + arr[1].sEventSubContent[i].composer +
                     //     " 唱：" + arr[1].sEventSubContent[i].singer;
                     musician_title2[i] = arr[1].sEventSubContent[i].description;
+                    //字符串超过12，则截取后面的以...表示
+                    if(musician_title2[i].length > 12) 
+                        musician_title2[i] = musician_title2[i].slice(0,12) + '...';
                     musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 

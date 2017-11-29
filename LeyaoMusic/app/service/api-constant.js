@@ -12,6 +12,11 @@ export default class APIConstant {
   static STATUS_FAILED = "ERROR"
   static STATUS_FAILED_VERIFY = -1
 
+  //音乐屋，每个tab的搜索功能只能搜索各自tab的内容，根据sEventCategoryCd来进行筛选乐谣活动->1；音乐教学->2，艺人分享->3,音乐家->4
+  static SEARCH_CATEGORY = ''
+  //加判断，是否在“音乐屋页面
+  static SEARCH_PAGE = 0
+
   //新的API地址
   static BASE_URL_ALL = APIConstant.BASE_URL + "getEvents"
   //Banner

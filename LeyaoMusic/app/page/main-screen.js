@@ -124,7 +124,15 @@ export default class MainScreen extends Component {
               selected={this.state.selectedTab === tag}
               renderIcon={() => <Image style={styles.tabIcon} source={img}/>}
               renderSelectedIcon={() => <Image style={styles.tabIcon} source={selectedImg}/>}
-              onPress={() => this.setState({ selectedTab: tag })}>
+              onPress={
+                () => {
+                  this.setState({ selectedTab: tag })
+                  //加判断，是否在“音乐屋”页面
+                  if(tag == FAXIAN) 
+                    APIConstant.SEARCH_PAGE = 1;
+                  else APIConstant.SEARCH_PAGE = 0;
+                }
+              }>
               {childView}
           </TabNavigator.Item>
       );
