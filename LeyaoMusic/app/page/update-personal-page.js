@@ -13,7 +13,8 @@ import {
   DeviceEventEmitter
 } from 'react-native';
 import {
-  Actions
+  Actions,
+  ActionConst
 } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 
@@ -51,19 +52,36 @@ export default class UpdatePersonalPage extends Component {
       email: props.email,
       //parentComponent: props.parentComponent
     }
+    APIConstant.MY_IMAGE = this.state.avatar
+    APIConstant.MY_NICKNAME = this.state.realName
+    APIConstant.MY_GENDER = this.state.gender
+    APIConstant.MY_EMAIL = this.state.email
     //Alert.alert('', 'avatar =' + JSON.stringify(this.state.avatar))
+  }
+
+  componentDidMount() {
+    //增加监听器
+    this.listener = DeviceEventEmitter.addListener('updateProfile', (events) => {
+      //接收到消息，就将存储的值取过来刷新界面
+      this.setState({
+        avatar: APIConstant.MY_IMAGE,
+        realName: APIConstant.MY_NICKNAME,
+        gender: APIConstant.MY_GENDER,
+        email: APIConstant.MY_EMAIL
+      })
+      //Alert.alert('APIConstant.MY_NICKNAME = ' + APIConstant.MY_NICKNAME)
+    });
   }
 
   back() {
     Actions.pop()
-    //返回到个人界面，则通知其刷新数据
-    DeviceEventEmitter.emit('updateProfile', { TAG: this.state.avatar });
   }
 
   save() {
   }
 
   load() {
+    copy = this
     APIClient.access(APIInterface.details(APIConstant.USER_PHONE))
       .then((response) => {
         return response.json()
@@ -78,15 +96,14 @@ export default class UpdatePersonalPage extends Component {
             copy.setState({
               avatar: { uri: (APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl) },
             })
+            // console.log("copy.state.avatar = "  + copy.state.avatar)
+            //每次换图片后这个url不变，虽然图片换了
+            ActionConst.MY_IMAGE = copy.state.avatar
           }
+          //发广播通知上层的界面刷新个人信息
+          DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });
           //强制刷新
-          this.forceUpdate()
-          // copy.setState({
-          //   realName: arr.sUserNameStr.size > 0 ? arr.sUserNameStr : realName,
-          //   //userName手机号，不能修改
-          //   gender: arr.sUserGenderCd.size > 0 ? arr.sUserGenderCd : gender,
-          //   email: arr.sUserEmailStr.size > 0 ? arr.sUserEmailStr : email
-          // })
+          //this.forceUpdate()
         }
         else {
           Alert.alert('', '获取用户详情错误')
@@ -119,7 +136,6 @@ export default class UpdatePersonalPage extends Component {
               copy.setState({ indicating: true })
               AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
                 copy.setState({ indicating: false })
-
                 if (error) {
                   console.log(error);
                 }
@@ -134,9 +150,11 @@ export default class UpdatePersonalPage extends Component {
                     .then((json) => {
                       console.log(json)
                       if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+                        Alert.alert('修改头像成功！')
                         copy.load()
                       } else {
-                        Alert.alert('', json.responseResultMsg)
+                        //Alert.alert('', json.responseResultMsg)
+                        Alert.alert('修改头像失败！')
                       }
                     })
                     .catch((error) => {

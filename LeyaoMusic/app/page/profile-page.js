@@ -23,7 +23,6 @@ import StorageConstant from '../service/storage-constant';
 import MenuText from './menu-text';
 
 export default class ProfilePage extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -39,24 +38,23 @@ export default class ProfilePage extends Component {
       message: "无",
       focus: "无",
       history: "无",
-      suggestion: "无",
     }
     this.load.bind(this)
   }
 
   componentDidMount() {
+    //加载个人信息
     this.load()
-    copy = this
     //增加监听器
     this.listener = DeviceEventEmitter.addListener('updateProfile', (events) => {
-      //获取传回的值，写刷新的逻辑
-      // copy.load()
       //接收到消息，就将存储的值取过来刷新界面
-      //实验性代码，接收到消息处理
-      // copy.setState({
-      //   realName: 'jesse' ,
-      // })
-      
+      this.setState({
+        avatar: APIConstant.MY_IMAGE,
+        realName: APIConstant.MY_NICKNAME,
+        gender: APIConstant.MY_GENDER,
+        email: APIConstant.MY_EMAIL
+      })
+      // Alert.alert('收到了消息！')
     });
   }
 
@@ -98,7 +96,7 @@ export default class ProfilePage extends Component {
                   gender: arr.sUserGenderCd != '' ? arr.sUserGenderCd : copy.state.gender,
                   email: arr.sUserEmailStr != '' ? arr.sUserEmailStr : copy.state.email
                 })
-                console.log("realName = "  + copy.state.realName);
+                console.log("avatar = "  + APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl);
               }
               else {
                 Alert.alert('', '获取用户详情错误')
@@ -116,14 +114,12 @@ export default class ProfilePage extends Component {
   //点击个人相关信息
   choosePersonal() {
     //跳转到新的界面，显示“头像、昵称”等信息
-    var copy = this;
     Actions.update_personal({
       avatar: this.state.avatar,
       realName: this.state.realName,
       userName: this.state.userName,
       gender: this.state.gender,
       email: this.state.email,
-      //parentComponent: copy
     })
 
   }
@@ -150,7 +146,6 @@ export default class ProfilePage extends Component {
   //意见反馈
   checkSuggestion() {
     Actions.update_suggestion({
-      // suggestion: this.state.suggestion,
     })
   }
 
@@ -208,7 +203,7 @@ export default class ProfilePage extends Component {
               alignItems: 'center'
             }}>
             <Image
-              style={{ width: '25%', height: 80 }}
+              style={{ width: 88, height: 88, borderRadius: 10, marginLeft: 8 }}
               resizeMode={'stretch'}
               source={this.state.avatar}
             />
@@ -218,9 +213,9 @@ export default class ProfilePage extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start'
               }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', height: 40 }}>{this.state.realName}</Text>
+                <Text style={{ fontSize: 30, color: '#333333', fontWeight: 'bold', height: 42 }}>{this.state.realName}</Text>
                 <Image
-                  style={{ width: 20, height: 20 }}
+                  style={{ width: 20, height: 20, marginTop: 8, marginLeft: 4 }}
                   source={sexImage}
                 />
               </View>
@@ -230,10 +225,10 @@ export default class ProfilePage extends Component {
                   flexDirection: 'row',
                   alignItems: 'center'
                 }}>
-                <Text style={{ height: 20 }}>{this.state.userName}</Text>
-                <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+                <Text style={{ height: 18, color: '#BDBDBD' }}>{this.state.userName}</Text>
+                <Image style={{ height: 18, width: 20 }} source={require('../resource/btn_jiantou.png')} />
               </View>
-              <Text style={{ height: 20 }}>{this.state.email}</Text>
+              <Text style={{ height: 18, color: '#BDBDBD' }}>{this.state.email}</Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -254,8 +249,8 @@ export default class ProfilePage extends Component {
             <Text
               style={{
                 fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
+                fontSize: 14,
+                color: '#333333',
                 marginLeft: 11
               }}>我的消息</Text>
             <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
@@ -275,8 +270,8 @@ export default class ProfilePage extends Component {
             <Text
               style={{
                 fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
+                fontSize: 14,
+                color: '#333333',
                 marginLeft: 11
               }}>我的关注</Text>
             <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
@@ -288,7 +283,6 @@ export default class ProfilePage extends Component {
             style={{
               width: Dimensions.get('window').width,
               height: 43,
-              marginTop: 5,
               backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
@@ -297,8 +291,8 @@ export default class ProfilePage extends Component {
             <Text
               style={{
                 fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
+                fontSize: 14,
+                color: '#333333',
                 marginLeft: 11
               }}>我的历史</Text>
             <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
@@ -318,8 +312,8 @@ export default class ProfilePage extends Component {
             <Text
               style={{
                 fontFamily: 'ArialMT',
-                fontSize: 13,
-                color: '#000',
+                fontSize: 14,
+                color: '#333333',
                 marginLeft: 11
               }}>意见反馈</Text>
             <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
@@ -341,8 +335,8 @@ export default class ProfilePage extends Component {
             <Text
               style={{
                 fontFamily: 'ArialMT',
-                fontSize: 15,
-                color: '#000'
+                fontSize: 14,
+                color: '#333333'
               }}>退出登录</Text>
           </View>
         </TouchableWithoutFeedback>

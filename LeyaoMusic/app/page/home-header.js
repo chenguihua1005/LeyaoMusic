@@ -116,7 +116,7 @@ export default class Header extends Component {
                             justifyContent: 'flex-end',
                             flexDirection: 'row'
                         }}>
-                        <Text style={{ color: '#000000', fontSize: 16, fontWeight: 'bold' }}>乐谣音乐</Text>
+                        <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold' }}>乐谣音乐</Text>
                     </View>
                     <View style={{
                         flex: 0.4,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',   // 竖直排布
         paddingLeft: 10,
         paddingRight: 10,
-        marginTop: 5,
+        marginTop: 10,
         marginBottom: 10,
         paddingTop: Platform.OS === 'ios' ? 20 : 0,  // 处理iOS状态栏
         height: Platform.OS === 'ios' ? 68 : 48,   // 处理iOS状态栏
@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,  // 设置圆角边
         backgroundColor: '#f9f9f9',
         alignItems: 'center',
+        marginTop: 10,
         marginLeft: 8,
         marginRight: 12,
     },

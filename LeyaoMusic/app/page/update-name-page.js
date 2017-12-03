@@ -8,7 +8,8 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 import {
   Actions
@@ -48,7 +49,7 @@ export default class UpdateNamePage extends Component {
         } else {
           console.log(result)
 
-          var realname = copy.state.name
+          let realname = copy.state.name
           copy.setState({ indicating: true })
           APIClient.access(APIInterface.updateUserName(APIConstant.SESSIONCODE, APIConstant.USER_PHONE, realname))
             .then((response) => {
@@ -60,6 +61,8 @@ export default class UpdateNamePage extends Component {
               if (json.responseResult == APIConstant.STATUS_SUCCEED) {
                 //存储修改成功后的昵称
                 APIConstant.MY_NICKNAME = realname
+                //发广播通知上层的界面刷新个人信息
+                DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });               
                 Alert.alert('修改昵称成功！')
                 Actions.pop()
                 //copy.state.parentComponent.load()

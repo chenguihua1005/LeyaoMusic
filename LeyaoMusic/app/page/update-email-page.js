@@ -8,7 +8,8 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 import {
   Actions
@@ -60,11 +61,14 @@ export default class UpdateEmailPage extends Component {
               if (json.responseResult == APIConstant.STATUS_SUCCEED) {
                 //存储修改成功后的邮箱
                 APIConstant.MY_EMAIL = email
+                //发广播通知上层的界面刷新个人信息
+                DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });
+
                 Alert.alert('修改邮箱成功！')
                 Actions.pop()
                 //copy.state.parentComponent.load()
                 //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
-                
+
               } else {
                 //Alert.alert('', json.errorCode)
                 Alert.alert('修改邮箱失败！')

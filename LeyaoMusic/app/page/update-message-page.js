@@ -9,7 +9,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   View,
-  ListView
+  ListView,
+  StyleSheet,
 } from 'react-native';
 import {
   Actions
@@ -82,6 +83,20 @@ export default class UpdateMessagePage extends Component {
         }
       }
     })
+  }
+
+  // 返回一个Item
+  _renderRow(rowData, sectionID, rowID) {
+    return (
+      // 实例化Item
+      <View style={styles.cellViewStyle}>
+        <View style={styles.rightViewStyle}>
+          <Text style={styles.topTitleStyle}>{rowData.sMessageContentStr}</Text>
+          <Text style={styles.bottomTitleStyle}>{rowData.updateTsString}</Text>
+          {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
+        </View>
+      </View>
+    )
   }
 
   render() {
@@ -204,16 +219,36 @@ export default class UpdateMessagePage extends Component {
           <View style={{ paddingTop: 22, paddingLeft: 10 }}>
             <ListView
               dataSource={this.state.dataSource}
-              renderRow={(rowData) =>
-                <Text>
-                  {rowData.sMessageContentStr}
-                </Text>                               
-              }
+              renderRow={this._renderRow}
             />
           </View>
         </Image>
       );
     }
   }
-
 }
+
+const styles = StyleSheet.create({
+  cellViewStyle: {
+    padding: 5,
+    backgroundColor: 'white',
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#e8e8e8",
+    flexDirection: 'column',
+  },
+  rightViewStyle:{  
+    justifyContent:"center",  
+    width: (Dimensions.get('window').width) * 0.9,  
+   },   
+  topTitleStyle: {
+    fontWeight: 'bold',
+    color: "#333333",
+    fontSize: 15,
+  },
+  bottomTitleStyle: {
+    fontWeight: 'bold',
+    color: "#BDBDBD",
+    fontSize: 12,
+    marginTop: 5
+  }
+}); 
