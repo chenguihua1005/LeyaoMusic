@@ -29,6 +29,7 @@ import MenuText from './menu-text';
 
 //state中转变量 
 let slide_image = []
+let slide_url = []
 let musician_title1 = []
 let musician_url1 = []
 let musician_title2 = []
@@ -53,7 +54,8 @@ export default class HomePage extends Component {
         // 实际的DataSources存放在state中
         this.state = {
             listData: ds,
-            slide_image: [],
+            slide_image: ['', '', '', '', '', ''],
+            slide_url: [],
             musician_title1: [],
             musician_url1: [],
             musician_title2: [],
@@ -83,20 +85,47 @@ export default class HomePage extends Component {
     //Banner页
     getBanner() {
         APIClient.access(APIInterface.getBanner())
-        .then((response) => {
-            return response.json()
-        })
-        .then((json) => {
-            console.log(json)
-            let arr = json.rows;
-            for (let i = 0; i < json.total; i++) {
-                slide_image[i] = arr[i].sEventTitleUrl;
-            }
-            this.setState({ slide_image: slide_image })
-        })
-        .catch((error) => {
-            console.log(error);
-        });        
+            .then((response) => {
+                return response.json()
+            })
+            .then((json) => {
+                console.log(json)
+                let arr = json.rows;
+                for (let i = 0; i < json.total; i++) {
+                    slide_image[i] = arr[i].sEventTitleUrl;
+                    slide_url[i] = arr[i].sEventContentUrl;
+                }
+                this.setState({ slide_image: slide_image })
+                this.setState({ slide_url: slide_url })
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    _onClick1() {
+        APIConstant.URL_EVENT = slide_url[0];
+        Actions.update_webview({ type: ActionConst.PUSH });
+    }
+    _onClick2() {
+        APIConstant.URL_EVENT = slide_url[1];
+        Actions.update_webview({ type: ActionConst.PUSH });
+    }
+    _onClick3() {
+        APIConstant.URL_EVENT = slide_url[2];
+        Actions.update_webview({ type: ActionConst.PUSH });
+    }
+    _onClick4() {
+        APIConstant.URL_EVENT = slide_url[3];
+        Actions.update_webview({ type: ActionConst.PUSH });
+    }
+    _onClick5() {
+        APIConstant.URL_EVENT = slide_url[4];
+        Actions.update_webview({ type: ActionConst.PUSH });
+    }
+    _onClick6() {
+        APIConstant.URL_EVENT = slide_url[2];
+        Actions.update_webview({ type: ActionConst.PUSH });
     }
 
     //音乐家
@@ -119,8 +148,8 @@ export default class HomePage extends Component {
                     //音乐家的歌曲描述用description那个字段
                     musician_title1[i] = arr[0].sEventSubContent[i].description
                     //字符串超过12，则截取后面的以...表示
-                    if(musician_title1[i].length > 12) 
-                        musician_title1[i] = musician_title1[i].slice(0,12) + '...';
+                    if (musician_title1[i].length > 12)
+                        musician_title1[i] = musician_title1[i].slice(0, 12) + '...';
                     musician_url1[i] = arr[0].sEventSubContent[i].url;
                 }
                 for (let i = 0; i < 3; i++) {
@@ -129,8 +158,8 @@ export default class HomePage extends Component {
                     //     " 唱：" + arr[1].sEventSubContent[i].singer;
                     musician_title2[i] = arr[1].sEventSubContent[i].description;
                     //字符串超过12，则截取后面的以...表示
-                    if(musician_title2[i].length > 12) 
-                        musician_title2[i] = musician_title2[i].slice(0,12) + '...';
+                    if (musician_title2[i].length > 12)
+                        musician_title2[i] = musician_title2[i].slice(0, 12) + '...';
                     musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 
@@ -291,12 +320,36 @@ export default class HomePage extends Component {
                     return (
                         <View>
                             <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} autoplayTimeout={3}>
-                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[0] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[2] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[3] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[4] }}></Image>
-                                <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
+                                <View>
+                                    <TouchableWithoutFeedback onPress={this._onClick1}>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[0] }}></Image>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                                <View>
+                                    <TouchableWithoutFeedback onPress={this._onClick2}>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                                <View>
+                                    <TouchableWithoutFeedback onPress={this._onClick3}>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[2] }}></Image>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                                <View>
+                                    <TouchableWithoutFeedback onPress={this._onClick4}>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[3] }}></Image>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                                <View>
+                                    <TouchableWithoutFeedback onPress={this._onClick5}>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[4] }}></Image>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                                <View>
+                                    <TouchableWithoutFeedback onPress={this._onClick6}>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
+                                    </TouchableWithoutFeedback>
+                                </View>
                             </Swiper>
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
@@ -402,7 +455,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     mainStyle: {
-        marginLeft:5,
+        marginLeft: 5,
     },
     itemStyle: {
         // 尺寸

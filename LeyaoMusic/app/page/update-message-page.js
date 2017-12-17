@@ -20,6 +20,7 @@ import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 import StorageConstant from '../service/storage-constant';
+import MenuMessage from './menu-message';
 
 export default class UpdateMessagePage extends Component {
 
@@ -30,6 +31,7 @@ export default class UpdateMessagePage extends Component {
       name: '',
       dataSource: null
     }
+    this._renderRow = this._renderRow.bind(this);
   }
 
   componentDidMount() {
@@ -85,17 +87,20 @@ export default class UpdateMessagePage extends Component {
     })
   }
 
+  _onMenuClick(tag) {
+    //Alert.alert('提示', '你点击了:' + " Tag:" + tag);
+    Actions.update_message_sub({
+      ContentStr: tag
+    })
+  }
+
   // 返回一个Item
   _renderRow(rowData, sectionID, rowID) {
     return (
-      // 实例化Item
-      <View style={styles.cellViewStyle}>
-        <View style={styles.rightViewStyle}>
-          <Text style={styles.topTitleStyle}>{rowData.sMessageContentStr}</Text>
-          <Text style={styles.bottomTitleStyle}>{rowData.updateTsString}</Text>
-          {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
-        </View>
-      </View>
+      <MenuMessage showText1={rowData.sMessageContentStr}
+        showText2={rowData.updateTsString}
+        tag={rowData.sMessageContentStr}
+        onClick={this._onMenuClick} />
     )
   }
 
@@ -236,10 +241,10 @@ const styles = StyleSheet.create({
     borderBottomColor: "#e8e8e8",
     flexDirection: 'column',
   },
-  rightViewStyle:{  
-    justifyContent:"center",  
-    width: (Dimensions.get('window').width) * 0.9,  
-   },   
+  rightViewStyle: {
+    justifyContent: "center",
+    width: (Dimensions.get('window').width) * 0.9,
+  },
   topTitleStyle: {
     fontWeight: 'bold',
     color: "#333333",

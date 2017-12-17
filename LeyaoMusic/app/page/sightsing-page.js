@@ -6,14 +6,15 @@ import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
-  ListView
+  ListView,
+  Alert
 } from 'react-native';
 import {
   Actions,
   ActionConst
 } from 'react-native-router-flux';
 import TopBarNav from 'top-bar-nav';
-import MenuImage from './menu-image';
+import MenuImageReport from './menu-image-report';
 import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
@@ -51,13 +52,17 @@ export default class SightsingPage extends Component {
             (rowData) =>
               <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
                 <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p1}
+                  <MenuImageReport renderIcon={rowData.p1}
                     tag={rowData.u1}
+                    hEventId={rowData.e1}
+                    rUserEventCategory={rowData.c1}
                     onClick={this._onMenuClick} />
                 </View>
                 <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p2}
+                  <MenuImageReport renderIcon={rowData.p2}
                     tag={rowData.u2}
+                    hEventId={rowData.e2}
+                    rUserEventCategory={rowData.c2}
                     onClick={this._onMenuClick} />
                 </View>
               </View>
@@ -74,13 +79,17 @@ export default class SightsingPage extends Component {
             (rowData) =>
               <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
                 <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p1}
+                  <MenuImageReport renderIcon={rowData.p1}
                     tag={rowData.u1}
+                    hEventId={rowData.e1}
+                    rUserEventCategory={rowData.c1}
                     onClick={this._onMenuClick} />
                 </View>
                 <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p2}
+                  <MenuImageReport renderIcon={rowData.p2}
                     tag={rowData.u2}
+                    hEventId={rowData.e2}
+                    rUserEventCategory={rowData.c2}
                     onClick={this._onMenuClick} />
                 </View>
               </View>
@@ -97,13 +106,17 @@ export default class SightsingPage extends Component {
             (rowData) =>
               <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
                 <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p1}
+                  <MenuImageReport renderIcon={rowData.p1}
                     tag={rowData.u1}
+                    hEventId={rowData.e1}
+                    rUserEventCategory={rowData.c1}
                     onClick={this._onMenuClick} />
                 </View>
                 <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p2}
+                  <MenuImageReport renderIcon={rowData.p2}
                     tag={rowData.u2}
+                    hEventId={rowData.e2}
+                    rUserEventCategory={rowData.c2}
                     onClick={this._onMenuClick} />
                 </View>
               </View>
@@ -138,14 +151,17 @@ export default class SightsingPage extends Component {
         for (let i = 0; i < json.total; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
+            'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
+            'e2': arr[i + 1].hEventId,'c2': arr[i + 1].sEventCategoryCd
           }
           dataList1.push(data)
         }
         //奇数个
         if (json.total % 2) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl,
+            'e1': arr[json.total - 1].hEventId, 'c1': arr[json.total - 1].sEventCategoryCd
           }
           dataList1.push(data)
         }
@@ -170,14 +186,17 @@ export default class SightsingPage extends Component {
         for (let i = 0; i < json.total; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
+            'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
+            'e2': arr[i + 1].hEventId,'c2': arr[i + 1].sEventCategoryCd
           }
           dataList2.push(data)
         }
         //奇数个
         if (json.total % 2) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl,
+            'e1': arr[json.total - 1].hEventId, 'c1': arr[json.total - 1].sEventCategoryCd
           }
           dataList2.push(data)
         }
@@ -203,14 +222,17 @@ export default class SightsingPage extends Component {
         for (let i = 0; i < json.total; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
+            'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
+            'e2': arr[i + 1].hEventId,'c2': arr[i + 1].sEventCategoryCd
           }
           dataList3.push(data)
         }
         //奇数个
         if (json.total % 2) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl,
+            'e1': arr[json.total - 1].hEventId, 'c1': arr[json.total - 1].sEventCategoryCd
           }
           dataList3.push(data)
         }
@@ -232,7 +254,24 @@ export default class SightsingPage extends Component {
     Actions.note_duration()
   }
 
-  _onMenuClick(tag) {
+  _onMenuClick(tag, hEventId, rUserEventCategory) {
+    //添加用户阅读记录
+    APIClient.access(APIInterface.report(hEventId, rUserEventCategory))
+    .then((response) => {
+      return response.json()
+    })
+    .then((json) => {
+      if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+        Alert.alert('上报成功！')
+      }else {
+        Alert.alert('上报失败！')
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+
     APIConstant.URL_EVENT = tag;
     Actions.update_webview({ type: ActionConst.PUSH });
   }

@@ -24,6 +24,7 @@ import UpdateEmailPage from './page/update-email-page';
 import UpdateVideoPage from './page/update-video-page';
 import UpdateWebviewPage from './page/update-webview-page';
 import UpdateMessagePage from './page/update-message-page';
+import UpdateMessagePageSub from './page/update-message-page-sub';
 import UpdateFocusPage from './page/update-focus-page';
 import UpdateHistoryPage from './page/update-history-page';
 import UpdateSuggestionPage from './page/update-suggestion-page';
@@ -33,7 +34,7 @@ import UpdateSuggestionPage from './page/update-suggestion-page';
 export default class AppRouter extends Component {
   render() {
     return (
-      <Router scenes={ scenes } createReducer={ reducerCreate }/>
+      <Router scenes={scenes} createReducer={reducerCreate} />
     );
   }
 }
@@ -53,79 +54,83 @@ const scenes = Actions.create(
     <Scene
       key="welcome"
       initial="true"
-      hideNavBar={ true }
-      component={ WelcomePage }/>
+      hideNavBar={true}
+      component={WelcomePage} />
     <Scene
       key="guide"
-      hideNavBar={ true }
-      component={ GuidePage }/>
+      hideNavBar={true}
+      component={GuidePage} />
     <Scene
       key="login"
-      hideNavBar={ true }
-      component={ LoginPage }/>
+      hideNavBar={true}
+      component={LoginPage} />
     <Scene
       key="set_password"
-      hideNavBar={ true }
-      component={ SetPasswordPage }/>
+      hideNavBar={true}
+      component={SetPasswordPage} />
     <Scene
       key="register_one"
-      hideNavBar={ true }
-      component={ RegisterOnePage }/>
+      hideNavBar={true}
+      component={RegisterOnePage} />
     <Scene
       key="register_two"
-      hideNavBar={ true }
-      component={ RegisterTwoPage }/>
+      hideNavBar={true}
+      component={RegisterTwoPage} />
     <Scene
       key="main"
-      hideNavBar={ true }
-      component={ MainScreen }/>
+      hideNavBar={true}
+      component={MainScreen} />
     <Scene
       key="notification"
-      hideNavBar={ true }
-      component={ NotificationPage }/>
+      hideNavBar={true}
+      component={NotificationPage} />
     <Scene
       key="update_name"
-      hideNavBar={ true }
-      component={ UpdateNamePage }/>
+      hideNavBar={true}
+      component={UpdateNamePage} />
     <Scene
       key="update_personal"
-      hideNavBar={ true }
-      component={ UpdatePersonalPage }/>  
+      hideNavBar={true}
+      component={UpdatePersonalPage} />
     <Scene
       key="update_gender"
-      hideNavBar={ true }
-      component={ UpdateGenderPage }/>
+      hideNavBar={true}
+      component={UpdateGenderPage} />
     <Scene
       key="update_email"
-      hideNavBar={ true }
-      component={ UpdateEmailPage }/>
+      hideNavBar={true}
+      component={UpdateEmailPage} />
     <Scene
       key="update_video"
-      hideNavBar={ true }
-      component={ UpdateVideoPage }/>
+      hideNavBar={true}
+      component={UpdateVideoPage} />
     <Scene
       key="update_webview"
-      hideNavBar={ true }
-      component={ UpdateWebviewPage }/>  
-      <Scene
+      hideNavBar={true}
+      component={UpdateWebviewPage} />
+    <Scene
       key="update_message"
-      hideNavBar={ true }
-      component={ UpdateMessagePage }/>
-      <Scene
+      hideNavBar={true}
+      component={UpdateMessagePage} />
+    <Scene
+      key="update_message_sub"
+      hideNavBar={true}
+      component={UpdateMessagePageSub} />
+    <Scene
       key="update_focus"
-      hideNavBar={ true }
-      component={ UpdateFocusPage }/>
-      <Scene
+      hideNavBar={true}
+      component={UpdateFocusPage} />
+    <Scene
       key="update_history"
-      hideNavBar={ true }
-      component={ UpdateHistoryPage }/>
-      <Scene
+      hideNavBar={true}
+      component={UpdateHistoryPage} />
+    <Scene
       key="update_suggestion"
-      hideNavBar={ true }
-      component={ UpdateSuggestionPage }/>
-      <Scene
+      hideNavBar={true}
+      component={UpdateSuggestionPage} />
+    <Scene
       key="sightsing_search"
-      hideNavBar={ true }
-      component={ SightsingSearchPage }/>
+      hideNavBar={true}
+      component={SightsingSearchPage} />
   </Scene>
 );

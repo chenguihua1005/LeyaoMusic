@@ -30,12 +30,11 @@ export default class APIConstant {
   static BASE_URL_MUSIC_PARTY = APIConstant.BASE_URL + "event/getTEventSummaryByCategory?sEventCategoryCd=1&sessionCode=" + APIConstant.SESSIONCODE
   static BASE_URL_MUSIC_TEACH = APIConstant.BASE_URL + "event/getTEventSummaryByCategory?sEventCategoryCd=2&sessionCode=" + APIConstant.SESSIONCODE
   static BASE_URL_MUSIC_SHARE = APIConstant.BASE_URL + "event/getTEventSummaryByCategory?sEventCategoryCd=3&sessionCode=" + APIConstant.SESSIONCODE
-  // static BASE_URL_MUSICIAN = APIConstant.BASE_URL + "event/getTEventSummaryByCategory?sEventCategoryCd=4&sessionCode=" + APIConstant.SESSIONCODE
   static BASE_URL_MUSICIAN = APIConstant.BASE_URL + "event/getTEventSummaryByCondition?sEventCategoryCd=4&sessionCode=" + APIConstant.SESSIONCODE
   
   //
   static BASE_URL_DETAILS = APIConstant.BASE_URL + "user/getTUserSummary?sessionCode=" + APIConstant.SESSIONCODE + "&hUserPhoneNr="
-  static BASE_URL_SEARCH = APIConstant.BASE_URL + "event/getTEventSummaryByConditionGlobal?sessionCode=" + APIConstant.SESSIONCODE + "&sEventSearchContentTxt="
+  static BASE_URL_SEARCH = APIConstant.BASE_URL + "event/getTEventSummaryByCondition?sessionCode=" + APIConstant.SESSIONCODE + "&sEventSearchContentTxt="
   //我的关注
   static BASE_URL_FOCUS = APIConstant.BASE_URL + "event/getTEventSummaryByCondition?sessionCode=" + APIConstant.SESSIONCODE  + "&sEventCategoryCd="
 
