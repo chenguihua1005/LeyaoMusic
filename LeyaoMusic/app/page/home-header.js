@@ -73,7 +73,7 @@ export default class Header extends Component {
         //判断当前是否在“音乐屋”下面，在其哪个tab下
         if(APIConstant.SEARCH_PAGE == 1) {
             APIConstant.SEARCH_CATEGORY = TopBarNav.SEARCH_PAGE_INDEX;
-        }
+        }else APIConstant.SEARCH_CATEGORY = '';
         //Alert.alert('监听到事件：' + event.nativeEvent.text)
         Actions.sightsing_search({
             sEventSearchContentTxt: event.nativeEvent.text,

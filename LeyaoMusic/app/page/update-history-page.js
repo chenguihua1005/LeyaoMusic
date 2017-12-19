@@ -131,7 +131,11 @@ export default class UpdateFocusPage extends Component {
         console.log(json)
         let dataList1 = []
         let arr = json.rows;
-        for (let i = 0; i < json.total; i += 2) {
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if (index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
@@ -162,9 +166,13 @@ export default class UpdateFocusPage extends Component {
       })
       .then((json) => {
         console.log(json)
-        let arr = json.rows;
         let dataList2 = []
-        for (let i = 0; i < json.total; i+=2) {
+        let arr = json.rows;
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if (index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
@@ -196,9 +204,13 @@ export default class UpdateFocusPage extends Component {
       })
       .then((json) => {
         console.log(json)
-        let arr = json.rows;
         let dataList3 = []
-        for (let i = 0; i < json.total; i+=2) {
+        let arr = json.rows;
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if (index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl

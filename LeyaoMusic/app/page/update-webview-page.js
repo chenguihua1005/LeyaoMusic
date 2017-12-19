@@ -58,10 +58,10 @@ export default class UpdateWebviewPage extends Component {
       <View style={styles.container}>
         <View style={styles.item}>
             <Text style={styles.text} onPress={()=>{this.onBack()}}>返回</Text>
-            <TextInput style={styles.input}
+            {/* <TextInput style={styles.input}
                       defaultValue={this.state.url}
                       onChangeText={text=>this.text=text}></TextInput>
-            <Text style={styles.text} onPress={()=>{this.onNext()}}>GO</Text>
+            <Text style={styles.text} onPress={()=>{this.onNext()}}>GO</Text> */}
         </View>
         <WebView source={{uri:this.state.url}}
               onNavigationStateChange={(e)=>this.onNavigationStateChange(e)}
@@ -79,13 +79,14 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         color: '#333',
-        marginLeft: 10
+        marginTop: 10,
+        marginLeft: 10,
     },
     input: {
         height: 40,
         marginLeft: 10,
         flex: 1,
-        borderWidth: 1
+        borderWidth: 1,
     },
     item: {
         flexDirection: 'row',

@@ -42,7 +42,7 @@ let image_title = []
 let image_url = []
 
 //读我听我看我，个数先统一为6个
-const length = 6;
+const length = 5;
 
 export default class HomePage extends Component {
 

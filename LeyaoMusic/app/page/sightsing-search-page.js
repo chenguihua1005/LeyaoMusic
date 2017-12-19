@@ -44,7 +44,11 @@ export default class SightsingSearchPage extends Component {
         console.log(json)
         let dataList = []
         let arr = json.rows;
-        for (let i = 0; i < json.total; i += 2) {
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if (index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
@@ -58,6 +62,9 @@ export default class SightsingSearchPage extends Component {
           }
           dataList.push(data)
         }
+        //返回数据个数为0，则将dataList置为null
+        if (json.total == 0)
+          dataList = null;
         //重新设置数据源
         this.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList) });
 

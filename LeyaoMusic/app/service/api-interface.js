@@ -186,14 +186,13 @@ export default class APIInterface {
 
   //添加用户阅读习惯
   //我的历史功能只记录用户浏览过的所有事件，不包括搜素事件
-  static report(hEventId, rUserEventCategory, hUserPhoneNr = APIConstant.USER_PHONE) {
+  static report(hEventId, hUserPhoneNr = APIConstant.USER_PHONE) {
     return BaseRequest.post(APIConstant.BASE_URL + 'event/feedbackTEventSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }, {
         'hUserPhoneNr': hUserPhoneNr,
-        'hEventId': hEventId,
-        'rUserEventCategory': rUserEventCategory
+        'hEventId': hEventId
       }) 
   }
 

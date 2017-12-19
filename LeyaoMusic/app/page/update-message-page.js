@@ -97,7 +97,7 @@ export default class UpdateMessagePage extends Component {
   // 返回一个Item
   _renderRow(rowData, sectionID, rowID) {
     return (
-      <MenuMessage showText1={rowData.sMessageContentStr}
+      <MenuMessage showText1={rowData.sMessageContentStr.slice(0, 15) + '...'}
         showText2={rowData.updateTsString}
         tag={rowData.sMessageContentStr}
         onClick={this._onMenuClick} />

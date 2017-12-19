@@ -148,12 +148,16 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        for (let i = 0; i < json.total; i += 2) {
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if(index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
             'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
-            'e2': arr[i + 1].hEventId,'c2': arr[i + 1].sEventCategoryCd
+            'e2': arr[i + 1].hEventId, 'c2': arr[i + 1].sEventCategoryCd
           }
           dataList1.push(data)
         }
@@ -183,12 +187,16 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        for (let i = 0; i < json.total; i += 2) {
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if(index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
             'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
-            'e2': arr[i + 1].hEventId,'c2': arr[i + 1].sEventCategoryCd
+            'e2': arr[i + 1].hEventId, 'c2': arr[i + 1].sEventCategoryCd
           }
           dataList2.push(data)
         }
@@ -219,12 +227,16 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        for (let i = 0; i < json.total; i += 2) {
+        //去掉最后的奇数位（如果有的话）
+        let index = json.total;
+        if(index % 2)
+          index = index - 1;
+        for (let i = 0; i < index; i += 2) {
           let data = {
             'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
             'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
             'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
-            'e2': arr[i + 1].hEventId,'c2': arr[i + 1].sEventCategoryCd
+            'e2': arr[i + 1].hEventId, 'c2': arr[i + 1].sEventCategoryCd
           }
           dataList3.push(data)
         }
@@ -256,20 +268,20 @@ export default class SightsingPage extends Component {
 
   _onMenuClick(tag, hEventId, rUserEventCategory) {
     //添加用户阅读记录
-    APIClient.access(APIInterface.report(hEventId, rUserEventCategory))
-    .then((response) => {
-      return response.json()
-    })
-    .then((json) => {
-      if (json.responseResult == APIConstant.STATUS_SUCCEED) {
-        Alert.alert('上报成功！')
-      }else {
-        Alert.alert('上报失败！')
-      }
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    APIClient.access(APIInterface.report(hEventId))
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+          Alert.alert('上报成功！')
+        } else {
+          Alert.alert('上报失败！')
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
 
 
     APIConstant.URL_EVENT = tag;
