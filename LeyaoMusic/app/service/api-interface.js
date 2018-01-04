@@ -1,6 +1,8 @@
 import BaseRequest from './base-request';
 import APIConstant from './api-constant';
 
+import CryptoJS from 'crypto-js';
+
 export default class APIInterface {
 
   //获取Banner事件
@@ -103,15 +105,16 @@ export default class APIInterface {
       })
   }
 
-  static updateMessage() {
-    return BaseRequest.get(APIConstant.BASE_URL + 'message/getTMessageSummaryListByCondition?sessionCode=' + APIConstant.SESSIONCODE, {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    })
+  static updateMessage(hUserPhoneNr) {
+    return BaseRequest.get(APIConstant.BASE_URL + 'message/getTMessageSummaryListByCondition?sessionCode=' + APIConstant.SESSIONCODE
+      + '&isPush=1&hUserPhoneNr=' + hUserPhoneNr, {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      })
   }
 
   //修改昵称
-  static updateUserName(sessionCode,hUserPhoneNr,sUserNameStr) {
+  static updateUserName(sessionCode, hUserPhoneNr, sUserNameStr) {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -123,7 +126,7 @@ export default class APIInterface {
   }
 
   //修改性别
-  static updateUserGender(sessionCode,hUserPhoneNr,sUserGenderCd) {
+  static updateUserGender(sessionCode, hUserPhoneNr, sUserGenderCd) {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -135,7 +138,7 @@ export default class APIInterface {
   }
 
   //修改邮箱
-  static updateUserEmail(sessionCode,hUserPhoneNr,sUserEmailStr) {
+  static updateUserEmail(sessionCode, hUserPhoneNr, sUserEmailStr) {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -193,7 +196,55 @@ export default class APIInterface {
     }, {
         'hUserPhoneNr': hUserPhoneNr,
         'hEventId': hEventId
-      }) 
+      })
   }
+
+  // DES加密
+  static encryptByDES() {
+    var message = APIConstant.DES_PRESTR + APIInterface.getTimestamp();
+    //把私钥转换成16进制的字符串
+    var keyHex = CryptoJS.enc.Utf8.parse(APIConstant.DES_KEY);
+    //模式为ECB padding为Pkcs7
+    var encrypted = CryptoJS.DES.encrypt(message, keyHex, {
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7
+    });
+    //加密出来是一个16进制的字符串
+    return encrypted.ciphertext.toString();
+  }
+  //DES  ECB模式解密
+  static decryptByDESModeEBC(ciphertext) {
+    //把私钥转换成16进制的字符串
+    var keyHex = CryptoJS.enc.Utf8.parse(APIConstant.DES_KEY);
+    //把需要解密的数据从16进制字符串转换成字符byte数组
+    var decrypted = CryptoJS.DES.decrypt({
+      ciphertext: CryptoJS.enc.Hex.parse(ciphertext)
+    }, keyHex, {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      });
+    //以utf-8的形式输出解密过后内容
+    var result_value = decrypted.toString(CryptoJS.enc.Utf8);
+    return result_value;
+  }
+
+  // 获取当前时间戳(以s为单位)
+  static getTimestamp() {
+    var timestamp = Date.parse(new Date());
+    timestamp = timestamp / 1000;
+    return timestamp
+  }
+
+  //校验手机号码
+  static checkMobile(str) {
+    var re = /^1\d{10}$/
+    if (re.test(str)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+
 
 }

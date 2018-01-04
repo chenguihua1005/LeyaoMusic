@@ -17,10 +17,14 @@ export default class APIConstant {
   //加判断，是否在“音乐屋页面
   static SEARCH_PAGE = 0
 
+  //加密字符
+  static DES_KEY = 'key1key1key1key1'
+  static DES_PRESTR = 'hello james,'
+
   //新的API地址
   static BASE_URL_ALL = APIConstant.BASE_URL + "getEvents"
   //Banner
-  static BASE_URL_BANNER = APIConstant.BASE_URL + "event/getTEventSummaryForBanner?sessionCode=" + APIConstant.SESSIONCODE  
+  static BASE_URL_BANNER = APIConstant.BASE_URL + "event/getTEventSummaryForBanner?sessionCode=" + APIConstant.SESSIONCODE + "&rows=6"
   //1:听我 2:看我 3:读我 
   static BASE_URL_AUDIO = APIConstant.BASE_URL + "event/getTEventSummaryByType?sEventTypeCd=1&sessionCode=" + APIConstant.SESSIONCODE
   static BASE_URL_VEDIO = APIConstant.BASE_URL + "event/getTEventSummaryByType?sEventTypeCd=2&sessionCode=" + APIConstant.SESSIONCODE

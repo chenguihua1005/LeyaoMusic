@@ -124,7 +124,7 @@ export default class HomePage extends Component {
         Actions.update_webview({ type: ActionConst.PUSH });
     }
     _onClick6() {
-        APIConstant.URL_EVENT = slide_url[2];
+        APIConstant.URL_EVENT = slide_url[5];
         Actions.update_webview({ type: ActionConst.PUSH });
     }
 
@@ -347,7 +347,7 @@ export default class HomePage extends Component {
                                 </View>
                                 <View>
                                     <TouchableWithoutFeedback onPress={this._onClick6}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
+                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[5] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>
                             </Swiper>

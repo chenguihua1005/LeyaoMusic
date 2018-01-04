@@ -58,7 +58,7 @@ export default class UpdateMessagePage extends Component {
 
           //sMessageContentStr
           copy.setState({ indicating: true })
-          APIClient.access(APIInterface.updateMessage())
+          APIClient.access(APIInterface.updateMessage(APIConstant.USER_PHONE))
             .then((response) => {
               copy.setState({ indicating: false })
               return response.json()
@@ -75,7 +75,7 @@ export default class UpdateMessagePage extends Component {
                 copy.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList) });
 
               } else {
-                Alert.alert('获取我的消息失败！')
+                //Alert.alert('获取我的消息失败！')
               }
             })
             .catch((error) => {

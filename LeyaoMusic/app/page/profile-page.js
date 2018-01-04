@@ -96,7 +96,7 @@ export default class ProfilePage extends Component {
                   gender: arr.sUserGenderCd != '' ? arr.sUserGenderCd : copy.state.gender,
                   email: arr.sUserEmailStr != '' ? arr.sUserEmailStr : copy.state.email
                 })
-                console.log("avatar = "  + APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl);
+                console.log("avatar = " + APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl);
               }
               else {
                 Alert.alert('', '获取用户详情错误')
@@ -127,6 +127,12 @@ export default class ProfilePage extends Component {
   //增加的4个菜单按钮事件
   //我的消息
   checkMessage() {
+    console.log(APIInterface.getTimestamp());
+    //加密解密
+    let str1 = APIInterface.encryptByDES();
+    let str2 = APIInterface.decryptByDESModeEBC(str1);
+    console.log(str1.toString())
+    console.log(str2)
     Actions.update_message({
       //message: this.state.message,
     })

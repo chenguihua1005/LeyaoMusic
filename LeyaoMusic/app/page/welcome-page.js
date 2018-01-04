@@ -11,6 +11,7 @@ import {
 } from 'react-native-router-flux';
 import StorageConstant from '../service/storage-constant';
 import APIConstant from '../service/api-constant';
+import APIInterface from "../service/api-interface";
 
 export default class WelcomePage extends Component {
 
@@ -33,7 +34,13 @@ export default class WelcomePage extends Component {
             console.log("TOKEN = " + result);
             //如果上一次登录成功的话，把token赋值给USER_PHONE
             APIConstant.USER_PHONE = result
-            Actions.main({ type: ActionConst.REPLACE })
+            if(APIInterface.checkMobile(APIConstant.USER_PHONE)) {
+              Actions.main({ type: ActionConst.REPLACE })
+            }else{
+              //如果校验手机号失败，则返回登录引导页
+              Actions.guide({ type: ActionConst.REPLACE })
+            }
+            
           }
         }
       })
