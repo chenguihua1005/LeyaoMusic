@@ -69,15 +69,8 @@ export default class Header extends Component {
     };
 
     //监听搜索的文本
-    onSubmitEditingTextKeyword(event) {
-        //判断当前是否在“音乐屋”下面，在其哪个tab下
-        if(APIConstant.SEARCH_PAGE == 1) {
-            APIConstant.SEARCH_CATEGORY = TopBarNav.SEARCH_PAGE_INDEX;
-        }else APIConstant.SEARCH_CATEGORY = '';
-        //Alert.alert('监听到事件：' + event.nativeEvent.text)
-        Actions.sightsing_search({
-            sEventSearchContentTxt: event.nativeEvent.text,
-        })
+    onFocus(event) {
+        Actions.sightsing_focus();
     }
 
     //播放/暂停
@@ -133,10 +126,10 @@ export default class Header extends Component {
                 <View style={styles.searchBox}>
                     <Image source={require('../resource/icon_search.png')} style={styles.searchIcon} />
                     <TextInput
-                        style={styles.inputText} 
+                        style={styles.inputText}
                         keyboardType='web-search'
                         placeholder='点击搜索你感兴趣的内容'
-                        onSubmitEditing={this.onSubmitEditingTextKeyword.bind(this)} />
+                        onFocus={this.onFocus.bind(this)} />
                 </View>
 
                 {/*播放器*/}
@@ -166,8 +159,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'  // 使元素垂直居中排布, 当flexDirection为column时, 为水平居中
     },
     pauseIcon: {
-        height: 26.7,
-        width: 26.7,
+        height: 30,
+        width: 30,
         resizeMode: 'center'
     },
     searchBox: {

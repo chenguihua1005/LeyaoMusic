@@ -56,6 +56,8 @@ export default class HomePage extends Component {
             listData: ds,
             slide_image: ['', '', '', '', '', ''],
             slide_url: [],
+            musician_image1: '',
+            musician_image2: '',
             musician_title1: [],
             musician_url1: [],
             musician_title2: [],
@@ -163,10 +165,14 @@ export default class HomePage extends Component {
                     musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 
-                this.setState({ musician_title1: musician_title1 })
-                this.setState({ musician_url1: musician_url1 })
-                this.setState({ musician_title2: musician_title2 })
-                this.setState({ musician_url2: musician_url2 })
+                this.setState({ 
+                    musician_image1: arr[0].sEventTitleUrl,
+                    musician_image2: arr[1].sEventTitleUrl,
+                    musician_title1: musician_title1,
+                                musician_url1: musician_url1,
+                                musician_title2: musician_title2,
+                                musician_url2: musician_url2
+                            })
             })
             .catch((error) => {
                 console.log(error);
@@ -356,7 +362,7 @@ export default class HomePage extends Component {
                                 <Image
                                     style={{ width: '40%', height: 80 }}
                                     resizeMode={'stretch'}
-                                    source={{ uri: 'http://47.94.94.196:8088/static/image/1.jpg' }}
+                                    source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.musician_image1 }}
                                 />
                                 <View style={{ flexDirection: 'column', width: '60%' }}>
                                     <MenuText showText={this.state.musician_title1[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[0]}
@@ -371,7 +377,7 @@ export default class HomePage extends Component {
                                 <Image
                                     style={{ width: '40%', height: 80 }}
                                     resizeMode={'stretch'}
-                                    source={{ uri: 'http://47.94.94.196:8088/static/image/2.jpg' }}
+                                    source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.musician_image2 }}
                                 />
                                 <View style={{ flexDirection: 'column', width: '60%' }}>
                                     <MenuText showText={this.state.musician_title2[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[0]}
@@ -438,7 +444,8 @@ const styles = StyleSheet.create({
         marginTop: 0
     },
     wrapper: {
-        height: 130
+        height: 130,
+        marginBottom: -10,
     },
     slide: {
         marginTop: 0,
