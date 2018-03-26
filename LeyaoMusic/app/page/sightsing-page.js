@@ -274,9 +274,9 @@ export default class SightsingPage extends Component {
       })
       .then((json) => {
         if (json.responseResult == APIConstant.STATUS_SUCCEED) {
-          Alert.alert('上报成功！')
+          //Alert.alert('上报成功！')
         } else {
-          Alert.alert('上报失败！')
+          //Alert.alert('上报失败！')
         }
       })
       .catch((error) => {
