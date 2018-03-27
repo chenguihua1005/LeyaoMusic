@@ -100,28 +100,21 @@ export default class Header extends Component {
                         flex: 1,
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        flexDirection: 'row'
+                        flexDirection: 'row',
                     }}>
-                    <View
-                        style={{
-                            flex: 0.6,
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                            flexDirection: 'row'
-                        }}>
-                        <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold' }}>乐谣音乐</Text>
-                    </View>
-                    <View style={{
-                        flex: 0.4,
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        flexDirection: 'row'
-                    }}>
-                        <TouchableOpacity onPress={() => this.playAction()}>
-                            <Image source={this.state.isplayBtn} style={styles.pauseIcon} />
-                        </TouchableOpacity>
-                    </View>
-
+                    {/*播放器*/}
+                    <Video
+                        source={this.state.file_link}
+                        ref='audio'
+                        volume={1.0}
+                        repeat={true}
+                        paused={this.state.pause}
+                        playInBackground={true}
+                    />
+                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold' }}>乐谣音乐</Text>
+                    <TouchableOpacity onPress={() => this.playAction()}>
+                        <Image source={this.state.isplayBtn} style={styles.pauseIcon} />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.searchBox}>
                     <Image source={require('../resource/icon_search.png')} style={styles.searchIcon} />
@@ -129,18 +122,8 @@ export default class Header extends Component {
                         style={styles.inputText}
                         keyboardType='web-search'
                         placeholder='点击搜索你感兴趣的内容'
-                        onFocus={this.onFocus.bind(this)} />
+                        onFocus={() => this.onFocus()} />
                 </View>
-
-                {/*播放器*/}
-                <Video
-                    source={this.state.file_link}
-                    ref='audio'
-                    volume={1.0}
-                    repeat={true}
-                    paused={this.state.pause}
-                    playInBackground={true}
-                />
             </View>
         )
     }
@@ -156,30 +139,28 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'ios' ? 20 : 0,  // 处理iOS状态栏
         height: Platform.OS === 'ios' ? 68 : 48,   // 处理iOS状态栏
         backgroundColor: 'white',
-        alignItems: 'center'  // 使元素垂直居中排布, 当flexDirection为column时, 为水平居中
     },
     pauseIcon: {
-        height: 30,
-        width: 30,
-        resizeMode: 'center'
+        height: 25,
+        width: 25,
+        resizeMode: 'stretch'
     },
     searchBox: {
-        height: 30,
+        height: 30,  // 类似于android中的layout_weight,设置为1即自动拉伸填充
         flexDirection: 'row',
-        flex: 1,  // 类似于android中的layout_weight,设置为1即自动拉伸填充
         borderRadius: 5,  // 设置圆角边
         backgroundColor: '#f9f9f9',
         alignItems: 'center',
-        marginTop: 10,
-        marginLeft: 8,
-        marginRight: 12,
+        marginTop: 9,
+        marginLeft: 10,
+        marginRight: 10,
     },
     searchIcon: {
         marginLeft: 6,
         marginRight: 6,
         width: 16.7,
         height: 16.7,
-        resizeMode: 'center'
+        resizeMode: 'stretch'
     },
     inputText: {
         flex: 1,

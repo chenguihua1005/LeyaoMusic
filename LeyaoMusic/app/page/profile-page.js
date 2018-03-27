@@ -200,42 +200,42 @@ export default class ProfilePage extends Component {
           onPress={this.choosePersonal.bind(this)}>
           <View
             style={{
-              width: Dimensions.get('window').width,
-              height: 80,
-              marginTop: 30,
-              marginBottom: 10,
-              justifyContent: 'space-between',
+              height: 100,
               flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: 10,
+              marginBottom: 5,
+            }}>
+
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
               alignItems: 'center'
             }}>
-            <Image
-              style={{ width: 88, height: 88, borderRadius: 10, marginLeft: 8 }}
-              resizeMode={'stretch'}
-              source={this.state.avatar}
-            />
-            <View style={{ flexDirection: 'column', width: '70%', height: 80 }}>
-              <View style={{
-                justifyContent: 'flex-start',
-                flexDirection: 'row',
-                alignItems: 'flex-start'
-              }}>
-                <Text style={{ fontSize: 30, color: '#333333', fontWeight: 'bold', height: 42 }}>{this.state.realName}</Text>
-                <Image
-                  style={{ width: 20, height: 20, marginTop: 8, marginLeft: 4 }}
-                  source={sexImage}
-                />
-              </View>
-              <View
-                style={{
-                  justifyContent: 'space-between',
+              <Image
+                style={{ width: 88, height: 88, borderRadius: 10, marginLeft: 8 }}
+                resizeMode={'stretch'}
+                source={this.state.avatar}
+              />
+              <View style={{ width: 200, marginLeft: 20 }}>
+                <View style={{
                   flexDirection: 'row',
+                  justifyContent: 'flex-start',
                   alignItems: 'center'
                 }}>
-                <Text style={{ height: 18, color: '#BDBDBD' }}>{this.state.userName}</Text>
-                <Image style={{ height: 18, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+                  <Text style={{ fontSize: 30, color: '#333333', fontWeight: 'bold', height: 42 }}>{this.state.realName}</Text>
+                  <Image
+                    style={{ width: 20, height: 20, margin: 8, marginLeft: 4 }}
+                    source={sexImage}
+                  />
+                </View>
+                <Text style={{ height: 18, color: '#BDBDBD', marginTop: 8 }}>{this.state.userName}</Text>
+                <Text style={{ height: 18, color: '#BDBDBD', marginTop: 8 }}>{this.state.email}</Text>
               </View>
-              <Text style={{ height: 18, color: '#BDBDBD' }}>{this.state.email}</Text>
             </View>
+            <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
+
           </View>
         </TouchableWithoutFeedback>
         <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} />
@@ -259,7 +259,7 @@ export default class ProfilePage extends Component {
                 color: '#333333',
                 marginLeft: 11
               }}>我的消息</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -280,7 +280,7 @@ export default class ProfilePage extends Component {
                 color: '#333333',
                 marginLeft: 11
               }}>我的关注</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -301,7 +301,7 @@ export default class ProfilePage extends Component {
                 color: '#333333',
                 marginLeft: 11
               }}>我的历史</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
@@ -322,7 +322,7 @@ export default class ProfilePage extends Component {
                 color: '#333333',
                 marginLeft: 11
               }}>意见反馈</Text>
-            <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+            <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback

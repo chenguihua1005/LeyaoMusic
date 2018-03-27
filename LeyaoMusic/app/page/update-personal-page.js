@@ -297,7 +297,7 @@ export default class UpdatePersonalPage extends Component {
                   height: 42,
                   marginRight: 11
                 }} />
-              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+              <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
             </View>
 
           </View>
@@ -333,7 +333,7 @@ export default class UpdatePersonalPage extends Component {
                   color: '#000',
                   marginRight: 11
                 }}>{this.state.realName}</Text>
-              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+              <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -382,7 +382,7 @@ export default class UpdatePersonalPage extends Component {
                   color: '#000',
                   marginRight: 11
                 }}>{sex}</Text>
-              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+              <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -408,7 +408,7 @@ export default class UpdatePersonalPage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 13,
               color: '#000',
-              marginRight: 11
+              marginRight: 15
             }}>{this.state.userName}</Text>
         </View>
         <View
@@ -456,7 +456,7 @@ export default class UpdatePersonalPage extends Component {
                   color: '#000',
                   marginRight: 11
                 }}>{this.state.email}</Text>
-              <Image style={{ height: 20, width: 20 }} source={require('../resource/btn_jiantou.png')} />
+              <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
             </View>
           </View>
         </TouchableWithoutFeedback>

@@ -156,7 +156,7 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
     tab: {
         height: 52,
-        backgroundColor: '#303030',
+        backgroundColor: '#FFFFFF',
         alignItems: 'center',
     },
     tabIcon: {
