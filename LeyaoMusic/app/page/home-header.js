@@ -11,7 +11,8 @@ import {
     Text,
 } from 'react-native';
 import TopBarNav from 'top-bar-nav';
-import Video from 'react-native-video'
+import Video from 'react-native-video';
+import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 import {
     Actions,
@@ -51,7 +52,9 @@ export default class Header extends Component {
                 })
             }
 
-            this.setState({ file_link: { uri: events.TAG } });
+            //音乐的url
+            this.setState({ file_link: { uri: events.TAG + '?' + APIInterface.encryptByDES() } });
+
             //前后两次url地址不一样，通知改变音乐播放状态icon
             if (uri_temp != events.TAG) {
                 uri_temp = events.TAG
@@ -111,7 +114,7 @@ export default class Header extends Component {
                         paused={this.state.pause}
                         playInBackground={true}
                     />
-                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold' }}>乐谣音乐</Text>
+                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold',fontFamily: 'PingFangSC-Semibold', }}>乐谣音乐</Text>
                     <TouchableOpacity onPress={() => this.playAction()}>
                         <Image source={this.state.isplayBtn} style={styles.pauseIcon} />
                     </TouchableOpacity>
@@ -151,7 +154,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,  // 设置圆角边
         backgroundColor: '#f9f9f9',
         alignItems: 'center',
-        marginTop: 9,
+        marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
     },

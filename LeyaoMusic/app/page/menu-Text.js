@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 let pause = true;
+const bofang = require('../resource/btn_bofang.png');
+const bofangzhong = require('../resource/btn_bofangzhong.png');
 
 export default class MenuText extends Component {
 
@@ -22,7 +24,7 @@ export default class MenuText extends Component {
         super(props);
         this._onClick = this._onClick.bind(this);  // 需要在回调函数中使用this,必须使用bind(this)来绑定
         this.state = {
-            isplayBtn: require('../resource/btn_bofang.png')  //播放/暂停按钮背景图，初始状态：暂停
+            isplayBtn: bofang  //播放/暂停按钮背景图，初始状态：暂停
         }
     }
 
@@ -32,13 +34,13 @@ export default class MenuText extends Component {
             if (events.TAG == this.props.tag) {
                 if (pause == true) {
                     this.setState({
-                        isplayBtn: require('../resource/btn_bofangzhong.png')
+                        isplayBtn: bofangzhong
                     })
                     pause == false
                 } 
                 else {
                     this.setState({
-                        isplayBtn: require('../resource/btn_bofang.png')
+                        isplayBtn: bofang
                     })
                     pause == true
                 }
@@ -47,21 +49,21 @@ export default class MenuText extends Component {
             else if(events.TAG == true) {
                 if(events.TAG2 == this.props.tag) {
                     this.setState({
-                        isplayBtn: require('../resource/btn_bofangzhong.png')
+                        isplayBtn: bofangzhong
                     })
                 }
             }
             else if(events.TAG == false) {
                 if(events.TAG2 == this.props.tag) {
                     this.setState({
-                        isplayBtn: require('../resource/btn_bofang.png')
+                        isplayBtn: bofang
                     })
                 }
             }
             //不是匹配的url，变为暂停状态
             else {
                 this.setState({
-                    isplayBtn: require('../resource/btn_bofang.png')
+                    isplayBtn: bofang
                 })
             }
         });

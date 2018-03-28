@@ -9,7 +9,8 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  StyleSheet,
 } from 'react-native';
 import {
   Actions,
@@ -127,7 +128,7 @@ export default class ProfilePage extends Component {
   //增加的4个菜单按钮事件
   //我的消息
   checkMessage() {
-    console.log(APIInterface.getTimestamp());
+    console.log("Timestamp: " + APIInterface.getTimestamp());
     //加密解密
     let str1 = APIInterface.encryptByDES();
     let str2 = APIInterface.decryptByDESModeEBC(str1);
@@ -214,7 +215,7 @@ export default class ProfilePage extends Component {
               alignItems: 'center'
             }}>
               <Image
-                style={{ width: 88, height: 88, borderRadius: 10, marginLeft: 8 }}
+                style={{ width: 90, height: 90, borderRadius: 10, marginLeft: 8 }}
                 resizeMode={'stretch'}
                 source={this.state.avatar}
               />
@@ -230,8 +231,8 @@ export default class ProfilePage extends Component {
                     source={sexImage}
                   />
                 </View>
-                <Text style={{ height: 18, color: '#BDBDBD', marginTop: 8 }}>{this.state.userName}</Text>
-                <Text style={{ height: 18, color: '#BDBDBD', marginTop: 8 }}>{this.state.email}</Text>
+                <Text style={{ fontSize: 14, color: '#BDBDBD', marginTop: 8 }}>{this.state.userName}</Text>
+                <Text style={{ fontSize: 14, color: '#BDBDBD', marginTop: 8 }}>{this.state.email}</Text>
               </View>
             </View>
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
@@ -246,19 +247,14 @@ export default class ProfilePage extends Component {
             style={{
               width: Dimensions.get('window').width,
               height: 43,
-              marginTop: 5,
+              marginTop: 8,
               backgroundColor: 'rgba(0, 0, 0, 0)',
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center'
             }}>
             <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 14,
-                color: '#333333',
-                marginLeft: 11
-              }}>我的消息</Text>
+              style={styles.titleText}>我的消息</Text>
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
@@ -274,12 +270,7 @@ export default class ProfilePage extends Component {
               alignItems: 'center'
             }}>
             <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 14,
-                color: '#333333',
-                marginLeft: 11
-              }}>我的关注</Text>
+              style={styles.titleText}>我的关注</Text>
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
@@ -295,12 +286,7 @@ export default class ProfilePage extends Component {
               alignItems: 'center'
             }}>
             <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 14,
-                color: '#333333',
-                marginLeft: 11
-              }}>我的历史</Text>
+              style={styles.titleText}>我的历史</Text>
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
@@ -316,12 +302,7 @@ export default class ProfilePage extends Component {
               alignItems: 'center'
             }}>
             <Text
-              style={{
-                fontFamily: 'ArialMT',
-                fontSize: 14,
-                color: '#333333',
-                marginLeft: 11
-              }}>意见反馈</Text>
+              style={styles.titleText}>意见反馈</Text>
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>
@@ -350,3 +331,12 @@ export default class ProfilePage extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  titleText: {
+    fontFamily: 'PingFangSC-Regular',
+    fontSize: 14,
+    color: '#333333',
+    marginLeft: 11
+  }
+});

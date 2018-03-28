@@ -246,20 +246,21 @@ export default class HomePage extends Component {
     _onMenuClick(title, tag) {
         //调用事件通知
         DeviceEventEmitter.emit('changeMusic', { TAG: tag });
-        Alert.alert('提示', '你点击了:' + title + " Tag:" + tag);
+        //Alert.alert('提示', '你点击了:' + title + " Tag:" + tag);
     }
 
+    //看我，点击后统一调用接口
     _onMenuClick2(title, tag) {
         APIConstant.URL_VEDIO = tag;
         Actions.update_video();
         Alert.alert('URL_VEDIO = ' + tag);
     }
 
+    //读我，点击后统一调用接口
     _onMenuClick3(title, tag) {
         APIConstant.URL_EVENT = tag;
         Actions.update_webview({ type: ActionConst.PUSH });
     }
-
 
     _renderRow(rowData) {
         return (
@@ -294,7 +295,6 @@ export default class HomePage extends Component {
                         showText={''} tag={APIConstant.BASE_URL_PREFIX + this.state.vedio_url[i]}
                         onClick={this._onMenuClick2} />
                 </View>
-
             );
         }
         return itemAry;
@@ -360,11 +360,11 @@ export default class HomePage extends Component {
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
-                                    style={{ width: '40%', height: 80 }}
+                                    style={{ flex: 4, height: 80 }}
                                     resizeMode={'stretch'}
                                     source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.musician_image1 }}
                                 />
-                                <View style={{ flexDirection: 'column', width: '60%' }}>
+                                <View style={{ flex: 6 }}>
                                     <MenuText showText={this.state.musician_title1[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[0]}
                                         onClick={this._onMenuClick} />
                                     <MenuText showText={this.state.musician_title1[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[1]}
@@ -375,11 +375,11 @@ export default class HomePage extends Component {
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <Image
-                                    style={{ width: '40%', height: 80 }}
+                                    style={{ flex: 4, height: 80 }}
                                     resizeMode={'stretch'}
                                     source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.musician_image2 }}
                                 />
-                                <View style={{ flexDirection: 'column', width: '60%' }}>
+                                <View style={{ flex: 6 }}>
                                     <MenuText showText={this.state.musician_title2[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[0]}
                                         onClick={this._onMenuClick} />
                                     <MenuText showText={this.state.musician_title2[1]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[1]}
@@ -401,7 +401,6 @@ export default class HomePage extends Component {
                                     {this.renderItem1()}
                                 </ScrollView>
                             </View>
-                            {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
 
                             <View style={{ flexDirection: 'row', margin: 10 }}>
                                 <Text style={{ color: '#333333', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>看我</Text>
@@ -416,7 +415,7 @@ export default class HomePage extends Component {
                                     {this.renderItem2()}
                                 </ScrollView>
                             </View>
-                            {/* <View style={{ marginTop: 15, borderWidth: 0.5, borderColor: '#ccc' }} /> */}
+
                             <View style={{ flexDirection: 'row', margin: 10 }}>
                                 <Text style={{ color: '#333333', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>读我</Text>
                                 <Text style={{ color: '#BDBDBD', fontSize: 11, marginTop: 3 }}> · READ ME</Text>
