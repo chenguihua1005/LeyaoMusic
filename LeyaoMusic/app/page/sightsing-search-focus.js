@@ -9,6 +9,7 @@ import {
   ListView,
   Platform,
   TextInput,
+  Alert
 } from 'react-native';
 import {
   Actions,
@@ -31,14 +32,13 @@ export default class SightsingSearchFocus extends Component {
   }
 
   //监听搜索的文本
-  onSubmitEditingTextKeyword(event) {
-    //判断当前是否在“音乐屋”下面，在其哪个tab下
-    if (APIConstant.SEARCH_PAGE == 1) {
-      APIConstant.SEARCH_CATEGORY = TopBarNav.SEARCH_PAGE_INDEX;
-    } else APIConstant.SEARCH_CATEGORY = '';
-    //Alert.alert('监听到事件：' + event.nativeEvent.text)
+  onSubmitEditingTextKeyword(text) {
+    if(text == undefined || text == '') {
+      Alert.alert('搜索关键字不能为空！');
+      return;
+    }
     Actions.sightsing_search({
-      sEventSearchContentTxt: event.nativeEvent.text,
+      sEventSearchContentTxt: text,
     })
   }
 
@@ -72,7 +72,7 @@ export default class SightsingSearchFocus extends Component {
             keyboardType='web-search'
             placeholder='点击搜索你感兴趣的内容'
             autoFocus={true}
-            onSubmitEditing={this.onSubmitEditingTextKeyword.bind(this)}
+            onSubmitEditing={event => this.onSubmitEditingTextKeyword(event.nativeEvent.text)}
           />
         </View>
       </View>

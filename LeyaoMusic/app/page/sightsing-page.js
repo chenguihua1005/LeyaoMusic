@@ -45,84 +45,53 @@ export default class SightsingPage extends Component {
 
     //待渲染场景
     Scene1 = ({ index }) => (
-      <View style={{ paddingTop: 0 }}>
-        <ListView
-          dataSource={this.state.dataSource1}
-          renderRow={
-            (rowData) =>
-              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                <View style={styles.itemStyle} >
-                  <MenuImageReport renderIcon={rowData.p1}
-                    tag={rowData.u1}
-                    hEventId={rowData.e1}
-                    rUserEventCategory={rowData.c1}
-                    onClick={this._onMenuClick} />
-                </View>
-                <View style={styles.itemStyle} >
-                  <MenuImageReport renderIcon={rowData.p2}
-                    tag={rowData.u2}
-                    hEventId={rowData.e2}
-                    rUserEventCategory={rowData.c2}
-                    onClick={this._onMenuClick} />
-                </View>
-              </View>
-          }
-        />
-      </View>
+      <ListView
+        contentContainerStyle={styles.contentContainerStyle}
+        dataSource={this.state.dataSource1}
+        renderRow={
+          (rowData) =>
+            <View style={styles.itemStyle} >
+              <MenuImageReport renderIcon={rowData.p}
+                tag={rowData.u}
+                hEventId={rowData.e}
+                rUserEventCategory={rowData.c}
+                onClick={this._onMenuClick} />
+            </View>
+        }
+      />
 
     );
     Scene2 = ({ index }) => (
-      <View style={{ paddingTop: 0 }}>
-        <ListView
-          dataSource={this.state.dataSource2}
-          renderRow={
-            (rowData) =>
-              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                <View style={styles.itemStyle} >
-                  <MenuImageReport renderIcon={rowData.p1}
-                    tag={rowData.u1}
-                    hEventId={rowData.e1}
-                    rUserEventCategory={rowData.c1}
-                    onClick={this._onMenuClick} />
-                </View>
-                <View style={styles.itemStyle} >
-                  <MenuImageReport renderIcon={rowData.p2}
-                    tag={rowData.u2}
-                    hEventId={rowData.e2}
-                    rUserEventCategory={rowData.c2}
-                    onClick={this._onMenuClick} />
-                </View>
-              </View>
-          }
-        />
-      </View>
-
+      <ListView
+        contentContainerStyle={styles.contentContainerStyle}
+        dataSource={this.state.dataSource2}
+        renderRow={
+          (rowData) =>
+            <View style={styles.itemStyle} >
+              <MenuImageReport renderIcon={rowData.p}
+                tag={rowData.u}
+                hEventId={rowData.e}
+                rUserEventCategory={rowData.c}
+                onClick={this._onMenuClick} />
+            </View>
+        }
+      />
     );
     Scene3 = ({ index }) => (
-      <View style={{ paddingTop: 0 }}>
-        <ListView
-          dataSource={this.state.dataSource3}
-          renderRow={
-            (rowData) =>
-              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                <View style={styles.itemStyle} >
-                  <MenuImageReport renderIcon={rowData.p1}
-                    tag={rowData.u1}
-                    hEventId={rowData.e1}
-                    rUserEventCategory={rowData.c1}
-                    onClick={this._onMenuClick} />
-                </View>
-                <View style={styles.itemStyle} >
-                  <MenuImageReport renderIcon={rowData.p2}
-                    tag={rowData.u2}
-                    hEventId={rowData.e2}
-                    rUserEventCategory={rowData.c2}
-                    onClick={this._onMenuClick} />
-                </View>
-              </View>
-          }
-        />
-      </View>
+      <ListView
+        contentContainerStyle={styles.contentContainerStyle}
+        dataSource={this.state.dataSource3}
+        renderRow={
+          (rowData) =>
+            <View style={styles.itemStyle} >
+              <MenuImageReport renderIcon={rowData.p}
+                tag={rowData.u}
+                hEventId={rowData.e}
+                rUserEventCategory={rowData.c}
+                onClick={this._onMenuClick} />
+            </View>
+        }
+      />
     );
 
     this.ROUTES = {
@@ -148,24 +117,11 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if(index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
-            'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
-            'e2': arr[i + 1].hEventId, 'c2': arr[i + 1].sEventCategoryCd
-          }
-          dataList1.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl,
-            'e1': arr[json.total - 1].hEventId, 'c1': arr[json.total - 1].sEventCategoryCd
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList1.push(data)
         }
@@ -187,24 +143,11 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if(index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
-            'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
-            'e2': arr[i + 1].hEventId, 'c2': arr[i + 1].sEventCategoryCd
-          }
-          dataList2.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl,
-            'e1': arr[json.total - 1].hEventId, 'c1': arr[json.total - 1].sEventCategoryCd
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList2.push(data)
         }
@@ -227,24 +170,11 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if(index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl,
-            'e1': arr[i].hEventId, 'c1': arr[i].sEventCategoryCd,
-            'e2': arr[i + 1].hEventId, 'c2': arr[i + 1].sEventCategoryCd
-          }
-          dataList3.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl,
-            'e1': arr[json.total - 1].hEventId, 'c1': arr[json.total - 1].sEventCategoryCd
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList3.push(data)
         }
@@ -255,8 +185,6 @@ export default class SightsingPage extends Component {
         console.log(error);
       })
   }
-
-
 
   staveIntroduce() {
     Actions.stave_introduction()
@@ -341,8 +269,12 @@ const styles = StyleSheet.create({
     height: 3.6,
     backgroundColor: 'black'
   },
+  contentContainerStyle: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   itemStyle: {
-    width: '50%',
+    width: (Dimensions.get('window').width) * 0.5,
     height: 100,
     borderWidth: 2,
     borderColor: '#e6faff',

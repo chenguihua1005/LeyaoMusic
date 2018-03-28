@@ -179,7 +179,7 @@ export default class APIInterface {
   //搜索全局事件
   static search(sEventSearchContentTxt) {
     //console.log(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt + '&sEventCategoryCd=' + APIConstant.SEARCH_CATEGORY)
-    return BaseRequest.get(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt + '&sEventCategoryCd=' + APIConstant.SEARCH_CATEGORY, {})
+    return BaseRequest.get(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt, {})
   }
 
   //我的关注

@@ -44,27 +44,19 @@ export default class SightsingSearchPage extends Component {
         console.log(json)
         let dataList = []
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if (index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
-          }
-          dataList.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList.push(data)
         }
         //返回数据个数为0，则将dataList置为null
-        if (json.total == 0)
+        if (json.total == 0) {
           dataList = null;
+          return;
+        } 
         //重新设置数据源
         this.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList) });
 
@@ -186,20 +178,16 @@ export default class SightsingSearchPage extends Component {
 
           <View style={{ paddingTop: 0 }}>
             <ListView
+              contentContainerStyle={styles.contentContainerStyle}
               dataSource={this.state.dataSource}
               renderRow={
                 (rowData) =>
-                  <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                    <View style={styles.itemStyle} >
-                      <MenuImage renderIcon={rowData.p1}
-                        tag={rowData.u1}
-                        onClick={this._onMenuClick} />
-                    </View>
-                    <View style={styles.itemStyle} >
-                      <MenuImage renderIcon={rowData.p2}
-                        tag={rowData.u2}
-                        onClick={this._onMenuClick} />
-                    </View>
+                  <View style={styles.itemStyle} >
+                    <MenuImageReport renderIcon={rowData.p}
+                      tag={rowData.u}
+                      hEventId={rowData.e}
+                      rUserEventCategory={rowData.c}
+                      onClick={this._onMenuClick} />
                   </View>
               }
             />
@@ -212,6 +200,10 @@ export default class SightsingSearchPage extends Component {
 }
 
 const styles = StyleSheet.create({
+  contentContainerStyle: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   itemStyle: {
     width: '50%',
     height: 100,
@@ -219,5 +211,4 @@ const styles = StyleSheet.create({
     borderColor: '#e6faff',
     padding: 2.5
   }
-
 });
