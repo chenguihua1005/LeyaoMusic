@@ -18,6 +18,10 @@ import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 
+let dataList1 = []
+let dataList2 = []
+let dataList3 = []
+
 export default class UpdateFocusPage extends Component {
   constructor(props) {
     super(props);
@@ -35,72 +39,53 @@ export default class UpdateFocusPage extends Component {
 
     //待渲染场景
     Scene1 = ({ index }) => (
-      <View style={{ paddingTop: 0 }}>
-        <ListView
-          dataSource={this.state.dataSource1}
-          renderRow={
-            (rowData) =>
-              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p1}
-                    tag={rowData.u1}
-                    onClick={this._onMenuClick} />
-                </View>
-                <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p2}
-                    tag={rowData.u2}
-                    onClick={this._onMenuClick} />
-                </View>
-              </View>
-          }
-        />
-      </View>
+      <ListView
+        contentContainerStyle={styles.contentContainerStyle}
+        dataSource={this.state.dataSource1}
+        renderRow={
+          (rowData) =>
+            <View style={styles.itemStyle} >
+              <MenuImage renderIcon={rowData.p}
+                tag={rowData.u}
+                hEventId={rowData.e}
+                rUserEventCategory={rowData.c}
+                onClick={this._onMenuClick} />
+            </View>
+        }
+      />
 
     );
     Scene2 = ({ index }) => (
-      <View style={{ paddingTop: 0 }}>
-        <ListView
-          dataSource={this.state.dataSource2}
-          renderRow={
-            (rowData) =>
-              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p1}
-                    tag={rowData.u1}
-                    onClick={this._onMenuClick} />
-                </View>
-                <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p2}
-                    tag={rowData.u2}
-                    onClick={this._onMenuClick} />
-                </View>
-              </View>
-          }
-        />
-      </View>
-
+      <ListView
+        contentContainerStyle={styles.contentContainerStyle}
+        dataSource={this.state.dataSource2}
+        renderRow={
+          (rowData) =>
+            <View style={styles.itemStyle} >
+              <MenuImage renderIcon={rowData.p}
+                tag={rowData.u}
+                hEventId={rowData.e}
+                rUserEventCategory={rowData.c}
+                onClick={this._onMenuClick} />
+            </View>
+        }
+      />
     );
     Scene3 = ({ index }) => (
-      <View style={{ paddingTop: 0 }}>
-        <ListView
-          dataSource={this.state.dataSource3}
-          renderRow={
-            (rowData) =>
-              <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-                <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p1}
-                    tag={rowData.u1}
-                    onClick={this._onMenuClick} />
-                </View>
-                <View style={styles.itemStyle} >
-                  <MenuImage renderIcon={rowData.p2}
-                    tag={rowData.u2}
-                    onClick={this._onMenuClick} />
-                </View>
-              </View>
-          }
-        />
-      </View>
+      <ListView
+        contentContainerStyle={styles.contentContainerStyle}
+        dataSource={this.state.dataSource3}
+        renderRow={
+          (rowData) =>
+            <View style={styles.itemStyle} >
+              <MenuImage renderIcon={rowData.p}
+                tag={rowData.u}
+                hEventId={rowData.e}
+                rUserEventCategory={rowData.c}
+                onClick={this._onMenuClick} />
+            </View>
+        }
+      />
     );
 
     this.ROUTES = {
@@ -129,23 +114,12 @@ export default class UpdateFocusPage extends Component {
       })
       .then((json) => {
         console.log(json)
-        let dataList1 = []
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if (index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
-          }
-          dataList1.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList1.push(data)
         }
@@ -166,27 +140,15 @@ export default class UpdateFocusPage extends Component {
       })
       .then((json) => {
         console.log(json)
-        let dataList2 = []
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if (index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList2.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
-          }
-          dataList2.push(data)
-        }
-        //重新设置数据源
+        }        //重新设置数据源
         this.setState({ dataSource2: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList2) });
 
       })
@@ -204,23 +166,12 @@ export default class UpdateFocusPage extends Component {
       })
       .then((json) => {
         console.log(json)
-        let dataList3 = []
         let arr = json.rows;
-        //去掉最后的奇数位（如果有的话）
         let index = json.total;
-        if (index % 2)
-          index = index - 1;
-        for (let i = 0; i < index; i += 2) {
+        for (let i = 0; i < index; i++) {
           let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u1": arr[i].sEventContentUrl,
-            'p2': APIConstant.BASE_URL_PREFIX + arr[i + 1].sEventTitleUrl, "u2": arr[i + 1].sEventContentUrl
-          }
-          dataList3.push(data)
-        }
-        //奇数个
-        if (json.total % 2) {
-          let data = {
-            'p1': APIConstant.BASE_URL_PREFIX + arr[json.total - 1].sEventTitleUrl, "u1": arr[json.total - 1].sEventContentUrl
+            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
+            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList3.push(data)
         }
@@ -338,6 +289,10 @@ const styles = StyleSheet.create({
   underlineStyle: {
     height: 3.6,
     backgroundColor: 'black'
+  },
+  contentContainerStyle: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   itemStyle: {
     width: '50%',

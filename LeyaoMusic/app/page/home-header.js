@@ -54,6 +54,7 @@ export default class Header extends Component {
 
             //音乐的url
             this.setState({ file_link: { uri: events.TAG + '?' + APIInterface.encryptByDES() } });
+            //console.log("file_link = " + events.TAG + '?' + APIInterface.encryptByDES());
 
             //前后两次url地址不一样，通知改变音乐播放状态icon
             if (uri_temp != events.TAG) {
