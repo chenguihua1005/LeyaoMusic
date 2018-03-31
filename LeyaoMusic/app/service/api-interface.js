@@ -210,7 +210,9 @@ export default class APIInterface {
       padding: CryptoJS.pad.Pkcs7
     });
     //加密出来是一个16进制的字符串
-    return encrypted.ciphertext.toString();
+    //return encrypted.ciphertext.toString();
+    //base64编码
+    return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
   }
   //DES  ECB模式解密
   static decryptByDESModeEBC(ciphertext) {
@@ -218,7 +220,8 @@ export default class APIInterface {
     let keyHex = CryptoJS.enc.Utf8.parse(APIConstant.DES_KEY);
     //把需要解密的数据从16进制字符串转换成字符byte数组
     let decrypted = CryptoJS.DES.decrypt({
-      ciphertext: CryptoJS.enc.Hex.parse(ciphertext)
+      // ciphertext: CryptoJS.enc.Hex.parse(ciphertext)
+      ciphertext: CryptoJS.enc.Base64.parse(ciphertext)
     }, keyHex, {
         mode: CryptoJS.mode.ECB,
         padding: CryptoJS.pad.Pkcs7
