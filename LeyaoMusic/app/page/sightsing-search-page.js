@@ -183,7 +183,7 @@ export default class SightsingSearchPage extends Component {
               renderRow={
                 (rowData) =>
                   <View style={styles.itemStyle} >
-                    <MenuImageReport renderIcon={rowData.p}
+                    <MenuImage renderIcon={rowData.p}
                       tag={rowData.u}
                       hEventId={rowData.e}
                       rUserEventCategory={rowData.c}

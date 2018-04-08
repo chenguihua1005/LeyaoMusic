@@ -115,7 +115,7 @@ export default class Header extends Component {
                         paused={this.state.pause}
                         playInBackground={true}
                     />
-                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold',fontFamily: 'PingFangSC-Semibold', }}>乐谣音乐</Text>
+                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold', fontFamily: 'PingFangSC-Semibold', paddingLeft: 27}}>乐谣音乐</Text>
                     <TouchableOpacity onPress={() => this.playAction()}>
                         <Image source={this.state.isplayBtn} style={styles.pauseIcon} />
                     </TouchableOpacity>
