@@ -178,7 +178,7 @@ export default class APIInterface {
 
   //搜索全局事件
   static search(sEventSearchContentTxt) {
-    console.log(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt)
+    //console.log(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt)
     return BaseRequest.get(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt, {})
   }
 

@@ -114,6 +114,8 @@ export default class Header extends Component {
                         repeat={true}
                         paused={this.state.pause}
                         playInBackground={true}
+                        playWhenInactive = {true}
+                        ignoreSilentSwitch={"ignore"}
                     />
                     <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold', fontFamily: 'PingFangSC-Semibold', paddingLeft: 27}}>乐谣音乐</Text>
                     <TouchableOpacity onPress={() => this.playAction()}>
