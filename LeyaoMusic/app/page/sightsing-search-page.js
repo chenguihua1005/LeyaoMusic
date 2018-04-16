@@ -51,6 +51,7 @@ export default class SightsingSearchPage extends Component {
             'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
           }
           dataList.push(data)
+          //alert("p = "  + arr[i].sEventTitleUrl);
         }
         //返回数据个数为0，则将dataList置为null
         if (json.total == 0) {

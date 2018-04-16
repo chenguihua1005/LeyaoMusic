@@ -102,13 +102,13 @@ export default class SightsingPage extends Component {
     };
 
     this.ROUTESTACK = [
-      { label: '乐谣活动', title: 'Scene1' }, // label is what you see in the top bar
+      { label: '盒声活动', title: 'Scene1' }, // label is what you see in the top bar
       { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
       { label: '艺人分享', title: 'Scene3' }
     ];
   }
 
-  //音乐屋：乐谣活动
+  //音乐屋：盒声活动
   getMusicParty() {
     APIClient.access(APIInterface.getLeyaoMusicParty())
       .then((response) => {

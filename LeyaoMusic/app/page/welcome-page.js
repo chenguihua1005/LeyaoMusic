@@ -67,7 +67,7 @@ export default class WelcomePage extends Component {
               color: '#ffffff',
               fontWeight: 'bold',
               alignSelf: 'center'
-            }}>乐谣音乐</Text>
+            }}>盒声音乐</Text>
           <Text
             style={{
               fontFamily: 'PingFang SC',
@@ -75,7 +75,7 @@ export default class WelcomePage extends Component {
               color: '#ffffff',
               alignSelf: 'center',
               marginTop: 5
-            }}>LEYAO MUSIC</Text>
+            }}>HESHENG MUSIC</Text>
         </View>
       </Image>
     );
