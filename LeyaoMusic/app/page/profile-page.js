@@ -129,11 +129,11 @@ export default class ProfilePage extends Component {
   //我的消息
   checkMessage() {
     console.log("Timestamp: " + APIInterface.getTimestamp());
-    //加密解密
-    let str1 = APIInterface.encryptByDES();
-    let str2 = APIInterface.decryptByDESModeEBC(str1);
-    console.log(str1.toString())
-    console.log(str2)
+    //加密解密测试
+    //let str1 = APIInterface.encryptByDES();
+    //let str2 = APIInterface.decryptByDESModeEBC(str1);
+    //console.log(str1.toString())
+    //console.log(str2)
     Actions.update_message({
       //message: this.state.message,
     })
