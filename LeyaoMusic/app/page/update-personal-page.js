@@ -196,8 +196,10 @@ export default class UpdatePersonalPage extends Component {
   render() {
     var sex = this.state.gender
     if (this.state.gender == 0) {
-      sex = '男'
+      sex = '未知'
     } else if (this.state.gender == 1) {
+      sex = '男'
+    } else if (this.state.gender == 2) {
       sex = '女'
     }
 

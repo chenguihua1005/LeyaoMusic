@@ -173,9 +173,12 @@ export default class ProfilePage extends Component {
     var sex = this.state.gender
     var sexImage;
     if (this.state.gender == 0) {
-      sex = '男'
+      sex = '未知'
       sexImage = require('../resource/icon_nan.png')
     } else if (this.state.gender == 1) {
+      sex = '男'
+      sexImage = require('../resource/icon_nan.png')
+    } else if (this.state.gender == 2) {
       sex = '女'
       sexImage = require('../resource/icon_nv.png')
     }

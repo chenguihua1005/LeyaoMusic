@@ -42,7 +42,7 @@ export default class UpdateGenderPage extends Component {
     this.setState({
       maleChecked: true,
       femaleChecked: false,
-      sex: 0
+      sex: 1
     })
 
     this.save()
@@ -52,7 +52,7 @@ export default class UpdateGenderPage extends Component {
     this.setState({
       maleChecked: false,
       femaleChecked: true,
-      sex: 1
+      sex: 2
     })
 
     this.save()
