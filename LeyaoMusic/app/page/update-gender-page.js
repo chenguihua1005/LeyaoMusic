@@ -74,7 +74,9 @@ export default class UpdateGenderPage extends Component {
 
           var sex = copy.state.sex
           copy.setState({ indicating: true })
-          APIClient.access(APIInterface.updateUserGender(APIConstant.SESSIONCODE, APIConstant.USER_PHONE, sex))
+          APIClient.access(APIInterface.updateUserGender(
+            APIConstant.SESSIONCODE, APIConstant.USER_PHONE, sex,
+            APIConstant.MY_NICKNAME, APIConstant.MY_EMAIL))
             .then((response) => {
               copy.setState({ indicating: false })
               return response.json()

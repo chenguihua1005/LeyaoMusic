@@ -126,14 +126,16 @@ export default class APIInterface {
   }
 
   //修改性别
-  static updateUserGender(sessionCode, hUserPhoneNr, sUserGenderCd) {
+  static updateUserGender(sessionCode, hUserPhoneNr, sUserGenderCd, sUserNameStr, sUserEmailStr) {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/editTUserSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }, {
         'verifyCode': sessionCode,
         'hUserPhoneNr': hUserPhoneNr,
-        'sUserGenderCd': sUserGenderCd
+        'sUserGenderCd': sUserGenderCd,
+        'sUserNameStr': sUserNameStr,
+        'sUserEmailStr': sUserEmailStr
       })
   }
 
@@ -198,6 +200,12 @@ export default class APIInterface {
         'hEventId': hEventId
       })
   }
+
+  //获取用户未读消息
+  static getUnreadMessage(hUserPhoneNr = APIConstant.USER_PHONE) {
+    return BaseRequest.get(APIConstant.BASE_URL_UNREAD + hUserPhoneNr, {})
+  }
+  
 
   // DES加密
   static encryptByDES() {

@@ -39,11 +39,13 @@ export default class ProfilePage extends Component {
       message: "无",
       focus: "无",
       history: "无",
+      unread: 0
     }
     this.load.bind(this)
   }
 
   componentDidMount() {
+    copy = this;
     //加载个人信息
     this.load()
     //增加监听器
@@ -57,10 +59,29 @@ export default class ProfilePage extends Component {
       })
       // Alert.alert('收到了消息！')
     });
+
+    //增加5s定时器轮询
+    this.timer = setInterval(function () {
+      APIClient.access(APIInterface.getUnreadMessage())
+        .then((response) => {
+          return response.json()
+        })
+        .then((json) => {
+          copy.setState({
+            unread: json.total
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 5 * 1000);
+
   }
 
   componentWillUnmount() {
     this.listener.remove();
+    //清除定时器
+    this.timer && clearInterval(this.timer);
   };
 
   load() {
@@ -182,6 +203,12 @@ export default class ProfilePage extends Component {
       sex = '女'
       sexImage = require('../resource/icon_nv.png')
     }
+    let v = this.state.unread > 0 ? <Text style={{
+      color: 'white',
+      backgroundColor: 'rgb(247,204,70)',
+      textShadowRadius: 5,
+      marginLeft: 200
+    }}>New</Text> : null;
     return (
       <Image
         source={require('../resource/main-background.jpg')}
@@ -258,6 +285,7 @@ export default class ProfilePage extends Component {
             }}>
             <Text
               style={styles.titleText}>我的消息</Text>
+            {v}
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>

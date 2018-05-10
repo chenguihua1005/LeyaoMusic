@@ -36,6 +36,8 @@ export default class APIConstant {
   static BASE_URL_SEARCH = APIConstant.BASE_URL + "event/getTEventSummaryByConditionGlobal?sessionCode=" + APIConstant.SESSIONCODE + "&sEventSearchContentTxt="
   //我的关注
   static BASE_URL_FOCUS = APIConstant.BASE_URL + "event/getTEventSummaryByCondition?sessionCode=" + APIConstant.SESSIONCODE  + "&sEventCategoryCd="
+  //我的未读消息
+  static BASE_URL_UNREAD = APIConstant.BASE_URL + "message/getTMessageSummaryUnreadCount?sessionCode=" + APIConstant.SESSIONCODE + "&hUserPhoneNr="
 
   //视频uri地址，音乐uri地址，事件uri地址
   static URL_VEDIO = ""
@@ -46,7 +48,6 @@ export default class APIConstant {
   static MY_IMAGE = ""
   static MY_NICKNAME = ""
   static MY_GENDER = 0
-  static MY_EMAIL = ""
-  
+  static MY_EMAIL = ""  
   
 }
