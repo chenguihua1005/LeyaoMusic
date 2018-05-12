@@ -56,7 +56,6 @@ export default class UpdatePersonalPage extends Component {
     APIConstant.MY_NICKNAME = this.state.realName
     APIConstant.MY_GENDER = this.state.gender
     APIConstant.MY_EMAIL = this.state.email
-    //Alert.alert('', 'avatar =' + JSON.stringify(this.state.avatar))
   }
 
   componentDidMount() {
@@ -64,14 +63,22 @@ export default class UpdatePersonalPage extends Component {
     this.listener = DeviceEventEmitter.addListener('updateProfile', (events) => {
       //接收到消息，就将存储的值取过来刷新界面
       this.setState({
-        avatar: APIConstant.MY_IMAGE,
+        // avatar: APIConstant.MY_IMAGE,
         realName: APIConstant.MY_NICKNAME,
         gender: APIConstant.MY_GENDER,
         email: APIConstant.MY_EMAIL
       })
-      //Alert.alert('APIConstant.MY_NICKNAME = ' + APIConstant.MY_NICKNAME)
     });
   }
+
+  componentWillUnmount() {
+    //重写组件的setState方法，直接返回空
+    //Warning: setState(...): Can only update a mounted or mounting component.
+    this.setState = (state, callback) => {
+      return;
+    }
+  }
+
 
   back() {
     Actions.pop()
@@ -96,14 +103,11 @@ export default class UpdatePersonalPage extends Component {
             copy.setState({
               avatar: { uri: (APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl) },
             })
-            // console.log("copy.state.avatar = "  + copy.state.avatar)
-            //每次换图片后这个url不变，虽然图片换了
+            //每次换图片后这个url会变化
             ActionConst.MY_IMAGE = copy.state.avatar
+            //发广播通知上层的界面刷新个人信息
+            DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });
           }
-          //发广播通知上层的界面刷新个人信息
-          DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });
-          //强制刷新
-          //this.forceUpdate()
         }
         else {
           Alert.alert('', '获取用户详情错误')
@@ -114,6 +118,7 @@ export default class UpdatePersonalPage extends Component {
       })
   }
 
+  //点击头像
   choosePicture() {
     ActionSheetIOS.showActionSheetWithOptions({
       options: choosePictureOption,
@@ -142,7 +147,7 @@ export default class UpdatePersonalPage extends Component {
                 if (!error) {
                   // 上传文件
                   copy.setState({ indicating: true })
-                  APIClient.access(APIInterface.upload(APIConstant.SESSIONCODE, response.fileName, APIConstant.USER_PHONE, response.data))
+                  APIClient.access(APIInterface.upload(APIConstant.SESSIONCODE, response.fileName, APIConstant.USER_PHONE, response.data, APIConstant.MY_IMAGE.uri.split('portrait/')[1]))
                     .then((response) => {
                       copy.setState({ indicating: false })
                       return response.json()
@@ -151,6 +156,7 @@ export default class UpdatePersonalPage extends Component {
                       console.log(json)
                       if (json.responseResult == APIConstant.STATUS_SUCCEED) {
                         Alert.alert('修改头像成功！')
+                        //重新请求数据
                         copy.load()
                       } else {
                         //Alert.alert('', json.responseResultMsg)

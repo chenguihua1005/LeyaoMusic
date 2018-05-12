@@ -93,7 +93,7 @@ export default class APIInterface {
       })
   }
 
-  static upload(sessionCode, fileName, hUserPhoneNr, base64) {
+  static upload(sessionCode, fileName, hUserPhoneNr, base64, currentPortraitName) {
     return BaseRequest.post(APIConstant.BASE_URL + 'user/uploadProfile', {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -101,7 +101,8 @@ export default class APIInterface {
         'sessionCode': sessionCode,
         'fileName': fileName,
         'hUserPhoneNr': hUserPhoneNr,
-        'base64': base64
+        'base64': base64,
+        'currentPortraitName': currentPortraitName
       })
   }
 

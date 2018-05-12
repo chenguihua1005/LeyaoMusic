@@ -51,16 +51,35 @@ export default class ProfilePage extends Component {
     //增加监听器
     this.listener = DeviceEventEmitter.addListener('updateProfile', (events) => {
       //接收到消息，就将存储的值取过来刷新界面
-      this.setState({
-        avatar: APIConstant.MY_IMAGE,
-        realName: APIConstant.MY_NICKNAME,
-        gender: APIConstant.MY_GENDER,
-        email: APIConstant.MY_EMAIL
-      })
-      // Alert.alert('收到了消息！')
+      // this.setState({
+      //   avatar: APIConstant.MY_IMAGE,
+      //   realName: APIConstant.MY_NICKNAME,
+      //   gender: APIConstant.MY_GENDER,
+      //   email: APIConstant.MY_EMAIL
+      // })
+
+      //重新请求数据
+      this.load();
     });
 
-    //增加5s定时器轮询
+    //初次请求2s后
+    this.timer0 = setTimeout(
+      () => {
+        APIClient.access(APIInterface.getUnreadMessage())
+          .then((response) => {
+            return response.json()
+          })
+          .then((json) => {
+            copy.setState({
+              unread: json.total
+            })
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, 2 * 1000);
+
+    //增加10*60s定时器轮询
     this.timer = setInterval(function () {
       APIClient.access(APIInterface.getUnreadMessage())
         .then((response) => {
@@ -74,14 +93,16 @@ export default class ProfilePage extends Component {
         .catch((error) => {
           console.log(error);
         });
-    }, 5 * 1000);
+    }, 10 * 60 * 1000);
 
   }
 
   componentWillUnmount() {
     this.listener.remove();
     //清除定时器
+    this.timer && clearTimeout(this.timer0);
     this.timer && clearInterval(this.timer);
+
   };
 
   load() {
@@ -118,7 +139,6 @@ export default class ProfilePage extends Component {
                   gender: arr.sUserGenderCd != '' ? arr.sUserGenderCd : copy.state.gender,
                   email: arr.sUserEmailStr != '' ? arr.sUserEmailStr : copy.state.email
                 })
-                console.log("avatar = " + APIConstant.BASE_URL_PREFIX + "static/" + arr.sUserProfileUrl);
               }
               else {
                 Alert.alert('', '获取用户详情错误')

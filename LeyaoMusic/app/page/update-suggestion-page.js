@@ -29,6 +29,15 @@ export default class UpdateSuggestionPage extends Component {
     }
   }
 
+  componentWillUnmount() {
+    //重写组件的setState方法，直接返回空
+    //Warning: setState(...): Can only update a mounted or mounting component.
+    this.setState = (state,callback)=>{
+      return;
+    }
+  }
+
+
   back() {
     Actions.pop()
   }
