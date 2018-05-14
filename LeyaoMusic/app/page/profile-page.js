@@ -105,7 +105,7 @@ export default class ProfilePage extends Component {
   componentWillUnmount() {
     this.listener.remove();
     //清除定时器
-    this.timer && clearTimeout(this.timer0);
+    this.timer0 && clearTimeout(this.timer0);
     this.timer && clearInterval(this.timer);
 
   };
@@ -232,13 +232,13 @@ export default class ProfilePage extends Component {
       sex = '女'
       sexImage = require('../resource/icon_nv.png')
     }
-    let v = (this.state.unread == 0 ? null :
+    let v = this.state.unread == 0 ? null :
       <Text style={{
         color: 'white',
         backgroundColor: 'rgb(247,204,70)',
         textShadowRadius: 5,
         marginLeft: 200
-      }}>New</Text>;
+      }}>New</Text>
     return (
       <Image
         source={require('../resource/main-background.jpg')}

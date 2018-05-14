@@ -43,6 +43,7 @@ let image_url = []
 
 //读我听我看我，个数先统一为6个
 const length = 5;
+let copy;
 
 export default class HomePage extends Component {
 
@@ -72,16 +73,33 @@ export default class HomePage extends Component {
     }
 
     componentWillMount() {
+        copy = this;
+        //首次刷新
+        copy.load();
+        //增加10*60s定时器轮询
+        this.timer = setInterval(function () {
+            copy.load();
+        }, 10 * 60 * 1000);
+    }
+
+    componentWillUnmount() {
+        //清除定时器
+        this.timer && clearInterval(this.timer);
+    };
+
+    //加载数据
+    load() {
         //Banner页
         this.getBanner();
 
         //音乐家
         this.getMusicianList();
 
-        //读我听我看我
-        this.getImageList();
+        //听我看我读我
         this.getAudioList();
         this.getVedioList();
+        this.getImageList();
+        console.log("home -> load()被调用！")
     }
 
     //Banner页
@@ -105,28 +123,8 @@ export default class HomePage extends Component {
             });
     }
 
-    _onClick1() {
-        APIConstant.URL_EVENT = slide_url[0];
-        Actions.update_webview({ type: ActionConst.PUSH });
-    }
-    _onClick2() {
-        APIConstant.URL_EVENT = slide_url[1];
-        Actions.update_webview({ type: ActionConst.PUSH });
-    }
-    _onClick3() {
-        APIConstant.URL_EVENT = slide_url[2];
-        Actions.update_webview({ type: ActionConst.PUSH });
-    }
-    _onClick4() {
-        APIConstant.URL_EVENT = slide_url[3];
-        Actions.update_webview({ type: ActionConst.PUSH });
-    }
-    _onClick5() {
-        APIConstant.URL_EVENT = slide_url[4];
-        Actions.update_webview({ type: ActionConst.PUSH });
-    }
-    _onClick6() {
-        APIConstant.URL_EVENT = slide_url[5];
+    _onClick(i) {
+        APIConstant.URL_EVENT = slide_url[i - 1];
         Actions.update_webview({ type: ActionConst.PUSH });
     }
 
@@ -165,14 +163,14 @@ export default class HomePage extends Component {
                     musician_url2[i] = arr[1].sEventSubContent[i].url;
                 }
 
-                this.setState({ 
+                this.setState({
                     musician_image1: arr[0].sEventTitleUrl,
                     musician_image2: arr[1].sEventTitleUrl,
                     musician_title1: musician_title1,
-                                musician_url1: musician_url1,
-                                musician_title2: musician_title2,
-                                musician_url2: musician_url2
-                            })
+                    musician_url1: musician_url1,
+                    musician_title2: musician_title2,
+                    musician_url2: musician_url2
+                })
             })
             .catch((error) => {
                 console.log(error);
@@ -253,7 +251,6 @@ export default class HomePage extends Component {
     _onMenuClick2(title, tag) {
         APIConstant.URL_VEDIO = tag;
         Actions.update_video();
-        //Alert.alert('URL_VEDIO = ' + tag);
         console.log("URL_VEDIO = " + tag);
     }
 
@@ -328,32 +325,32 @@ export default class HomePage extends Component {
                         <View>
                             <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} autoplayTimeout={3}>
                                 <View>
-                                    <TouchableWithoutFeedback onPress={this._onClick1}>
+                                    <TouchableWithoutFeedback onPress={() => this._onClick(1)}>
                                         <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[0] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>
                                 <View>
-                                    <TouchableWithoutFeedback onPress={this._onClick2}>
+                                    <TouchableWithoutFeedback onPress={() => this._onClick(2)}>
                                         <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>
                                 <View>
-                                    <TouchableWithoutFeedback onPress={this._onClick3}>
+                                    <TouchableWithoutFeedback onPress={() => this._onClick(3)}>
                                         <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[2] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>
                                 <View>
-                                    <TouchableWithoutFeedback onPress={this._onClick4}>
+                                    <TouchableWithoutFeedback onPress={() => this._onClick(4)}>
                                         <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[3] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>
                                 <View>
-                                    <TouchableWithoutFeedback onPress={this._onClick5}>
+                                    <TouchableWithoutFeedback onPress={() => this._onClick(5)}>
                                         <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[4] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>
                                 <View>
-                                    <TouchableWithoutFeedback onPress={this._onClick6}>
+                                    <TouchableWithoutFeedback onPress={() => this._onClick(6)}>
                                         <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[5] }}></Image>
                                     </TouchableWithoutFeedback>
                                 </View>

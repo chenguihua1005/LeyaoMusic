@@ -28,6 +28,8 @@ let dataList3 = [
   // },
 ]
 
+let copy;
+
 export default class SightsingPage extends Component {
   constructor(props) {
     super(props);
@@ -39,9 +41,7 @@ export default class SightsingPage extends Component {
     };
 
     //请求网络，并解析封装数据
-    this.getMusicParty();
-    this.getMusicTeach();
-    this.getMusicShare();
+    this.load();
 
     //待渲染场景
     Scene1 = ({ index }) => (
@@ -106,6 +106,30 @@ export default class SightsingPage extends Component {
       { label: '音乐教学', title: 'Scene2' }, // title is just the name of the Component being rendered.  See the renderScene property below
       { label: '艺人分享', title: 'Scene3' }
     ];
+  }
+
+  componentWillMount() {
+    copy = this;
+    //增加10*60s定时器轮询
+    this.timer = setInterval(function () {
+      copy.load();
+    }, 10 * 60 * 1000);
+  }
+
+  componentWillUnmount() {
+    //清除定时器
+    this.timer && clearInterval(this.timer);
+  };
+
+  //加载数据
+  load() {
+    //音乐屋：盒声活动
+    this.getMusicParty();
+    //音乐屋：音乐教学
+    this.getMusicTeach();
+    //音乐屋：艺人分享
+    this.getMusicShare();
+    console.log("sightsing -> load()被调用！")
   }
 
   //音乐屋：盒声活动
