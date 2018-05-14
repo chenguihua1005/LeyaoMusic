@@ -253,7 +253,8 @@ export default class HomePage extends Component {
     _onMenuClick2(title, tag) {
         APIConstant.URL_VEDIO = tag;
         Actions.update_video();
-        Alert.alert('URL_VEDIO = ' + tag);
+        //Alert.alert('URL_VEDIO = ' + tag);
+        console.log("URL_VEDIO = " + tag);
     }
 
     //读我，点击后统一调用接口

@@ -23,6 +23,9 @@ import APIConstant from '../service/api-constant';
 import StorageConstant from '../service/storage-constant';
 import MenuText from './menu-text';
 
+// 不能做局部变量，否则页面跳转后，会被销毁
+let copy;
+
 export default class ProfilePage extends Component {
   constructor(props) {
     super(props)
@@ -62,7 +65,7 @@ export default class ProfilePage extends Component {
       this.load();
     });
 
-    //初次请求2s后
+    //初次请求1s后
     this.timer0 = setTimeout(
       () => {
         APIClient.access(APIInterface.getUnreadMessage())
@@ -73,11 +76,12 @@ export default class ProfilePage extends Component {
             copy.setState({
               unread: json.total
             })
+            console.log("setTimeout -> unread = " + copy.state.unread)
           })
           .catch((error) => {
             console.log(error);
           });
-      }, 2 * 1000);
+      }, 1 * 1000);
 
     //增加10*60s定时器轮询
     this.timer = setInterval(function () {
@@ -89,6 +93,7 @@ export default class ProfilePage extends Component {
           copy.setState({
             unread: json.total
           })
+          // console.log("setInterval -> unread = " + copy.state.unread)
         })
         .catch((error) => {
           console.log(error);
@@ -175,6 +180,10 @@ export default class ProfilePage extends Component {
     //let str2 = APIInterface.decryptByDESModeEBC(str1);
     //console.log(str1.toString())
     //console.log(str2)
+    //消费掉消息，把"New"标志去掉
+    // this.setState({
+    //   unread: 0
+    // })
     Actions.update_message({
       //message: this.state.message,
     })
@@ -223,12 +232,13 @@ export default class ProfilePage extends Component {
       sex = '女'
       sexImage = require('../resource/icon_nv.png')
     }
-    let v = this.state.unread > 0 ? <Text style={{
-      color: 'white',
-      backgroundColor: 'rgb(247,204,70)',
-      textShadowRadius: 5,
-      marginLeft: 200
-    }}>New</Text> : null;
+    let v = (this.state.unread == 0 ? null :
+      <Text style={{
+        color: 'white',
+        backgroundColor: 'rgb(247,204,70)',
+        textShadowRadius: 5,
+        marginLeft: 200
+      }}>New</Text>;
     return (
       <Image
         source={require('../resource/main-background.jpg')}
