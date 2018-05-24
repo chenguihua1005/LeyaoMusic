@@ -25,7 +25,9 @@ export default class SightsingSearchPage extends Component {
       dataSource: null,
       sEventSearchContentTxt: props.sEventSearchContentTxt
     };
+  }
 
+  componentDidMount() {
     //请求网络，并解析封装数据
     this.getSearchResult();
   }

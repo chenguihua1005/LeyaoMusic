@@ -99,7 +99,7 @@ export default class HomePage extends Component {
         this.getAudioList();
         this.getVedioList();
         this.getImageList();
-        console.log("home -> load()被调用！")
+        // console.log("home -> load()被调用！")
     }
 
     //Banner页

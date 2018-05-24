@@ -1086,7 +1086,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 586WSCUMRV;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
@@ -1103,8 +1103,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codery.LeyaoMusic;
 				PRODUCT_NAME = LeyaoMusic;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "84a71ae7-51f1-4404-91d0-9504c703198f";
+				PROVISIONING_PROFILE_SPECIFIER = JesseDev;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
