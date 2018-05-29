@@ -240,7 +240,8 @@ export default class UpdatePersonalPage extends Component {
             onPress={this.back.bind(this)}>
             <View
               style={{
-                marginLeft: 10
+                marginLeft: 10,
+                width: 35
               }}>
               <Image
                 source={require('../resource/arrow.png')}
@@ -261,7 +262,7 @@ export default class UpdatePersonalPage extends Component {
             onPress={this.save.bind(this)}>
             <View
               style={{
-                marginRight: 10
+                marginRight: 40
               }}>
               <Text
                 style={{

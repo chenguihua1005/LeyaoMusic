@@ -10,7 +10,7 @@ import {
   View,
   StyleSheet,
   WebView,
-  // DeviceEventEmitter
+  DeviceEventEmitter
 } from 'react-native';
 import {
   Actions
@@ -25,13 +25,20 @@ export default class UpdateVideoPage extends Component {
     super(props)
     this.state = {
       parentComponent: props.parentComponent,
-      file_link:{uri:'http://47.94.94.196/LeyaoTemp/vedio/1.mp4'},   //视频播放链接
+      file_link: { uri: 'http://47.94.94.196/LeyaoTemp/vedio/1.mp4' },   //视频播放链接
     }
   }
 
-  componentDidMount(){    
-      this.setState({file_link : {uri:APIConstant.URL_VEDIO} });
-  } 
+  componentDidMount() {
+    this.setState({ file_link: { uri: APIConstant.URL_VEDIO } });
+    //发广播通知暂停音乐
+    DeviceEventEmitter.emit('pauseMusic', {});
+  }
+
+  componentWillUnmount() {
+    //发广播通知播放音乐
+    DeviceEventEmitter.emit('resumeMusic', {});
+  }
 
 
   back() {
@@ -40,17 +47,17 @@ export default class UpdateVideoPage extends Component {
 
   render() {
     return (
-        <View style={{
-            flex: 1
-          }}>
-          <VideoPlayer
-            source={this.state.file_link}
-            playInBackground={ true }
-            playWhenInactive={ true }
-            navigator={this.props.navigator} 
-            onBack={ this.back.bind(this)  } 
-          />
-        </View>
+      <View style={{
+        flex: 1
+      }}>
+        <VideoPlayer
+          source={this.state.file_link}
+          playInBackground={true}
+          playWhenInactive={true}
+          navigator={this.props.navigator}
+          onBack={this.back.bind(this)}
+        />
+      </View>
     );
   }
 }

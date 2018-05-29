@@ -62,12 +62,12 @@ export default class UpdateNamePage extends Component {
                 //存储修改成功后的昵称
                 APIConstant.MY_NICKNAME = realname
                 //发广播通知上层的界面刷新个人信息
-                DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });               
+                DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });
                 Alert.alert('修改昵称成功！')
                 Actions.pop()
                 //copy.state.parentComponent.load()
                 //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
-                
+
               } else {
                 //Alert.alert('', json.responseResultMsg)
                 Alert.alert('修改昵称失败！')
@@ -113,8 +113,9 @@ export default class UpdateNamePage extends Component {
           <TouchableWithoutFeedback
             onPress={this.back.bind(this)}>
             <View
-            style={{
-                marginLeft: 10
+              style={{
+                marginLeft: 10,
+                width: 35
               }}>
               <Image
                 source={require('../resource/arrow.png')}
@@ -129,7 +130,8 @@ export default class UpdateNamePage extends Component {
             style={{
               fontFamily: 'ArialMT',
               fontSize: 18,
-              color: '#000'
+              color: '#000',
+              marginRight: 5,
             }}>昵称</Text>
           <TouchableWithoutFeedback
             onPress={this.save.bind(this)}>

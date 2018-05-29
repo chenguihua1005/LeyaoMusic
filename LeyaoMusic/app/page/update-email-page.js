@@ -115,7 +115,8 @@ export default class UpdateEmailPage extends Component {
             onPress={this.back.bind(this)}>
             <View
               style={{
-                marginLeft: 10
+                marginLeft: 10,
+                width: 35
               }}>
               <Image
                 source={require('../resource/arrow.png')}
@@ -130,7 +131,8 @@ export default class UpdateEmailPage extends Component {
             style={{
               fontFamily: 'ArialMT',
               fontSize: 18,
-              color: '#000'
+              color: '#000',
+              marginRight: 5,
             }}>邮箱</Text>
           <TouchableWithoutFeedback
             onPress={this.save.bind(this)}>

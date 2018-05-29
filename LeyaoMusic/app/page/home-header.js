@@ -27,6 +27,9 @@ const bofangzhong = require('../resource/btn_bofangzhong.png');
 // 存储中间变量
 let uri_temp = ""
 
+// 标志位，音乐是否被视频暂停过
+let isPending = false
+
 export default class Header extends Component {
 
     constructor(props) {
@@ -51,7 +54,6 @@ export default class Header extends Component {
                     isplayBtn: bofangzhong
                 })
             }
-
             //音乐的url
             this.setState({ file_link: { uri: events.TAG + '?' + APIInterface.encryptByDES() } });
             //console.log("file_link = " + events.TAG + '?' + APIInterface.encryptByDES());
@@ -61,20 +63,23 @@ export default class Header extends Component {
                 uri_temp = events.TAG
                 DeviceEventEmitter.emit('changeMusicIcon', { TAG: uri_temp });
             }
-
             //Alert.alert('提示', '收到监听事件');
-            //强制启动渲染
-            // this.forceUpdate();
         });
-    }
 
-    componentWillUnmount() {
-        this.listener.remove();
-    };
-
-    //监听搜索的文本
-    onFocus(event) {
-        Actions.sightsing_focus();
+        this.listener2 = DeviceEventEmitter.addListener('pauseMusic', (events) => {
+            if (this.state.pause == true) return
+            else {
+                this.playAction()
+                isPending = true
+            }
+        });
+        this.listener3 = DeviceEventEmitter.addListener('resumeMusic', (events) => {
+            if (isPending == false) return
+            else {
+                this.playAction()
+                isPending = false
+            }
+        });
     }
 
     //播放/暂停
@@ -96,6 +101,17 @@ export default class Header extends Component {
         DeviceEventEmitter.emit('changeMusicIcon', { TAG: this.state.pause, TAG2: uri_temp });
     }
 
+    //监听搜索的文本
+    onFocus(event) {
+        Actions.sightsing_focus();
+    }
+
+    componentWillUnmount() {
+        this.listener.remove();
+        this.listener2.remove();
+        this.listener3.remove();
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -114,10 +130,10 @@ export default class Header extends Component {
                         repeat={true}
                         paused={this.state.pause}
                         playInBackground={true}
-                        playWhenInactive = {true}
+                        playWhenInactive={true}
                         ignoreSilentSwitch={"ignore"}
                     />
-                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold', fontFamily: 'PingFangSC-Semibold', paddingLeft: 27}}>盒声音乐</Text>
+                    <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold', fontFamily: 'PingFangSC-Semibold', paddingLeft: 27 }}>盒声音乐</Text>
                     <TouchableOpacity onPress={() => this.playAction()}>
                         <Image source={this.state.isplayBtn} style={styles.pauseIcon} />
                     </TouchableOpacity>
