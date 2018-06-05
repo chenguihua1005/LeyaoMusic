@@ -160,14 +160,15 @@ export default class UpdateGenderPage extends Component {
           <TouchableWithoutFeedback>
             <View
               style={{
-                marginRight: 40
+                marginRight: 10,
+                width: 35
               }}>
-              <Text
+              {/* <Text
                 style={{
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}></Text>
+                }}></Text> */}
             </View>
           </TouchableWithoutFeedback>
         </View>

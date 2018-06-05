@@ -241,7 +241,7 @@ export default class UpdatePersonalPage extends Component {
             <View
               style={{
                 marginLeft: 10,
-                width: 35
+                width: 65
               }}>
               <Image
                 source={require('../resource/arrow.png')}
@@ -262,14 +262,15 @@ export default class UpdatePersonalPage extends Component {
             onPress={this.save.bind(this)}>
             <View
               style={{
-                marginRight: 40
+                marginRight: 10,
+                width: 65
               }}>
-              <Text
+              {/* <Text
                 style={{
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}></Text>
+                }}></Text> */}
             </View>
           </TouchableWithoutFeedback>
         </View>
