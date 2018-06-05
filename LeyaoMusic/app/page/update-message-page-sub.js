@@ -48,40 +48,40 @@ export default class UpdateMessagePageSub extends Component {
             justifyContent: 'space-between',
             flexDirection: 'row'
           }}>
-          <TouchableWithoutFeedback
-            onPress={this.back.bind(this)}>
-            <View
-              style={{
-                marginLeft: 10
-              }}>
-              <Image
-                source={require('../resource/arrow.png')}
+            <TouchableWithoutFeedback
+              onPress={this.back.bind(this)}>
+              <View
                 style={{
-                  width: 10,
-                  height: 19.5,
-                  marginLeft: 5
-                }} />
-            </View>
-          </TouchableWithoutFeedback>
+                  marginLeft: 10,
+                  width: 35
+                }}>
+                <Image
+                  source={require('../resource/arrow.png')}
+                  style={{
+                    width: 10,
+                    height: 19.5,
+                    marginLeft: 5
+                  }} />
+              </View>
+            </TouchableWithoutFeedback>
           <Text
             style={{
               fontFamily: 'ArialMT',
               fontSize: 18,
               color: '#000'
             }}>我的消息</Text>
-          <TouchableWithoutFeedback>
-            <View
-              style={{
-                marginRight: 10
-              }}>
-              <Text
+          <View
+            style={{
+              marginRight: 10,
+              width: 35
+            }}>
+            {/* <Text
                 style={{
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}></Text>
-            </View>
-          </TouchableWithoutFeedback>
+                }}></Text> */}
+          </View>
         </View>
         <View style={{ paddingTop: 22, paddingLeft: 10 }}>
           <Text style={styles.topTitleStyle}>{this.state.sMessageContentStr}</Text>

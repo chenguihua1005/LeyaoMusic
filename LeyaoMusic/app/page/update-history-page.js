@@ -204,45 +204,57 @@ export default class UpdateFocusPage extends Component {
       );
     } else {//当this.state.data有了数据，则渲染ListView
       return (
-        <View style={{ flex: 1 }}>
+        <View style={{
+          flex: 1,
+          width: null,
+          height: null,
+          alignItems: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+        }}>
           <View
             style={{
-              marginTop: 20,
               width: Dimensions.get('window').width,
+              marginTop: 20,
               height: 44,
-              flexDirection: 'row',
+              alignItems: 'center',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              flexDirection: 'row',
             }}>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 18,
-                  color: '#000'
-                }}>我的历史</Text>
-            </View>
             <TouchableWithoutFeedback
               onPress={this.back.bind(this)}>
               <View
                 style={{
-                  position: 'absolute'
+                  marginLeft: 10,
+                  width: 35
                 }}>
                 <Image
                   source={require('../resource/arrow.png')}
                   style={{
                     width: 10,
                     height: 19.5,
-                    marginLeft: 15
+                    marginLeft: 5
                   }} />
               </View>
             </TouchableWithoutFeedback>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 18,
+                color: '#000'
+              }}>我的历史</Text>
+            <View
+              style={{
+                marginRight: 10,
+                width: 35
+              }}>
+              {/* <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}></Text> */}
+            </View>
+
           </View>
           <TopBarNav
             // routeStack and renderScene are required props

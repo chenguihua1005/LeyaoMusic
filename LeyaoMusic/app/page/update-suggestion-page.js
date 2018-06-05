@@ -114,7 +114,8 @@ export default class UpdateSuggestionPage extends Component {
             onPress={this.back.bind(this)}>
             <View
               style={{
-                marginLeft: 5
+                marginLeft: 10,
+                width: 35
               }}>
               <Image
                 source={require('../resource/arrow.png')}
@@ -135,7 +136,8 @@ export default class UpdateSuggestionPage extends Component {
             onPress={this.save.bind(this)}>
             <View
               style={{
-                marginRight: 10
+                marginRight: 10,
+                width: 35
               }}>
               <Text
                 style={{

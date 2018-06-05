@@ -41,7 +41,7 @@ export default class UpdateMessagePage extends Component {
   componentWillUnmount() {
     //重写组件的setState方法，直接返回空
     //Warning: setState(...): Can only update a mounted or mounting component.
-    this.setState = (state,callback)=>{
+    this.setState = (state, callback) => {
       return;
     }
   }
@@ -118,44 +118,48 @@ export default class UpdateMessagePage extends Component {
         <View style={{ flex: 1 }}>
           <View
             style={{
-              marginTop: 20,
               width: Dimensions.get('window').width,
+              marginTop: 20,
               height: 44,
-              flexDirection: 'row',
+              alignItems: 'center',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              flexDirection: 'row',
             }}>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 18,
-                  color: '#000'
-                }}>我的消息</Text>
-            </View>
             <TouchableWithoutFeedback
               onPress={this.back.bind(this)}>
               <View
                 style={{
-                  position: 'absolute'
+                  marginLeft: 10,
+                  width: 35
                 }}>
                 <Image
                   source={require('../resource/arrow.png')}
                   style={{
                     width: 10,
                     height: 19.5,
-                    marginLeft: 10
+                    marginLeft: 5
                   }} />
               </View>
             </TouchableWithoutFeedback>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 18,
+                color: '#000'
+              }}>我的消息</Text>
+            <View
+              style={{
+                marginRight: 10,
+                width: 35
+              }}>
+              {/* <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}></Text> */}
+            </View>
           </View>
-
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Image
               style={{ width: 80, height: 80 }}
@@ -192,13 +196,14 @@ export default class UpdateMessagePage extends Component {
               height: 44,
               alignItems: 'center',
               justifyContent: 'space-between',
-              flexDirection: 'row'
+              flexDirection: 'row',
             }}>
             <TouchableWithoutFeedback
               onPress={this.back.bind(this)}>
               <View
                 style={{
-                  marginLeft: 10
+                  marginLeft: 10,
+                  width: 35
                 }}>
                 <Image
                   source={require('../resource/arrow.png')}
@@ -215,19 +220,18 @@ export default class UpdateMessagePage extends Component {
                 fontSize: 18,
                 color: '#000'
               }}>我的消息</Text>
-            <TouchableWithoutFeedback>
-              <View
+            <View
+              style={{
+                marginRight: 10,
+                width: 35
+              }}>
+              {/* <Text
                 style={{
-                  marginRight: 10
-                }}>
-                <Text
-                  style={{
-                    fontFamily: 'ArialMT',
-                    fontSize: 16,
-                    color: '#b3d66e'
-                  }}></Text>
-              </View>
-            </TouchableWithoutFeedback>
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}></Text> */}
+            </View>
           </View>
           <View style={{ paddingTop: 22, paddingLeft: 10 }}>
             <ListView
