@@ -8,7 +8,8 @@ import {
   Text,
   TextInput,
   TouchableWithoutFeedback,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 import {
   Actions
@@ -26,7 +27,7 @@ export default class UpdateNamePage extends Component {
     this.state = {
       indicating: false,
       name: props.realName,
-      parentComponent: props.parentComponent
+      //parentComponent: props.parentComponent
     }
   }
 
@@ -36,38 +37,44 @@ export default class UpdateNamePage extends Component {
 
   save() {
     copy = this
-    copy.setState({ indicating: true})
-    AsyncStorage.getItem(StorageConstant.TOKEN, function(error, result) {
-      copy.setState({ indicating: false})
+    copy.setState({ indicating: true })
+    AsyncStorage.getItem(StorageConstant.TOKEN, function (error, result) {
+      copy.setState({ indicating: false })
       if (error) {
         console.log(error)
         return
       }
       if (!error) {
-        if(result == null) {
+        if (result == null) {
         } else {
           console.log(result)
 
-          var body = {
-            'realname': copy.state.name
-          }
-          copy.setState({ indicating: true})
-          APIClient.access(APIInterface.updateUser(result, body))
+          let realname = copy.state.name
+          copy.setState({ indicating: true })
+          APIClient.access(APIInterface.updateUserName(APIConstant.SESSIONCODE, APIConstant.USER_PHONE, realname))
             .then((response) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               return response.json()
             })
             .then((json) => {
               console.log(json)
-              if(json.callStatus == APIConstant.STATUS_SUCCEED) {
+              if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+                //存储修改成功后的昵称
+                APIConstant.MY_NICKNAME = realname
+                //发广播通知上层的界面刷新个人信息
+                DeviceEventEmitter.emit('updateProfile', { TAG: "发出个人信息" });
+                Alert.alert('修改昵称成功！')
                 Actions.pop()
-                copy.state.parentComponent.load()
+                //copy.state.parentComponent.load()
+                //不要直接使用copy，否则消耗内存很大，改用发通知的形式来优化
+
               } else {
-                Alert.alert('', json.errorCode)
+                //Alert.alert('', json.responseResultMsg)
+                Alert.alert('修改昵称失败！')
               }
             })
             .catch((error) => {
-              copy.setState({ indicating: false})
+              copy.setState({ indicating: false })
               console.log(error)
             })
         }
@@ -78,7 +85,7 @@ export default class UpdateNamePage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/main-background.jpg') }
+        source={require('../resource/main-background.jpg')}
         style={{
           flex: 1,
           width: null,
@@ -87,13 +94,13 @@ export default class UpdateNamePage extends Component {
           backgroundColor: 'rgba(0, 0, 0, 0)',
         }}>
         <ActivityIndicator
-          animating={ this.state.indicating }
+          animating={this.state.indicating}
           style={{
             position: 'absolute',
             top: (Dimensions.get('window').height - 80) / 2,
             height: 80
           }}
-          size="large"/>
+          size="large" />
         <View
           style={{
             width: Dimensions.get('window').width,
@@ -104,27 +111,30 @@ export default class UpdateNamePage extends Component {
             flexDirection: 'row'
           }}>
           <TouchableWithoutFeedback
-            onPress={ this.back.bind(this) }>
+            onPress={this.back.bind(this)}>
             <View
               style={{
-                marginLeft: 10
+                marginLeft: 10,
+                width: 35
               }}>
-              <Text
+              <Image
+                source={require('../resource/arrow.png')}
                 style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 16,
-                  color: '#ffffff'
-                }}>取消</Text>
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 5
+                }} />
             </View>
           </TouchableWithoutFeedback>
           <Text
             style={{
               fontFamily: 'ArialMT',
               fontSize: 18,
-              color: '#ffffff'
-            }}>修改姓名</Text>
+              color: '#000',
+              marginRight: 5,
+            }}>昵称</Text>
           <TouchableWithoutFeedback
-            onPress={ this.save.bind(this) }>
+            onPress={this.save.bind(this)}>
             <View
               style={{
                 marginRight: 10
@@ -134,7 +144,7 @@ export default class UpdateNamePage extends Component {
                   fontFamily: 'ArialMT',
                   fontSize: 16,
                   color: '#b3d66e'
-                }}>保存</Text>
+                }}>完成</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -143,7 +153,7 @@ export default class UpdateNamePage extends Component {
             width: Dimensions.get('window').width,
             height: 50,
             marginTop: 5,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             justifyContent: 'center',
             flexDirection: 'row',
             alignItems: 'center'
@@ -153,10 +163,10 @@ export default class UpdateNamePage extends Component {
               fontFamily: 'ArialMT',
               fontSize: 13,
               width: Dimensions.get('window').width - 20,
-              color: '#ffffff'
+              color: '#000'
             }}
-            onChangeText={ (value) => this.setState({ name: value }) }
-            value={ this.state.name }/>
+            onChangeText={(value) => this.setState({ name: value })}
+            value={this.state.name} />
         </View>
       </Image>
     );

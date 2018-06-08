@@ -13,6 +13,7 @@ import {
   Actions,
   ActionConst
 } from 'react-native-router-flux';
+import CryptoJS from 'crypto-js';
 
 import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
@@ -34,7 +35,7 @@ export default class LoginPage extends Component {
   }
 
   phoneOnChange(text) {
-    if(text.length == 0){
+    if (text.length == 0) {
       this.setState({ phoneValidate: false }, () => { this.checkNext() })
     } else {
       this.setState({ phoneValidate: true }, () => { this.checkNext() })
@@ -45,7 +46,7 @@ export default class LoginPage extends Component {
   }
 
   passwordOnChange(text) {
-    if(text.length == 0){
+    if (text.length == 0) {
       this.setState({ passwordValidate: false }, () => { this.checkNext() })
     } else {
       this.setState({ passwordValidate: true }, () => { this.checkNext() })
@@ -56,7 +57,7 @@ export default class LoginPage extends Component {
   }
 
   checkNext() {
-    if(this.state.phoneValidate &&
+    if (this.state.phoneValidate &&
       this.state.passwordValidate) {
       this.setState({ loginEnable: true })
     } else {
@@ -65,36 +66,40 @@ export default class LoginPage extends Component {
   }
 
   login() {
-    if(!this.state.loginEnable){
+    if (!this.state.loginEnable) {
       return
     } else {
       this.setState({
         loginEnable: !this.state.loginEnable
       })
-
-      APIClient.access(APIInterface.login(this.state.phone, this.state.password))
+      copy = this
+      APIClient.access(APIInterface.login(this.state.phone, CryptoJS.MD5(this.state.password, { asString: true }).toString()))
         .then((response) => {
           return response.json()
         })
         .then((json) => {
           console.log(json)
-          if(json.callStatus == APIConstant.STATUS_SUCCEED) {
-            // 存储登陆token
-            AsyncStorage.setItem(StorageConstant.TOKEN, json.token, function(error) {
+          if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+            // 存储登陆token，token为用户登录的手机号码
+            AsyncStorage.setItem(StorageConstant.TOKEN, this.state.phone, function (error) {
               if (error) {
                 console.log(error)
               }
               if (!error) {
                 Actions.main({ type: ActionConst.POP_AND_REPLACE })
+                //存储登录用户的手机号
+                APIConstant.USER_PHONE = copy.state.phone
               }
             });
 
           } else {
-            Alert.alert('', json.errorCode)
+            Alert.alert('', json.responseResultMsg)
           }
         })
         .catch((error) => {
           console.log(error);
+          //登陆有问题时，先直接跳转到主界面
+          //Actions.main({ type: ActionConst.POP_AND_REPLACE })
         })
     }
   }
@@ -110,7 +115,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <Image
-        source={ require('../resource/login-background.jpg') }
+        source={require('../resource/login-background.jpg')}
         style={{
           flex: 1,
           alignItems: 'center',
@@ -139,9 +144,9 @@ export default class LoginPage extends Component {
                   width: 21,
                   height: 21
                 }}
-                source={ require('../resource/icon-phone.jpg') }/>
+                source={require('../resource/icon-phone.jpg')} />
               <TextInput
-                onChangeText = { this.phoneOnChange.bind(this) }
+                onChangeText={this.phoneOnChange.bind(this)}
                 style={{
                   width: 186,
                   marginLeft: 45,
@@ -150,18 +155,18 @@ export default class LoginPage extends Component {
                   color: '#ffffff',
                   marginTop: 3
                 }}
-                caretHidden={ false }
-                keyboardType={ 'numeric' }
-                multiline={ false }
-                placeholder={ '请输入' }
-                placeholderTextColor={ '#ffffff' }/>
+                caretHidden={false}
+                keyboardType={'numeric'}
+                multiline={false}
+                placeholder={'请输入'}
+                placeholderTextColor={'#ffffff'} />
             </View>
             <View
               style={{
                 height: 1,
                 marginTop: 10,
                 backgroundColor: 'rgba(255, 255, 255, 0.8)'
-              }}/>
+              }} />
             <View
               style={{
                 marginTop: 32,
@@ -174,9 +179,9 @@ export default class LoginPage extends Component {
                   height: 19.5,
                   marginLeft: 2.5
                 }}
-                source={ require('../resource/icon-password.jpg') }/>
+                source={require('../resource/icon-password.jpg')} />
               <TextInput
-                onChangeText = { this.passwordOnChange.bind(this) }
+                onChangeText={this.passwordOnChange.bind(this)}
                 style={{
                   width: 186,
                   marginLeft: 48,
@@ -185,20 +190,20 @@ export default class LoginPage extends Component {
                   color: '#ffffff',
                   marginTop: 3
                 }}
-                secureTextEntry={ true }
-                caretHidden={ false }
-                multiline={ false }
-                placeholder={ '请输入' }
-                placeholderTextColor={ '#ffffff' }/>
+                secureTextEntry={true}
+                caretHidden={false}
+                multiline={false}
+                placeholder={'请输入'}
+                placeholderTextColor={'#ffffff'} />
             </View>
             <View
               style={{
                 height: 1,
                 marginTop: 10,
                 backgroundColor: 'rgba(255, 255, 255, 0.8)'
-              }}/>
+              }} />
             <TouchableWithoutFeedback
-              onPress={ this.login.bind(this) }>
+              onPress={this.login.bind(this)}>
               <View
                 style={{
                   width: 290,
@@ -217,7 +222,7 @@ export default class LoginPage extends Component {
                   }}>登录</Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
+            {/* <TouchableWithoutFeedback
               onPress={ this.setPassword.bind(this) }>
               <View
                 style={{
@@ -231,9 +236,9 @@ export default class LoginPage extends Component {
                     color: '#ffffff'
                   }}>忘记密码</Text>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
           </View>
-          <TouchableWithoutFeedback
+          {/* <TouchableWithoutFeedback
             onPress={ this.register.bind(this) }>
             <View
               style={{
@@ -247,7 +252,7 @@ export default class LoginPage extends Component {
                   color: '#ffffff'
                 }}>注册</Text>
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback> */}
         </KeyboardAvoidingView>
       </Image>
     );
