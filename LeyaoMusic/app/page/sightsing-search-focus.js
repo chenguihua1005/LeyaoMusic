@@ -54,7 +54,7 @@ export default class SightsingSearchFocus extends Component {
             flexDirection: 'row'
           }}>
           <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold' }}></Text>
-          <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold', fontFamily: 'PingFangSC-Semibold', paddingLeft: 35 }}>盒声音乐</Text>
+          <Text style={{ color: '#353E3F', fontSize: 17, fontWeight: 'bold', fontFamily: 'PingFangSC-Semibold', paddingLeft: 35 }}>SoundCube</Text>
           <TouchableWithoutFeedback
             onPress={this.back.bind(this)}>
             <View
