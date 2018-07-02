@@ -25,6 +25,7 @@ import APIConstant from '../service/api-constant';
 
 import Swiper from 'react-native-swiper';
 import MenuButton from './menu-button';
+import MenuButton2 from './menu-button2';
 import MenuText from './menu-text';
 
 //state中转变量 
@@ -41,7 +42,7 @@ let vedio_url = []
 let image_title = []
 let image_url = []
 
-//读我听我看我，个数先统一为6个
+//读我听我看我，个数统一为5个
 const length = 5;
 let copy;
 
@@ -51,7 +52,9 @@ export default class HomePage extends Component {
         super(props);
         this._onMenuClick = this._onMenuClick.bind(this);
         this._renderRow = this._renderRow.bind(this);
-        var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        this._onMenuClickMusicican1 = this._onMenuClickMusicican1.bind(this);
+        this._onMenuClickMusicican2 = this._onMenuClickMusicican2.bind(this);
+        let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         // 实际的DataSources存放在state中
         this.state = {
             listData: ds,
@@ -247,6 +250,22 @@ export default class HomePage extends Component {
         //Alert.alert('提示', '你点击了:' + title + " Tag:" + tag);
     }
 
+    _onMenuClickMusicican1() {
+        // Alert.alert('提示', '你点击了:音乐家1');
+        Actions.home_demo({
+            musician_title: this.state.musician_title1,
+            musician_url: this.state.musician_url1
+        })
+    }
+
+    _onMenuClickMusicican2() {
+        // Alert.alert('提示', '你点击了:音乐家2');
+        Actions.home_demo({
+            musician_title: this.state.musician_title2,
+            musician_url: this.state.musician_url2          
+        })
+    }
+
     //看我，点击后统一调用接口
     _onMenuClick2(title, tag) {
         APIConstant.URL_VEDIO = tag;
@@ -357,11 +376,10 @@ export default class HomePage extends Component {
                             </Swiper>
 
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                                <Image
-                                    style={{ flex: 4, height: 80 }}
-                                    resizeMode={'stretch'}
-                                    source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.musician_image1 }}
-                                />
+                                <View style={{ flex: 4 }}>
+                                    <MenuButton2 renderIcon={APIConstant.BASE_URL_PREFIX + this.state.musician_image1}
+                                        onClick={this._onMenuClickMusicican1} />
+                                </View>
                                 <View style={{ flex: 6 }}>
                                     <MenuText showText={this.state.musician_title1[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url1[0]}
                                         onClick={this._onMenuClick} />
@@ -372,11 +390,10 @@ export default class HomePage extends Component {
                                 </View>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                                <Image
-                                    style={{ flex: 4, height: 80 }}
-                                    resizeMode={'stretch'}
-                                    source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.musician_image2 }}
-                                />
+                                <View style={{ flex: 4 }}>
+                                    <MenuButton2 renderIcon={APIConstant.BASE_URL_PREFIX + this.state.musician_image2}
+                                        onClick={this._onMenuClickMusicican2} />
+                                </View>
                                 <View style={{ flex: 6 }}>
                                     <MenuText showText={this.state.musician_title2[0]} tag={APIConstant.BASE_URL_PREFIX + this.state.musician_url2[0]}
                                         onClick={this._onMenuClick} />

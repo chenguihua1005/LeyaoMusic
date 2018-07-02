@@ -29,6 +29,7 @@ import UpdateMessagePageSub from './page/update-message-page-sub';
 import UpdateFocusPage from './page/update-focus-page';
 import UpdateHistoryPage from './page/update-history-page';
 import UpdateSuggestionPage from './page/update-suggestion-page';
+import HomePageDemo from './page/home-page-demo';
 
 // import TabIconWidget from './widget/tab-icon-widget'
 
@@ -137,5 +138,9 @@ const scenes = Actions.create(
       key="sightsing_search"
       hideNavBar={true}
       component={SightsingSearchPage} />
+    <Scene
+      key="home_demo"
+      hideNavBar={true}
+      component={HomePageDemo} />
   </Scene>
 );
