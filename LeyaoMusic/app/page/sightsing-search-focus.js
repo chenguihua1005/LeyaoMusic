@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import {
-  Dimensions,
   Image,
   Text,
   TouchableWithoutFeedback,
   View,
   StyleSheet,
-  ListView,
   Platform,
   TextInput,
   Alert
@@ -15,12 +13,6 @@ import {
   Actions,
   ActionConst
 } from 'react-native-router-flux';
-import MenuImage from './menu-image';
-import APIClient from '../service/api-client';
-import APIInterface from '../service/api-interface';
-import APIConstant from '../service/api-constant';
-import Header from './home-header';
-import TopBarNav from 'top-bar-nav';
 
 export default class SightsingSearchFocus extends Component {
   constructor(props) {

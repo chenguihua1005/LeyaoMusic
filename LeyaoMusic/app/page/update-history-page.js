@@ -18,9 +18,10 @@ import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 
-let dataList1 = []
-let dataList2 = []
-let dataList3 = []
+//在所在的代码区块内有效,即全局有效
+// let dataList1 = []
+// let dataList2 = []
+// let dataList3 = []
 
 export default class UpdateFocusPage extends Component {
   constructor(props) {
@@ -116,6 +117,7 @@ export default class UpdateFocusPage extends Component {
         console.log(json)
         let arr = json.rows;
         let index = json.total;
+        let dataList1 = [];
         for (let i = 0; i < index; i++) {
           let data = {
             'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
@@ -142,6 +144,7 @@ export default class UpdateFocusPage extends Component {
         console.log(json)
         let arr = json.rows;
         let index = json.total;
+        let dataList2 = [];
         for (let i = 0; i < index; i++) {
           let data = {
             'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
@@ -168,6 +171,7 @@ export default class UpdateFocusPage extends Component {
         console.log(json)
         let arr = json.rows;
         let index = json.total;
+        let dataList3 = [];
         for (let i = 0; i < index; i++) {
           let data = {
             'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,

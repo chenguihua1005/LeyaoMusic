@@ -13,16 +13,6 @@ import {
     ActionConst
 } from 'react-native-router-flux';
 
-const music_1 = require('../resource/silent.mp3');
-const bofang = require('../resource/btn_bofang.png');
-const bofangzhong = require('../resource/btn_bofangzhong.png');
-
-// 存储中间变量
-let uri_temp = ""
-
-// 标志位，音乐是否被视频暂停过
-let isPending = false
-
 export default class Header extends Component {
 
     constructor(props) {

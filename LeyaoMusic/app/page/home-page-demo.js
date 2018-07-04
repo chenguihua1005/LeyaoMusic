@@ -12,12 +12,7 @@ import {
     ActionConst
 } from 'react-native-router-flux';
 
-import APIClient from '../service/api-client';
-import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
-
-import Swiper from 'react-native-swiper';
-import MenuButton from './menu-button';
 import MenuText from './menu-text';
 import HeaderDemo from './home-header-demo';
 

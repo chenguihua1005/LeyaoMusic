@@ -56,10 +56,10 @@ export default class SightsingSearchPage extends Component {
           //alert("p = "  + arr[i].sEventTitleUrl);
         }
         //返回数据个数为0，则将dataList置为null
-        if (json.total == 0) {
+        if (json.total === 0) {
           dataList = null;
           return;
-        } 
+        }
         //重新设置数据源
         this.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList) });
 
@@ -95,6 +95,22 @@ export default class SightsingSearchPage extends Component {
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
+            <TouchableWithoutFeedback
+              onPress={this.back.bind(this)}>
+              <View
+                style={{
+                  marginLeft: 10,
+                  width: 35
+                }}>
+                <Image
+                  source={require('../resource/arrow.png')}
+                  style={{
+                    width: 10,
+                    height: 19.5,
+                    marginLeft: 5
+                  }} />
+              </View>
+            </TouchableWithoutFeedback>
             <View
               style={{
                 flex: 1,
@@ -109,19 +125,18 @@ export default class SightsingSearchPage extends Component {
                   color: '#000'
                 }}>搜索结果</Text>
             </View>
-            <TouchableWithoutFeedback
-              onPress={this.back.bind(this)}>
+            <TouchableWithoutFeedback>
               <View
                 style={{
-                  position: 'absolute'
+                  marginRight: 10,
+                  width: 35
                 }}>
-                <Image
-                  source={require('../resource/arrow.png')}
-                  style={{
-                    width: 10,
-                    height: 19.5,
-                    marginLeft: 10
-                  }} />
+                {/* <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}></Text> */}
               </View>
             </TouchableWithoutFeedback>
           </View>
@@ -148,38 +163,45 @@ export default class SightsingSearchPage extends Component {
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'ArialMT',
-                  fontSize: 18,
-                  color: '#000'
-                }}>搜索结果</Text>
-            </View>
             <TouchableWithoutFeedback
               onPress={this.back.bind(this)}>
               <View
                 style={{
-                  position: 'absolute'
+                  marginLeft: 10,
+                  width: 35
                 }}>
                 <Image
                   source={require('../resource/arrow.png')}
                   style={{
                     width: 10,
                     height: 19.5,
-                    marginLeft: 10
+                    marginLeft: 5
                   }} />
+              </View>
+            </TouchableWithoutFeedback>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 18,
+                color: '#000'
+              }}>搜索结果</Text>
+            <TouchableWithoutFeedback>
+              <View
+                style={{
+                  marginRight: 10,
+                  width: 35
+                }}>
+                {/* <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}></Text> */}
               </View>
             </TouchableWithoutFeedback>
           </View>
 
-          <View style={{ paddingTop: 0 }}>
+          <View style={{ flex: 1 }}>
             <ListView
               contentContainerStyle={styles.contentContainerStyle}
               dataSource={this.state.dataSource}
