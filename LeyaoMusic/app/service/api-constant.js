@@ -34,8 +34,12 @@ export default class APIConstant {
   //
   static BASE_URL_DETAILS = APIConstant.BASE_URL + "user/getTUserSummary?sessionCode=" + APIConstant.SESSIONCODE + "&hUserPhoneNr="
   static BASE_URL_SEARCH = APIConstant.BASE_URL + "event/getTEventSummaryByConditionGlobal?sessionCode=" + APIConstant.SESSIONCODE + "&sEventSearchContentTxt="
+  
+  //我的历史
+  static BASE_URL_HISTORY = APIConstant.BASE_URL + "event/getTEventSummaryByConditionAndUser?sessionCode=" + APIConstant.SESSIONCODE + "&hUserPhoneNr="
   //我的关注
-  static BASE_URL_FOCUS = APIConstant.BASE_URL + "event/getTEventSummaryByCondition?sessionCode=" + APIConstant.SESSIONCODE + "sUserEventLikeInd = 1" +  "&sEventCategoryCd="
+  static BASE_URL_FOCUS = APIConstant.BASE_URL + "event/getTEventSummaryByConditionAndUser?sessionCode=" + APIConstant.SESSIONCODE + "&sUserEventLikeInd=1" +  "&hUserPhoneNr="
+  
   //我的未读消息
   static BASE_URL_UNREAD = APIConstant.BASE_URL + "message/getTMessageSummaryUnreadCount?sessionCode=" + APIConstant.SESSIONCODE + "&hUserPhoneNr="
 

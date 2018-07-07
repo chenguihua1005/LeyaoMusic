@@ -241,7 +241,10 @@ export default class SightsingPage extends Component {
 
 
     APIConstant.URL_EVENT = tag;
-    Actions.update_webview({ type: ActionConst.PUSH });
+    Actions.update_webview({ 
+      type: ActionConst.PUSH,
+      hEventId: hEventId
+    });
   }
 
   render() {

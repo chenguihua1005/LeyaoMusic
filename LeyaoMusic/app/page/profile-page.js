@@ -42,7 +42,7 @@ export default class ProfilePage extends Component {
       message: "无",
       focus: "无",
       history: "无",
-      unread: 0
+      // unread: 0
     }
     this.load.bind(this)
   }
@@ -66,47 +66,47 @@ export default class ProfilePage extends Component {
     });
 
     //初次请求1s后
-    this.timer0 = setTimeout(
-      () => {
-        APIClient.access(APIInterface.getUnreadMessage())
-          .then((response) => {
-            return response.json()
-          })
-          .then((json) => {
-            copy.setState({
-              unread: json.total
-            })
-            console.log("setTimeout -> unread = " + copy.state.unread)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, 1 * 1000);
+    // this.timer0 = setTimeout(
+    //   () => {
+    //     APIClient.access(APIInterface.getUnreadMessage())
+    //       .then((response) => {
+    //         return response.json()
+    //       })
+    //       .then((json) => {
+    //         copy.setState({
+    //           unread: json.total
+    //         })
+    //         console.log("setTimeout -> unread = " + copy.state.unread)
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   }, 1 * 1000);
 
     //增加10*60s定时器轮询
-    this.timer = setInterval(function () {
-      APIClient.access(APIInterface.getUnreadMessage())
-        .then((response) => {
-          return response.json()
-        })
-        .then((json) => {
-          copy.setState({
-            unread: json.total
-          })
-          // console.log("setInterval -> unread = " + copy.state.unread)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 10 * 60 * 1000);
+    // this.timer = setInterval(function () {
+    //   APIClient.access(APIInterface.getUnreadMessage())
+    //     .then((response) => {
+    //       return response.json()
+    //     })
+    //     .then((json) => {
+    //       copy.setState({
+    //         unread: json.total
+    //       })
+    //       console.log("setInterval -> unread = " + copy.state.unread)
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }, 10 * 60 * 1000);
 
   }
 
   componentWillUnmount() {
     this.listener.remove();
     //清除定时器
-    this.timer0 && clearTimeout(this.timer0);
-    this.timer && clearInterval(this.timer);
+    // this.timer0 && clearTimeout(this.timer0);
+    // this.timer && clearInterval(this.timer);
 
   };
 
@@ -232,13 +232,13 @@ export default class ProfilePage extends Component {
       sex = '女'
       sexImage = require('../resource/icon_nv.png')
     }
-    let v = this.state.unread == 0 ? null :
-      <Text style={{
-        color: 'white',
-        backgroundColor: 'rgb(247,204,70)',
-        textShadowRadius: 5,
-        marginLeft: 200
-      }}>New</Text>
+    // let view_unread = this.state.unread === 0 ? null :
+    //   <Text style={{
+    //     color: 'white',
+    //     backgroundColor: 'rgb(247,204,70)',
+    //     textShadowRadius: 5,
+    //     marginLeft: 200
+    //   }}>New</Text>
     return (
       <Image
         source={require('../resource/main-background.jpg')}
@@ -315,7 +315,7 @@ export default class ProfilePage extends Component {
             }}>
             <Text
               style={styles.titleText}>我的消息</Text>
-            {v}
+            {/* {view_unread} */}
             <Image style={{ height: 20, width: 20, marginRight: 15 }} source={require('../resource/btn_jiantou.png')} />
           </View>
         </TouchableWithoutFeedback>

@@ -185,15 +185,19 @@ export default class APIInterface {
     return BaseRequest.get(APIConstant.BASE_URL_SEARCH + sEventSearchContentTxt, {})
   }
 
+  //我的历史
+  static history(hUserPhoneNr) {
+    return BaseRequest.get(APIConstant.BASE_URL_HISTORY + hUserPhoneNr, {})
+  }
   //我的关注
-  static focus(sEventCategoryCd) {
-    return BaseRequest.get(APIConstant.BASE_URL_FOCUS + sEventCategoryCd, {})
+  static focus(hUserPhoneNr) {
+    return BaseRequest.get(APIConstant.BASE_URL_FOCUS + hUserPhoneNr, {})
   }
 
   //添加用户阅读习惯
   //我的历史功能只记录用户浏览过的所有事件，不包括搜素事件
   static report(hEventId, hUserPhoneNr = APIConstant.USER_PHONE) {
-    return BaseRequest.post(APIConstant.BASE_URL + 'event/feedbackTEventSummary', {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user_event/feedbackTEventSummary', {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }, {
@@ -202,10 +206,23 @@ export default class APIInterface {
       })
   }
 
-  //获取用户未读消息
-  static getUnreadMessage(hUserPhoneNr = APIConstant.USER_PHONE) {
-    return BaseRequest.get(APIConstant.BASE_URL_UNREAD + hUserPhoneNr, {})
+  //添加用户关注
+  //我的历史功能只记录用户浏览过的所有事件，不包括搜素事件
+  static stars(hEventId, hUserPhoneNr = APIConstant.USER_PHONE) {
+    return BaseRequest.post(APIConstant.BASE_URL + 'user_event/feedbackTEventSummary', {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }, {
+        'hUserPhoneNr': hUserPhoneNr,
+        'hEventId': hEventId,
+        'sUserEventLikeInd': 1
+      })
   }
+
+  //获取用户未读消息
+  // static getUnreadMessage(hUserPhoneNr = APIConstant.USER_PHONE) {
+  //   return BaseRequest.get(APIConstant.BASE_URL_UNREAD + hUserPhoneNr, {})
+  // }
   
 
   // DES加密

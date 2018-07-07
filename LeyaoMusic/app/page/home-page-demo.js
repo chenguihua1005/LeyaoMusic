@@ -13,7 +13,7 @@ import {
 } from 'react-native-router-flux';
 
 import APIConstant from '../service/api-constant';
-import MenuText from './menu-text';
+import MenuText2 from './menu-text2';
 import HeaderDemo from './home-header-demo';
 
 export default class HomePageDemo extends Component {
@@ -63,14 +63,14 @@ export default class HomePageDemo extends Component {
                     renderRow={
                         (rowData) =>
                             <View style={{ flexDirection: 'row', margin: 10 }}>
-                                <MenuText showText={rowData.title} tag={rowData.url}
+                                <MenuText2 showText={rowData.title} tag={rowData.url}
                                     onClick={this._onMenuClick} />
                             </View>
                     }
                 />
 
                 {/* <View style={{ flexDirection: 'row', margin: 10 }}>
-                    <MenuText showText={this.props.musician_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.props.musician_url[2]}
+                    <MenuText2 showText={this.props.musician_title[2]} tag={APIConstant.BASE_URL_PREFIX + this.props.musician_url[2]}
                         onClick={this._onMenuClick} />
                     <Text style={{ color: '#333333', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>收藏</Text>
                     <Text style={{ color: '#BDBDBD', fontSize: 18, fontWeight: 'bold', marginRight: 5 }}>购买</Text>

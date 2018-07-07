@@ -7,11 +7,14 @@ import {
   WebView,
   Image,
   TouchableWithoutFeedback,
+  Alert,
 } from 'react-native';
 import {
   Actions
 } from 'react-native-router-flux';
 import APIConstant from '../service/api-constant';
+import APIClient from '../service/api-client';
+import APIInterface from '../service/api-interface';
 
 export default class UpdateWebviewPage extends Component {
 
@@ -55,6 +58,24 @@ export default class UpdateWebviewPage extends Component {
     })
   }
 
+  //关注
+  stars() {
+    APIClient.access(APIInterface.stars(hEventId=this.props.hEventId))
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+          Alert.alert('提示', '已收藏！');
+        } else {
+          Alert.alert('提示', '收藏失败！');
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -63,22 +84,44 @@ export default class UpdateWebviewPage extends Component {
           ref={webView => this.webView = webView}>
         </WebView>
 
-        <TouchableWithoutFeedback
-          onPress={() => this.onBack()}>
-          <View
-            style={{
-              marginLeft: 10
-            }}>
-            <Image
-              source={require('../resource/arrow.png')}
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+          }}>
+          <TouchableWithoutFeedback
+            onPress={() => this.onBack()}>
+            <View
               style={{
-                width: 10,
-                height: 19.5,
-                marginLeft: 10,
-                marginBottom: 5
-              }} />
-          </View>
-        </TouchableWithoutFeedback>
+                marginLeft: 10
+              }}>
+              <Image
+                source={require('../resource/arrow.png')}
+                style={{
+                  width: 10,
+                  height: 19.5,
+                  marginLeft: 10,
+                  marginBottom: 5
+                }} />
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => this.stars()}>
+            <View
+              style={{
+                marginRight: 10,
+                width: 35
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}>关注</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
     );
   }

@@ -17,7 +17,7 @@ import SightsingPage from './page/sightsing-page';
 import SightsingSearchFocus from './page/sightsing-search-focus';
 import SightsingSearchPage from './page/sightsing-search-page';
 import ProfilePage from './page/profile-page';
-import NotificationPage from './page/notification-page';
+// import NotificationPage from './page/notification-page';
 import UpdateNamePage from './page/update-name-page';
 import UpdatePersonalPage from './page/update-personal-page'
 import UpdateGenderPage from './page/update-gender-page';
@@ -82,10 +82,10 @@ const scenes = Actions.create(
       key="main"
       hideNavBar={true}
       component={MainScreen} />
-    <Scene
+    {/* <Scene
       key="notification"
       hideNavBar={true}
-      component={NotificationPage} />
+      component={NotificationPage} /> */}
     <Scene
       key="update_name"
       hideNavBar={true}

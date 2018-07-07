@@ -42,8 +42,8 @@ let vedio_url = []
 let image_title = []
 let image_url = []
 
-//读我听我看我，个数统一为5个
-const length = 5;
+//读我听我看我，个数统一为6个
+const list_length = 6;
 let copy;
 
 export default class HomePage extends Component {
@@ -189,7 +189,7 @@ export default class HomePage extends Component {
             .then((json) => {
                 console.log(json)
                 let arr = json.rows;
-                for (let i = 0; i < length; i++) {
+                for (let i = 0; i < list_length; i++) {
                     audio_title[i] = arr[i].sEventTitleUrl;
                     audio_url[i] = arr[i].sEventContentUrl;
                 }
@@ -210,7 +210,7 @@ export default class HomePage extends Component {
             .then((json) => {
                 console.log(json)
                 let arr = json.rows;
-                for (let i = 0; i < length; i++) {
+                for (let i = 0; i < list_length; i++) {
                     vedio_title[i] = arr[i].sEventTitleUrl;
                     vedio_url[i] = arr[i].sEventContentUrl;
                 }
@@ -231,7 +231,7 @@ export default class HomePage extends Component {
             .then((json) => {
                 console.log(json)
                 let arr = json.rows;
-                for (let i = 0; i < length; i++) {
+                for (let i = 0; i < list_length; i++) {
                     image_title[i] = arr[i].sEventTitleUrl;
                     image_url[i] = arr[i].sEventContentUrl;
                 }
