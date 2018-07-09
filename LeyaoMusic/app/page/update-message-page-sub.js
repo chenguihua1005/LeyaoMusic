@@ -19,9 +19,6 @@ export default class UpdateMessagePageSub extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      sMessageContentStr: props.ContentStr,
-    }
   }
 
   back() {
@@ -84,7 +81,7 @@ export default class UpdateMessagePageSub extends Component {
           </View>
         </View>
         <View style={{ paddingTop: 22, paddingLeft: 10 }}>
-          <Text style={styles.topTitleStyle}>{this.state.sMessageContentStr}</Text>
+          <Text style={styles.topTitleStyle}>{this.props.ContentStr}</Text>
         </View>
       </Image>
     );

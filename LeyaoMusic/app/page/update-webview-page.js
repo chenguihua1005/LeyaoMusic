@@ -27,7 +27,7 @@ export default class UpdateWebviewPage extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ url: APIConstant.URL_EVENT });
   }
 

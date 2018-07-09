@@ -75,7 +75,7 @@ export default class HomePage extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         copy = this;
         //首次刷新
         copy.load();

@@ -12,16 +12,13 @@ import {
   Actions,
   ActionConst
 } from 'react-native-router-flux';
-import TopBarNav from 'top-bar-nav';
 import MenuImage from './menu-image';
 import APIClient from '../service/api-client';
 import APIInterface from '../service/api-interface';
 import APIConstant from '../service/api-constant';
 
 //在所在的代码区块内有效,即全局有效
-// let dataList1 = []
-// let dataList2 = []
-// let dataList3 = []
+// let dataList = []
 
 export default class UpdateFocusPage extends Component {
   constructor(props) {
@@ -49,17 +46,16 @@ export default class UpdateFocusPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        // let index = json.total;
-        let dataList1 = [];
-        for (let i in arr) {
+        let dataList = [];
+        arr.map(item => {
           let data = {
-            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
-            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
+            'p': APIConstant.BASE_URL_PREFIX + item.sEventTitleUrl, "u": item.sEventContentUrl,
+            'e': item.hEventId, 'c': item.sEventCategoryCd,
           }
-          dataList1.push(data)
-        }
+          dataList.push(data)
+        })
         //重新设置数据源
-        this.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList1) });
+        this.setState({ dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList) });
 
       })
       .catch((error) => {

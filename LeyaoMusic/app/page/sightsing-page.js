@@ -109,7 +109,7 @@ export default class SightsingPage extends Component {
     ];
   }
 
-  componentWillMount() {
+  componentDidMount() {
     copy = this;
     //增加10*60s定时器轮询
     this.timer = setInterval(function () {
@@ -130,7 +130,6 @@ export default class SightsingPage extends Component {
     this.getMusicTeach();
     //音乐屋：艺人分享
     this.getMusicShare();
-    console.log("sightsing -> load()被调用！")
   }
 
   //音乐屋：盒声活动
@@ -142,15 +141,14 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        let index = json.total;
         let dataList1 = [];
-        for (let i = 0; i < index; i++) {
+        arr.map(item => {
           let data = {
-            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
-            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
+            'p': APIConstant.BASE_URL_PREFIX + item.sEventTitleUrl, "u": item.sEventContentUrl,
+            'e': item.hEventId, 'c': item.sEventCategoryCd,
           }
           dataList1.push(data)
-        }
+        })
         //重新设置数据源
         this.setState({ dataSource1: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList1) });
 
@@ -169,15 +167,14 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        let index = json.total;
         let dataList2 = [];
-        for (let i = 0; i < index; i++) {
+        arr.map(item => {
           let data = {
-            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
-            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
+            'p': APIConstant.BASE_URL_PREFIX + item.sEventTitleUrl, "u": item.sEventContentUrl,
+            'e': item.hEventId, 'c': item.sEventCategoryCd,
           }
           dataList2.push(data)
-        }
+        })
         //重新设置数据源
         this.setState({ dataSource2: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList2) });
 
@@ -197,15 +194,14 @@ export default class SightsingPage extends Component {
       .then((json) => {
         console.log(json)
         let arr = json.rows;
-        let index = json.total;
         let dataList3 = [];
-        for (let i = 0; i < index; i++) {
+        arr.map(item => {
           let data = {
-            'p': APIConstant.BASE_URL_PREFIX + arr[i].sEventTitleUrl, "u": arr[i].sEventContentUrl,
-            'e': arr[i].hEventId, 'c': arr[i].sEventCategoryCd,
+            'p': APIConstant.BASE_URL_PREFIX + item.sEventTitleUrl, "u": item.sEventContentUrl,
+            'e': item.hEventId, 'c': item.sEventCategoryCd,
           }
           dataList3.push(data)
-        }
+        })
         //重新设置数据源
         this.setState({ dataSource3: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(dataList3) });
       })
@@ -214,13 +210,13 @@ export default class SightsingPage extends Component {
       })
   }
 
-  staveIntroduce() {
-    Actions.stave_introduction()
-  }
+  // staveIntroduce() {
+  //   Actions.stave_introduction()
+  // }
 
-  noteDuration() {
-    Actions.note_duration()
-  }
+  // noteDuration() {
+  //   Actions.note_duration()
+  // }
 
   _onMenuClick(tag, hEventId, rUserEventCategory) {
     //添加用户阅读记录
