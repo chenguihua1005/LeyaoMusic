@@ -26,11 +26,15 @@ import APIConstant from '../service/api-constant';
 import Swiper from 'react-native-swiper';
 import MenuButton from './menu-button';
 import MenuButton2 from './menu-button2';
+import MenuButtonReport from './menu-button-report';
 import MenuText from './menu-text';
+import MenuImageReport2 from './menu-image-report2';
 
 //state中转变量 
 let slide_image = []
 let slide_url = []
+let slide_hEventId = []
+let slide_rUserEventCategory = []
 let musician_title1 = []
 let musician_url1 = []
 let musician_title2 = []
@@ -41,6 +45,8 @@ let vedio_title = []
 let vedio_url = []
 let image_title = []
 let image_url = []
+let image_hEventId = []
+let image_rUserEventCategory = []
 
 //读我听我看我，个数统一为6个
 const list_length = 6;
@@ -54,12 +60,15 @@ export default class HomePage extends Component {
         this._renderRow = this._renderRow.bind(this);
         this._onMenuClickMusicican1 = this._onMenuClickMusicican1.bind(this);
         this._onMenuClickMusicican2 = this._onMenuClickMusicican2.bind(this);
+        this._onMenuClickReport = this._onMenuClickReport.bind(this);
         let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         // 实际的DataSources存放在state中
         this.state = {
             listData: ds,
-            slide_image: ['', '', '', '', '', ''],
+            slide_image: ['', '', '', '', '', '', ''],
             slide_url: [],
+            slide_hEventId: [],
+            slide_rUserEventCategory: [],
             musician_image1: '',
             musician_image2: '',
             musician_title1: [],
@@ -72,6 +81,8 @@ export default class HomePage extends Component {
             vedio_url: [],
             image_title: [],
             image_url: [],
+            image_hEventId: [],
+            image_rUserEventCategory: []
         }
     }
 
@@ -117,18 +128,17 @@ export default class HomePage extends Component {
                 for (let i = 0; i < json.total; i++) {
                     slide_image[i] = arr[i].sEventTitleUrl;
                     slide_url[i] = arr[i].sEventContentUrl;
+                    slide_hEventId[i] = arr[i].hEventId;
+                    slide_rUserEventCategory[i] = arr[i].sEventCategoryCd;
                 }
                 this.setState({ slide_image: slide_image })
                 this.setState({ slide_url: slide_url })
+                this.setState({ slide_hEventId: slide_hEventId })
+                this.setState({ slide_rUserEventCategory: slide_rUserEventCategory })
             })
             .catch((error) => {
                 console.log(error);
             });
-    }
-
-    _onClick(i) {
-        APIConstant.URL_EVENT = slide_url[i - 1];
-        Actions.update_webview({ type: ActionConst.PUSH });
     }
 
     //音乐家
@@ -234,13 +244,42 @@ export default class HomePage extends Component {
                 for (let i = 0; i < list_length; i++) {
                     image_title[i] = arr[i].sEventTitleUrl;
                     image_url[i] = arr[i].sEventContentUrl;
+                    image_hEventId[i] = arr[i].hEventId;
+                    image_rUserEventCategory[i] = arr[i].sEventCategoryCd;
                 }
                 this.setState({ image_title: image_title })
                 this.setState({ image_url: image_url })
+                this.setState({ image_hEventId: image_hEventId })
+                this.setState({ image_rUserEventCategory: image_rUserEventCategory })
             })
             .catch((error) => {
                 console.log(error);
             })
+    }
+
+    //Banner页、读我页的单击事件
+    _onMenuClickReport(tag, hEventId) {
+        //添加用户阅读记录
+        APIClient.access(APIInterface.report(hEventId))
+            .then((response) => {
+                return response.json()
+            })
+            .then((json) => {
+                if (json.responseResult == APIConstant.STATUS_SUCCEED) {
+                    Alert.alert('上报成功！')
+                } else {
+                    Alert.alert('上报失败！')
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+        APIConstant.URL_EVENT = tag;
+        Actions.update_webview({
+            type: ActionConst.PUSH,
+            hEventId: hEventId
+        });
     }
 
     //音乐家和听我，点击后统一调用接口
@@ -262,7 +301,7 @@ export default class HomePage extends Component {
         // Alert.alert('提示', '你点击了:音乐家2');
         Actions.home_demo({
             musician_title: this.state.musician_title2,
-            musician_url: this.state.musician_url2          
+            musician_url: this.state.musician_url2
         })
     }
 
@@ -286,9 +325,25 @@ export default class HomePage extends Component {
         );
     }
 
+    //Banner页
+    renderItemBanner() {
+        let itemAry = [];
+        for (var i = 0; i < 6; i++) {
+            itemAry.push(
+                <View key={i}>
+                    <MenuImageReport2 renderIcon={APIConstant.BASE_URL_PREFIX + this.state.slide_image[i]}
+                        tag={this.state.slide_url[i]}
+                        hEventId={this.state.slide_hEventId[i]}
+                        onClick={this._onMenuClickReport} />
+                </View>
+            );
+        }
+        return itemAry;
+    }
+
     //听我
     renderItem1() {
-        var itemAry = [];
+        let itemAry = [];
         for (var i = 0; i < 6; i++) {
             itemAry.push(
                 <View key={i}>
@@ -304,7 +359,7 @@ export default class HomePage extends Component {
 
     //看我
     renderItem2() {
-        var itemAry = [];
+        let itemAry = [];
         for (var i = 0; i < 6; i++) {
             itemAry.push(
                 <View key={i}>
@@ -319,15 +374,15 @@ export default class HomePage extends Component {
 
     //读我
     renderItem3() {
-        var itemAry = [];
+        let itemAry = [];
         for (var i = 0; i < 6; i++) {
             itemAry.push(
                 <View key={i}>
-                    <MenuButton renderIcon={APIConstant.BASE_URL_PREFIX + this.state.image_title[i]}
-                        showText={''} tag={this.state.image_url[i]}
-                        onClick={this._onMenuClick3} />
-                </View>
-
+                    <MenuButtonReport renderIcon={APIConstant.BASE_URL_PREFIX + this.state.image_title[i]}
+                        tag={this.state.image_url[i]}
+                        hEventId={this.state.image_hEventId[i]}
+                        onClick={this._onMenuClickReport} />
+                </View >
             );
         }
         return itemAry;
@@ -343,38 +398,8 @@ export default class HomePage extends Component {
                     return (
                         <View>
                             <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} autoplayTimeout={3}>
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => this._onClick(1)}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[0] }}></Image>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => this._onClick(2)}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[1] }}></Image>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => this._onClick(3)}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[2] }}></Image>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => this._onClick(4)}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[3] }}></Image>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => this._onClick(5)}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[4] }}></Image>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => this._onClick(6)}>
-                                        <Image style={[styles.slide,]} source={{ uri: APIConstant.BASE_URL_PREFIX + this.state.slide_image[5] }}></Image>
-                                    </TouchableWithoutFeedback>
-                                </View>
+                                {this.renderItemBanner()}
                             </Swiper>
-
                             <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
                                 <View style={{ flex: 4 }}>
                                     <MenuButton2 renderIcon={APIConstant.BASE_URL_PREFIX + this.state.musician_image1}

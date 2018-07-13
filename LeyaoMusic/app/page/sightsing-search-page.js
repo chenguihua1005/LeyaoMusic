@@ -78,8 +78,10 @@ export default class SightsingSearchPage extends Component {
   }
 
   _onMenuClick(tag) {
-    APIConstant.URL_EVENT = tag;
-    Actions.update_webview({ type: ActionConst.PUSH });
+    if(tag.indexOf(".mp3") == -1 && tag.indexOf(".mp4") == -1) {
+      APIConstant.URL_EVENT = tag;
+      Actions.update_webview({ type: ActionConst.PUSH });
+    }
   }
 
   render() {

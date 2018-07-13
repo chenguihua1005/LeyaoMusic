@@ -68,7 +68,7 @@ export default class UpdateWebviewPage extends Component {
         if (json.responseResult == APIConstant.STATUS_SUCCEED) {
           Alert.alert('提示', '已收藏！');
         } else {
-          Alert.alert('提示', '收藏失败！');
+          Alert.alert('提示', '关注失败！');
         }
       })
       .catch((error) => {
