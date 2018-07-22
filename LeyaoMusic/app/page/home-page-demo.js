@@ -40,6 +40,7 @@ export default class HomePageDemo extends Component {
     }
 
     componentWillUnmount() {
+        dataList = []
     };
 
     onBack() {

@@ -153,28 +153,26 @@ export default class HomePage extends Component {
                 //一共有2名音乐家，每名音乐家下面有3首歌曲
                 //"sEventSubContent1UrlList":["audio/1.mp3","audio/2.mp3","audio/3.mp3"],
                 //"sEventSubContent2StrList":["musician1","musician1","musician1"]
-                for (let i = 0; i < 3; i++) {
+                arr[0].sEventSubContent.map(item => {
                     //词：jack 曲：jesse 唱： mark
                     // musician_title1[i] = " 词：" + arr[0].sEventSubContent[i].lyricist +
                     //     " 曲：" + arr[0].sEventSubContent[i].composer +
                     //     " 唱：" + arr[0].sEventSubContent[i].singer;
                     //音乐家的歌曲描述用description那个字段
-                    musician_title1[i] = arr[0].sEventSubContent[i].description
+                    musician_title1.push(item.description)
                     //字符串超过12，则截取后面的以...表示
-                    if (musician_title1[i].length > 12)
-                        musician_title1[i] = musician_title1[i].slice(0, 12) + '...';
-                    musician_url1[i] = arr[0].sEventSubContent[i].url;
-                }
-                for (let i = 0; i < 3; i++) {
-                    // musician_title2[i] = " 词：" + arr[1].sEventSubContent[i].lyricist +
-                    //     " 曲：" + arr[1].sEventSubContent[i].composer +
-                    //     " 唱：" + arr[1].sEventSubContent[i].singer;
-                    musician_title2[i] = arr[1].sEventSubContent[i].description;
+                    // if (musician_title1[i].length > 12)
+                    //     musician_title1[i] = musician_title1[i].slice(0, 12) + '...';
+                    musician_url1.push(item.url)
+                })
+                arr[1].sEventSubContent.map(item => {
+                    //音乐家的歌曲描述用description那个字段
+                    musician_title2.push(item.description)
                     //字符串超过12，则截取后面的以...表示
-                    if (musician_title2[i].length > 12)
-                        musician_title2[i] = musician_title2[i].slice(0, 12) + '...';
-                    musician_url2[i] = arr[1].sEventSubContent[i].url;
-                }
+                    // if (musician_title2[i].length > 12)
+                    //     musician_title2[i] = musician_title2[i].slice(0, 12) + '...';
+                    musician_url2.push(item.url)
+                })
 
                 this.setState({
                     musician_image1: arr[0].sEventTitleUrl,

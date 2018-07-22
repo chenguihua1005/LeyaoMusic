@@ -70,18 +70,70 @@ export default class UpdateFocusPage extends Component {
   }
 
   render() {
-    if (!this.state.dataSource) {//如果this.state.data没有数据(即网络请求未完成),则返回一个加载中的文本   
+    if (!this.state.dataSource) {//如果this.state.data没有数据(即网络请求未完成)，或者返回为空数组，则返回提示文本    
       return (
-        <Text>loading...</Text>
+        // <Text>loading...</Text>
+        <View style={{
+          flex: 1
+        }}>
+          <View
+            style={{
+              width: Dimensions.get('window').width,
+              marginTop: 20,
+              height: 44,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}>
+            <TouchableWithoutFeedback
+              onPress={this.back.bind(this)}>
+              <View
+                style={{
+                  marginLeft: 10,
+                  width: 35
+                }}>
+                <Image
+                  source={require('../resource/arrow.png')}
+                  style={{
+                    width: 10,
+                    height: 19.5,
+                    marginLeft: 5
+                  }} />
+              </View>
+            </TouchableWithoutFeedback>
+            <Text
+              style={{
+                fontFamily: 'ArialMT',
+                fontSize: 18,
+                color: '#000'
+              }}>我的关注</Text>
+            <View
+              style={{
+                marginRight: 10,
+                width: 35
+              }}>
+              {/* <Text
+                style={{
+                  fontFamily: 'ArialMT',
+                  fontSize: 16,
+                  color: '#b3d66e'
+                }}></Text> */}
+            </View>
+          </View>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Image
+              style={{ width: 80, height: 80 }}
+              /* resizeMode={'stretch'} */
+              source={require('../resource/img_kong.png')}
+            />
+            <Text>暂时还没有历史</Text>
+          </View>
+        </View>
       );
     } else {//当this.state.data有了数据，则渲染ListView
       return (
         <View style={{
-          flex: 1,
-          width: null,
-          height: null,
-          alignItems: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0)',
+          flex: 1
         }}>
           <View
             style={{
